@@ -7,7 +7,7 @@ import * as components from './components';
 
 @NgModule({
   declarations: [components.AppbarComponent],
-  imports: [CommonModule, RouterModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, RouterModule],
   exports: [components.AppbarComponent],
   providers: []
 })
