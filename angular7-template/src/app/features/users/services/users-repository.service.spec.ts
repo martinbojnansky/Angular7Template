@@ -4,19 +4,19 @@ import {
   HttpTestingController
 } from '@angular/common/http/testing';
 
-import { HomeRepositoryService } from './home-repository.service';
+import { UsersRepositoryService } from './users-repository.service';
 
-describe('HomeRepositoryService', () => {
-  let homeRepositoryService: HomeRepositoryService;
+describe('UsersRepositoryService', () => {
+  let usersRepositoryService: UsersRepositoryService;
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [HomeRepositoryService]
+      providers: [UsersRepositoryService]
     });
 
-    homeRepositoryService = TestBed.get(HomeRepositoryService);
+    usersRepositoryService = TestBed.get(UsersRepositoryService);
     httpTestingController = TestBed.get(HttpTestingController);
   });
 
@@ -25,11 +25,11 @@ describe('HomeRepositoryService', () => {
   });
 
   it('should be created', () => {
-    expect(homeRepositoryService).toBeTruthy();
+    expect(usersRepositoryService).toBeTruthy();
   });
 
   it('should call getUsers with correct url', () => {
-    homeRepositoryService.getUsers().subscribe(() => {});
+    usersRepositoryService.getUsers().subscribe(() => {});
     httpTestingController.expectOne('https://reqres.in/api/users').flush({});
   });
 });

@@ -3,23 +3,22 @@ $color-black: #000;
 $color-transparent: transparent;
 $color-primary: #3176bb;
 $color-secondary: #27bf89;
+$color-warning: gold;
 $color-error: #d91313;
 $color-font: $color-black;
 $color-background: #fcfcfc;
-$color-border: #808080;
-$color-focus: lighten($color-primary, 20%);
+$color-border: #ccc;
+$color-focus: lighten($color-primary, 40%);
 
 // Font family
 $font-text: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
   Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 
 // Font sizes
-$font-size-xs: 1.2rem;
-$font-size-s: 1.4rem;
-$font-size-m: 1.6rem;
-$font-size-l: 1.8rem;
-$font-size-xl: 2.2rem;
-$font-size-xxl: 4.2rem;
+$font-size: 62.5%;
+
+// Paddings
+$padding: 1.2rem;
 
 // Sizes
 $focus-width: 0.1rem;

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { HomeRepositoryService } from '../../services';
+import { UsersRepositoryService } from '../../services';
+import { User } from '../../models';
 
 @Injectable()
-export class HomeRepositoryMockService extends HomeRepositoryService {
-  getUsers(): Observable<Object> {
+export class UsersRepositoryServiceMock extends UsersRepositoryService {
+  getUsers(): Observable<User> {
     return new Observable(<any>{
       data: [
         {

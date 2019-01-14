@@ -12,6 +12,10 @@ const routes: Routes = [
   {
     path: AppRoutes.HOME,
     loadChildren: './features/home/home.module#HomeModule'
+  },
+  {
+    path: AppRoutes.USERS,
+    loadChildren: './features/users/users.module#UsersModule'
   }
 ];
 

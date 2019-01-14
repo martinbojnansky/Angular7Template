@@ -1,0 +1,11 @@
+@import './../../../../assets/styles/global';
+
+nav {
+  padding: $padding 0;
+  border-bottom: $border-width solid $color-border;
+
+  a {
+    padding: 0 $padding 0 0;
+    font-weight: bold;
+  }
+}
