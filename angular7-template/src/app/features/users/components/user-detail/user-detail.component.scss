@@ -1,3 +1,10 @@
+@import './../../../../../assets/styles/global';
+
 p {
   font-weight: bold;
+}
+
+button {
+  margin-top: $padding;
+  padding: $padding;
 }

@@ -22,6 +22,12 @@ export class UsersComponent implements OnInit {
     this.selectedUser = user;
   }
 
+  onUnselectUser(user: User) {
+    if (this.selectedUser === user) {
+      this.selectedUser = null;
+    }
+  }
+
   private initUsers() {
     this.usersRepositoryService.getUsers().subscribe(result => {
       this.users = (<any>result).data;

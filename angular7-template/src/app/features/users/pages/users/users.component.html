@@ -27,6 +27,7 @@
 
     <app-user-detail
       [user]="selectedUser"
+      (closed)="onUnselectUser($event)"
       class="container-half"
     ></app-user-detail>
   </div>
