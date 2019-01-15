@@ -8,4 +8,8 @@ export class AppPage {
   getTitleText() {
     return element(by.css('app-root h1')).getText();
   }
+
+  getUsersRoutelink() {
+    return element(by.css('nav a:nth-child(2)'));
+  }
 }
