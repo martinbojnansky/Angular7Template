@@ -53,7 +53,7 @@ describe('UserDetailComponent', () => {
   });
 
   it('should emit closed on button click', () => {
-    const button = compiled.querySelector('#close-btn');
+    const button = compiled.querySelector('.close-btn');
     let emittedUser: User;
 
     component.closed.subscribe(u => {

@@ -1,6 +1,6 @@
-<section id="user-detail" *ngIf="user">
+<section class="user-detail" *ngIf="user">
   <img [src]="user.avatar" />
   <p>{{ user.first_name }}</p>
   <p>{{ user.last_name }}</p>
-  <button id="close-btn" (click)="onClose()">Close</button>
+  <button class="close-btn" (click)="onClose()">Close</button>
 </section>

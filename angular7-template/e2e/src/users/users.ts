@@ -10,6 +10,6 @@ export class UsersPage {
   }
 
   getUserDetail(): ElementFinder {
-    return element(by.css('#user-detail'));
+    return element(by.css('.user-detail'));
   }
 }

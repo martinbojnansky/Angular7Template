@@ -68,14 +68,14 @@ describe('UsersComponent', () => {
   });
 
   it('should render users table', () => {
-    const rows = compiled.querySelectorAll('#users-table > tbody > tr');
+    const rows = compiled.querySelectorAll('.users-table > tbody > tr');
 
     expect(rows.length).toBe(3);
   });
 
   it('should select user on row click', () => {
     const row = compiled.querySelector(
-      '#users-table > tbody > tr:nth-child(2)'
+      '.users-table > tbody > tr:nth-child(2)'
     );
     row.click();
 
@@ -99,7 +99,7 @@ describe('UsersComponent', () => {
 
   it('should order users on header click', () => {
     const header = compiled.querySelector(
-      '#users-table > thead > tr > th:nth-child(3)'
+      '.users-table > thead > tr > th:nth-child(3)'
     );
 
     header.click();
