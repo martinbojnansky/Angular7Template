@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppRoutes } from '@shared/constants';
+import { AuthorizationGuard } from './core/guards/authorization.guard';
 
 const routes: Routes = [
   {
@@ -14,8 +15,15 @@ const routes: Routes = [
     loadChildren: './features/home/home.module#HomeModule'
   },
   {
-    path: AppRoutes.USERS,
-    loadChildren: './features/users/users.module#UsersModule'
+    path: AppRoutes.ADMIN,
+    canActivate: [AuthorizationGuard],
+    children: [
+      {
+        path: AppRoutes.USERS,
+        loadChildren: './features/users/users.module#UsersModule',
+        canActivate: [AuthorizationGuard]
+      }
+    ]
   }
 ];
 

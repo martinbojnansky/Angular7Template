@@ -1,1 +1,5 @@
-<nav><a routerLink="/home">Home</a> <a routerLink="/users">Users</a></nav>
+<nav>
+  <a routerLink="/home">Home</a>
+  <a routerLink="/users" i18n="@@appBarUsersLinkText">Users</a>
+  <button (click)="signInOrOut()">Sign in/out</button>
+</nav>
