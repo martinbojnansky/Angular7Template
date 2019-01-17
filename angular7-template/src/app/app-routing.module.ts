@@ -8,7 +8,7 @@ import {
   LoginPageComponent,
   NotFoundPageComponent
 } from './core';
-import { HomeModule, UsersModule } from './features';
+import { HomeModule, UsersModule } from './modules';
 
 const routes: Routes = [
   {

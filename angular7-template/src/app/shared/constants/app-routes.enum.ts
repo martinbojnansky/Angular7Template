@@ -1,10 +1,10 @@
 export enum AppRoutes {
+  // Public
   DEFAULT = '',
   LOGIN = 'login',
-  HOME = 'home',
+  NOT_FOUND = 'not-found',
+  // Authorized
   AUTH = 'auth',
-  USERS = 'users',
-  ERRORS = 'errors',
-  UNAUTHORIZED = 'unauthorized',
-  NOT_FOUND = 'not-found'
+  HOME = 'home',
+  USERS = 'users'
 }

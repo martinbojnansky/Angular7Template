@@ -1,24 +1,24 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, Input } from '@angular/core';
 
-import { UsersComponent } from './users.component';
+import { UsersPageComponent } from './users-page.component';
 import { UsersRepositoryService } from '../../services';
 import { UsersRepositoryServiceMock } from '../../mocks';
 import { User } from '../../models';
+import { Component, Input } from '@angular/core';
 
 @Component({ selector: 'app-user-detail', template: '' })
 class UserDetailStubComponent {
   @Input() user: User;
 }
 
-describe('UsersComponent', () => {
-  let component: UsersComponent;
-  let fixture: ComponentFixture<UsersComponent>;
+describe('UsersPageComponent', () => {
+  let component: UsersPageComponent;
+  let fixture: ComponentFixture<UsersPageComponent>;
   let compiled: any;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [UsersComponent, UserDetailStubComponent],
+      declarations: [UsersPageComponent, UserDetailStubComponent],
       providers: [
         {
           provide: UsersRepositoryService,
@@ -29,7 +29,7 @@ describe('UsersComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UsersComponent);
+    fixture = TestBed.createComponent(UsersPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     compiled = fixture.debugElement.nativeElement;

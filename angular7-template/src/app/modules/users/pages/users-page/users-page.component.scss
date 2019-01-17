@@ -25,7 +25,7 @@ table {
 
   td,
   th {
-    border: $border-width solid gray;
+    border: $border-width solid $color-border;
     padding: $padding;
   }
 
