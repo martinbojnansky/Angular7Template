@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { AuthorizationGuard } from './authorization.guard';
 import { AuthorizationService } from '../services';
-import { AppRoutes } from '@app/shared/constants';
+import { AppRoutes } from '@app/shared/';
 
 describe('AuthorizationGuard', () => {
   let guard: AuthorizationGuard;

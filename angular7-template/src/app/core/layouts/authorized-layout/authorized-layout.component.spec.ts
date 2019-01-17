@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NotFoundComponent } from './not-found.component';
+import { AuthorizedLayoutComponent } from './authorized-layout.component';
 
-describe('NotFoundComponent', () => {
-  let component: NotFoundComponent;
-  let fixture: ComponentFixture<NotFoundComponent>;
+describe('AuthorizedLayoutComponent', () => {
+  let component: AuthorizedLayoutComponent;
+  let fixture: ComponentFixture<AuthorizedLayoutComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NotFoundComponent ]
+      declarations: [ AuthorizedLayoutComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NotFoundComponent);
+    fixture = TestBed.createComponent(AuthorizedLayoutComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,3 +1,6 @@
 export * from './core.module';
-// export * from './guards';
-// export * from './services';
+// export * from './components';
+export * from './guards';
+export * from './layouts';
+export * from './pages';
+export * from './services';

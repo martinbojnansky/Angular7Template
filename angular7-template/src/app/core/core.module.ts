@@ -4,14 +4,29 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
-import * as components from './components';
+import * as layouts from './layouts';
+import * as pages from './pages';
 import * as services from './services';
+import * as guards from './guards';
 
 @NgModule({
-  declarations: [components.AppbarComponent],
+  declarations: [
+    // Layouts
+    layouts.AuthorizedLayoutComponent,
+    // Pages
+    pages.LoginPageComponent,
+    pages.NotFoundPageComponent
+  ],
   imports: [BrowserModule, CommonModule, HttpClientModule, RouterModule],
-  exports: [components.AppbarComponent],
+  exports: [
+    // Layouts
+    layouts.AuthorizedLayoutComponent,
+    // Pages
+    pages.LoginPageComponent,
+    pages.NotFoundPageComponent
+  ],
   providers: [
+    // Services
     services.AuthorizationService,
     {
       provide: Storage,

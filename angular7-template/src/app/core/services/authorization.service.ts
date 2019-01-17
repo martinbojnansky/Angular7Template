@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LocalStorageKeys, AppRoutes } from '@shared/constants';
+import { LocalStorageKeys, AppRoutes } from '@app/shared';
 
 @Injectable()
 export class AuthorizationService {
@@ -18,7 +18,7 @@ export class AuthorizationService {
   signIn(): void {
     this.authToken = 'xyz123456789';
     this.storage.setItem(LocalStorageKeys.AUTHORIZATION_TOKEN, this.authToken);
-    this.router.navigate([AppRoutes.ADMIN]);
+    this.router.navigate([AppRoutes.AUTH]);
   }
 
   signOut(): void {

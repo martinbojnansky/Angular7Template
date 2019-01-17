@@ -1,43 +1,55 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AppRoutes } from '@shared/constants';
-import { AuthorizationGuard } from './core/guards/authorization.guard';
-import * as modules from './features';
+import { AppRoutes } from './shared';
+import {
+  AuthorizedLayoutComponent,
+  AuthorizationGuard,
+  LoginPageComponent,
+  NotFoundPageComponent
+} from './core';
+import { HomeModule, UsersModule } from './features';
 
 const routes: Routes = [
   {
     path: AppRoutes.DEFAULT,
-    redirectTo: `${AppRoutes.HOME}`,
+    redirectTo: `${AppRoutes.AUTH}`,
     pathMatch: 'full'
   },
   {
-    path: AppRoutes.HOME,
-    loadChildren: () => modules.HomeModule
+    path: AppRoutes.LOGIN,
+    component: LoginPageComponent
   },
   {
-    path: AppRoutes.ADMIN,
+    path: AppRoutes.AUTH,
+    component: AuthorizedLayoutComponent,
     canActivate: [AuthorizationGuard],
     children: [
       {
         path: '',
-        redirectTo: AppRoutes.USERS,
+        redirectTo: AppRoutes.HOME,
         pathMatch: 'full'
       },
       {
+        path: AppRoutes.HOME,
+        loadChildren: () => HomeModule
+      },
+      {
         path: AppRoutes.USERS,
-        loadChildren: () => modules.UsersModule,
+        loadChildren: () => UsersModule,
         canActivate: [AuthorizationGuard]
       }
     ]
   },
   {
-    path: AppRoutes.ERRORS,
-    loadChildren: () => modules.ErrorsModule
+    path: AppRoutes.NOT_FOUND,
+    component: NotFoundPageComponent
   },
   {
+    // Any other unknown route is redirected to not found error page.
+    // This route has to be registered as the last one.
     path: '**',
-    redirectTo: `${AppRoutes.ERRORS}/${AppRoutes.NOT_FOUND}`,
+    redirectTo: AppRoutes.NOT_FOUND,
     pathMatch: 'full'
   }
 ];

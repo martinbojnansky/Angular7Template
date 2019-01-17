@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 
 import { AuthorizationService } from './authorization.service';
-import { LocalStorageKeys, AppRoutes } from '@app/shared/constants';
+import { LocalStorageKeys, AppRoutes } from '@app/shared';
 
 describe('AuthorizationService', () => {
   let service: AuthorizationService;
@@ -55,7 +55,7 @@ describe('AuthorizationService', () => {
 
   it('should navigate to admin route on sign in', () => {
     service.signIn();
-    expect(routerSpy.navigate).toHaveBeenCalledWith([AppRoutes.ADMIN]);
+    expect(routerSpy.navigate).toHaveBeenCalledWith([AppRoutes.AUTH]);
   });
 
   it('should navigate to default route on sign out', () => {

@@ -8,7 +8,7 @@ import {
 import { Observable } from 'rxjs';
 
 import { AuthorizationService } from '../services/';
-import { AppRoutes } from '@shared/constants';
+import { AppRoutes } from '@app/shared';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,7 @@ export class AuthorizationGuard implements CanActivate {
     const isAuthorized = this.authorizationService.isAuthorized();
 
     if (!isAuthorized) {
-      this.router.navigate([`${AppRoutes.ERRORS}/${AppRoutes.UNAUTHORIZED}`]);
+      this.router.navigate([AppRoutes.LOGIN]);
     }
 
     return isAuthorized;
