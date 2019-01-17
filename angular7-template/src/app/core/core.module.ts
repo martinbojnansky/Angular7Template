@@ -5,12 +5,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import * as components from './components';
+import * as services from './services';
 
 @NgModule({
   declarations: [components.AppbarComponent],
   imports: [BrowserModule, CommonModule, HttpClientModule, RouterModule],
   exports: [components.AppbarComponent],
-  providers: []
+  providers: [
+    services.AuthorizationService,
+    {
+      provide: Storage,
+      useValue: window.localStorage
+    }
+  ]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

@@ -3,27 +3,42 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AppRoutes } from '@shared/constants';
 import { AuthorizationGuard } from './core/guards/authorization.guard';
+import * as modules from './features';
 
 const routes: Routes = [
   {
     path: AppRoutes.DEFAULT,
-    redirectTo: `/${AppRoutes.HOME}`,
+    redirectTo: `${AppRoutes.HOME}`,
     pathMatch: 'full'
   },
   {
     path: AppRoutes.HOME,
-    loadChildren: './features/home/home.module#HomeModule'
+    loadChildren: () => modules.HomeModule
   },
   {
     path: AppRoutes.ADMIN,
     canActivate: [AuthorizationGuard],
     children: [
       {
+        path: '',
+        redirectTo: AppRoutes.USERS,
+        pathMatch: 'full'
+      },
+      {
         path: AppRoutes.USERS,
-        loadChildren: './features/users/users.module#UsersModule',
+        loadChildren: () => modules.UsersModule,
         canActivate: [AuthorizationGuard]
       }
     ]
+  },
+  {
+    path: AppRoutes.ERRORS,
+    loadChildren: () => modules.ErrorsModule
+  },
+  {
+    path: '**',
+    redirectTo: `${AppRoutes.ERRORS}/${AppRoutes.NOT_FOUND}`,
+    pathMatch: 'full'
   }
 ];
 

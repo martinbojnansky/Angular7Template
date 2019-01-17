@@ -26,7 +26,7 @@ export class AuthorizationGuard implements CanActivate {
     const isAuthorized = this.authorizationService.isAuthorized();
 
     if (!isAuthorized) {
-      this.router.navigate([AppRoutes.DEFAULT]);
+      this.router.navigate([`${AppRoutes.ERRORS}/${AppRoutes.UNAUTHORIZED}`]);
     }
 
     return isAuthorized;

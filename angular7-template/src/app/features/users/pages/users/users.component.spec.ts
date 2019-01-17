@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, Input, DebugElement } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { UsersComponent } from './users.component';
 import { UsersRepositoryService } from '../../services';
@@ -15,7 +15,6 @@ describe('UsersComponent', () => {
   let component: UsersComponent;
   let fixture: ComponentFixture<UsersComponent>;
   let compiled: any;
-  // let usersRepositoryServiceSpy: jasmine.SpyObj<UsersRepositoryService>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -23,31 +22,11 @@ describe('UsersComponent', () => {
       providers: [
         {
           provide: UsersRepositoryService,
-          // useValue: jasmine.createSpyObj('UsersRepository', ['getUsers'])
           useFactory: () => new UsersRepositoryServiceMock(null)
         }
       ]
     }).compileComponents();
-
-    // mockUsersRepositoryService();
   }));
-
-  // function mockUsersRepositoryService() {
-  //   usersRepositoryServiceSpy = TestBed.get(UsersRepositoryService);
-  //   usersRepositoryServiceSpy.getUsers.and.returnValue(
-  //     new Observable(<any>{
-  //       data: [
-  //         {
-  //           id: 1,
-  //           first_name: 'George',
-  //           last_name: 'Bluth',
-  //           avatar:
-  //             'https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/128.jpg'
-  //         }
-  //       ]
-  //     })
-  //   );
-  // }
 
   beforeEach(() => {
     fixture = TestBed.createComponent(UsersComponent);
