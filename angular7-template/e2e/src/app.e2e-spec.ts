@@ -9,12 +9,7 @@ describe('App', () => {
     page.navigateTo();
   });
 
-  it('should display welcome message', () => {
-    expect(page.getTitleText()).toEqual('angular7-template');
-  });
-
-  it('should navigate to users page on routelink click', () => {
-    page.getUsersRoutelink().click();
-    expect(browser.getCurrentUrl()).toContain('/users');
+  it('should redirect to login page', () => {
+    expect(browser.getCurrentUrl()).toContain('/login');
   });
 });

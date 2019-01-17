@@ -2,7 +2,7 @@ import { browser, by, element, ElementFinder } from 'protractor';
 
 export class UsersPage {
   navigateTo() {
-    return browser.get('/users');
+    return browser.get('/auth/users');
   }
 
   getUsersTableRow(i: number = 1): ElementFinder {
