@@ -24,6 +24,6 @@ export class AuthorizationService {
   signOut(): void {
     this.storage.removeItem(LocalStorageKeys.AUTHORIZATION_TOKEN);
     this.authToken = null;
-    this.router.navigate([AppRoutes.DEFAULT]);
+    this.router.navigate([AppRoutes.LOGIN]);
   }
 }

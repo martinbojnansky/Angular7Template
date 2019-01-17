@@ -48,11 +48,9 @@ describe('AuthorizationGuard', () => {
     expect(guard.canActivate(null, null)).toBeFalsy();
   });
 
-  it('should navigate to unauthorized route when is authorized === false', () => {
+  it('should navigate to login route when is authorized === false', () => {
     authorizationServiceSpy.isAuthorized.and.returnValue(false);
     guard.canActivate(null, null);
-    expect(routerSpy.navigate).toHaveBeenCalledWith([
-      `${AppRoutes.ERRORS}/${AppRoutes.UNAUTHORIZED}`
-    ]);
+    expect(routerSpy.navigate).toHaveBeenCalledWith([`${AppRoutes.LOGIN}`]);
   });
 });

@@ -58,8 +58,8 @@ describe('AuthorizationService', () => {
     expect(routerSpy.navigate).toHaveBeenCalledWith([AppRoutes.AUTH]);
   });
 
-  it('should navigate to default route on sign out', () => {
+  it('should navigate to login route on sign out', () => {
     service.signOut();
-    expect(routerSpy.navigate).toHaveBeenCalledWith([AppRoutes.DEFAULT]);
+    expect(routerSpy.navigate).toHaveBeenCalledWith([AppRoutes.LOGIN]);
   });
 });

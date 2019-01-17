@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthorizationGuard } from './core/guards/authorization.guard';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +6,7 @@ import { AuthorizationGuard } from './core/guards/authorization.guard';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(authorizedGuard: AuthorizationGuard) {}
+  constructor() {}
 
   title = 'angular7-template';
 }
