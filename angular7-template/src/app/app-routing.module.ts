@@ -49,7 +49,7 @@ const routes: Routes = [
     // Any other unknown route is redirected to not found error page.
     // This route has to be registered as the last one.
     path: '**',
-    redirectTo: AppRoutes.NOT_FOUND,
+    component: NotFoundPageComponent,
     pathMatch: 'full'
   }
 ];
