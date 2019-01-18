@@ -27,7 +27,10 @@ import * as guards from './guards';
   ],
   providers: [
     // Services
-    services.AuthorizationService,
+    {
+      provide: services.AuthorizationService,
+      useClass: services.FakeAuthorizationService
+    },
     {
       provide: Storage,
       useValue: window.localStorage
