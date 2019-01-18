@@ -1,41 +1,13 @@
 @import 'global';
 
-.container {
-  display: flex;
-  flex-direction: row;
-
-  &-half {
-    flex: 1 0 0%;
-    padding: 0 $padding;
+.users-container {
+  > *:nth-child(2) {
+    flex: 0 0 300px;
   }
 }
 
-table {
-  tbody > tr {
-    &:hover {
-      background: $color-focus;
-      cursor: pointer;
-    }
-
-    &.selected {
-      background: $color-primary;
-      color: $color-white;
-    }
+.users-table {
+  img {
+    width: 40px;
   }
-
-  td,
-  th {
-    border: $border-width solid $color-border;
-    padding: $padding;
-  }
-
-  th {
-    font-weight: bold;
-  }
-}
-
-.user-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
 }

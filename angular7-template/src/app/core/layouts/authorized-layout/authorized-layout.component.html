@@ -1,8 +1,11 @@
 <header>
   <h1>angular7-template</h1>
   <nav>
-    <a routerLink="/auth/home">Home</a> <a routerLink="/auth/users">Users</a>
-    <button class="signout-btn" (click)="signOut()">Sign Out</button>
+    <a routerLink="/auth/home" class="btn btn-primary">Home</a>
+    <a routerLink="/auth/users" class="btn btn-primary">Users</a>
+    <button class="signout-btn btn btn-secondary" (click)="signOut()">
+      Sign Out
+    </button>
   </nav>
 </header>
 <main><router-outlet></router-outlet></main>

@@ -1,8 +1,8 @@
 <section>
   <p>This is users page with sample repository to retrieve users.</p>
   <br />
-  <div class="container">
-    <table class="users-table container-half">
+  <div class="users-container d-flex">
+    <table class="users-table table table-hover mr-2">
       <thead>
         <tr>
           <th>Avatar</th>
@@ -14,10 +14,10 @@
       <tbody>
         <tr
           *ngFor="let user of users"
-          [class.selected]="user === selectedUser"
+          [class.table-primary]="user === selectedUser"
           (click)="onSelectUser(user)"
         >
-          <td><img [src]="user.avatar" class="user-avatar" /></td>
+          <td><img [src]="user.avatar" /></td>
           <td>{{ user.id }}</td>
           <td>{{ user.first_name }}</td>
           <td>{{ user.last_name | uppercase }}</td>
@@ -28,7 +28,6 @@
     <app-user-detail
       [user]="selectedUser"
       (closed)="onUnselectUser($event)"
-      class="container-half"
     ></app-user-detail>
   </div>
 </section>

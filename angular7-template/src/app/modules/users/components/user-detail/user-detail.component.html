@@ -1,6 +1,8 @@
-<section class="user-detail" *ngIf="user">
-  <img [src]="user.avatar" />
-  <p>{{ user.first_name }}</p>
-  <p>{{ user.last_name }}</p>
-  <button class="close-btn" (click)="onClose()">Close</button>
+<section class="user-detail card" *ngIf="user">
+  <img [src]="user.avatar" class="card-img-top" />
+  <div class="card-body">
+    <h5 class="card-title">{{ user.last_name }}</h5>
+    <p class="card-text">{{ user.first_name }}</p>
+    <button class="close-btn btn btn-danger" (click)="onClose()">Close</button>
+  </div>
 </section>
