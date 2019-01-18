@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 import { UsersRepositoryService } from '../../services';
+import { of } from 'rxjs/internal/observable/of';
 
 @Injectable()
 export class UsersRepositoryServiceMock extends UsersRepositoryService {

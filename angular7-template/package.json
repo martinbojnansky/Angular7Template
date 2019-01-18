@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "npm run lint && ng serve",
     "build": "npm run lint && ng build",
+    "build:prod": "npm run lint && ng build --prod",
     "test": "ng test",
     "lint": "ng lint && npm run stylelint",
     "stylelint": "stylelint src/assets/styles/**/*.scss && stylelint src/app/**/*.scss",

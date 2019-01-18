@@ -2,25 +2,23 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 
-import { AuthService, FakeAuthService } from './auth.service';
 import { LocalStorageKeys, AppRoutes } from '@app/shared';
+import { FakeAuthService } from './fake-auth.service';
+import { StorageService } from '../storage/';
 
-describe('AuthService', () => {
-  let service: AuthService;
-  let storageSpy: jasmine.SpyObj<Storage>;
+describe('FakeAuthService', () => {
+  let service: FakeAuthService;
+  let storageServiceSpy: jasmine.SpyObj<StorageService>;
   let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes([])],
       providers: [
+        FakeAuthService,
         {
-          provide: AuthService,
-          useClass: FakeAuthService
-        },
-        {
-          provide: Storage,
-          useValue: jasmine.createSpyObj('Storage', [
+          provide: StorageService,
+          useValue: jasmine.createSpyObj('StorageService', [
             'getItem',
             'setItem',
             'removeItem'
@@ -33,8 +31,8 @@ describe('AuthService', () => {
       ]
     });
 
-    service = TestBed.get(AuthService);
-    storageSpy = TestBed.get(Storage);
+    service = TestBed.get(FakeAuthService);
+    storageServiceSpy = TestBed.get(StorageService);
     routerSpy = TestBed.get(Router);
   });
 
@@ -44,14 +42,14 @@ describe('AuthService', () => {
 
   it('should save token on sign in', () => {
     service.signIn();
-    expect(storageSpy.setItem.calls.mostRecent().args[0]).toBe(
+    expect(storageServiceSpy.setItem.calls.mostRecent().args[0]).toBe(
       LocalStorageKeys.AUTHORIZATION_TOKEN
     );
   });
 
   it('should remove token on sign out', () => {
     service.signOut();
-    expect(storageSpy.removeItem).toHaveBeenCalledWith(
+    expect(storageServiceSpy.removeItem).toHaveBeenCalledWith(
       LocalStorageKeys.AUTHORIZATION_TOKEN
     );
   });

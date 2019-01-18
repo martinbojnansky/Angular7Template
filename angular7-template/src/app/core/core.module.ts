@@ -32,8 +32,8 @@ import * as guards from './guards';
       useClass: services.FakeAuthService
     },
     {
-      provide: Storage,
-      useValue: window.localStorage
+      provide: services.StorageService,
+      useClass: services.LocalStorageService
     }
   ]
 })
