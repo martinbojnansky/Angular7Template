@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 
-import { AuthService } from './auth.service';
+import { AuthService, FakeAuthService } from './auth.service';
 import { LocalStorageKeys, AppRoutes } from '@app/shared';
 
 describe('AuthService', () => {
@@ -14,7 +14,10 @@ describe('AuthService', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes([])],
       providers: [
-        AuthService,
+        {
+          provide: AuthService,
+          useClass: FakeAuthService
+        },
         {
           provide: Storage,
           useValue: jasmine.createSpyObj('Storage', [
