@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthorizationService } from './../../services';
+import { AuthService } from './../../services';
 
 @Component({
   selector: 'app-authorized-layout',
@@ -8,11 +8,11 @@ import { AuthorizationService } from './../../services';
   styleUrls: ['./authorized-layout.component.scss']
 })
 export class AuthorizedLayoutComponent implements OnInit {
-  constructor(private authorizationService: AuthorizationService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {}
 
   signOut() {
-    this.authorizationService.signOut();
+    this.authService.signOut();
   }
 }

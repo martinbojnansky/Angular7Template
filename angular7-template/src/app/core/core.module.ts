@@ -28,8 +28,8 @@ import * as guards from './guards';
   providers: [
     // Services
     {
-      provide: services.AuthorizationService,
-      useClass: services.FakeAuthorizationService
+      provide: services.AuthService,
+      useClass: services.FakeAuthService
     },
     {
       provide: Storage,

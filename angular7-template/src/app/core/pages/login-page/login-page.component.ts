@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthorizationService } from './../../services';
+import { AuthService } from './../../services';
 
 @Component({
   selector: 'app-login-page',
@@ -8,11 +8,11 @@ import { AuthorizationService } from './../../services';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
-  constructor(private authorizationService: AuthorizationService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {}
 
   signIn() {
-    this.authorizationService.signIn();
+    this.authService.signIn();
   }
 }

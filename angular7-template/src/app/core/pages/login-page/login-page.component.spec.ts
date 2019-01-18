@@ -1,26 +1,26 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginPageComponent } from './login-page.component';
-import { AuthorizationService } from './../../services';
+import { AuthService } from './../../services';
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
   let fixture: ComponentFixture<LoginPageComponent>;
   let compiled: any;
-  let authorizationServiceSpy: jasmine.SpyObj<AuthorizationService>;
+  let authServiceSpy: jasmine.SpyObj<AuthService>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [LoginPageComponent],
       providers: [
         {
-          provide: AuthorizationService,
-          useValue: jasmine.createSpyObj('AuthorizationService', ['signIn'])
+          provide: AuthService,
+          useValue: jasmine.createSpyObj('AuthService', ['signIn'])
         }
       ]
     }).compileComponents();
 
-    authorizationServiceSpy = TestBed.get(AuthorizationService);
+    authServiceSpy = TestBed.get(AuthService);
   }));
 
   beforeEach(() => {
@@ -36,12 +36,12 @@ describe('LoginPageComponent', () => {
 
   it('should call authorization service on signIn method', () => {
     component.signIn();
-    expect(authorizationServiceSpy.signIn).toHaveBeenCalled();
+    expect(authServiceSpy.signIn).toHaveBeenCalled();
   });
 
   it('should call authorization service on button click', () => {
     const button = compiled.querySelector('button');
     button.click();
-    expect(authorizationServiceSpy.signIn).toHaveBeenCalled();
+    expect(authServiceSpy.signIn).toHaveBeenCalled();
   });
 });

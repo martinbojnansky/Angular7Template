@@ -2,11 +2,11 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 
-import { AuthorizationService } from './authorization.service';
+import { AuthService } from './auth.service';
 import { LocalStorageKeys, AppRoutes } from '@app/shared';
 
-describe('AuthorizationService', () => {
-  let service: AuthorizationService;
+describe('AuthService', () => {
+  let service: AuthService;
   let storageSpy: jasmine.SpyObj<Storage>;
   let routerSpy: jasmine.SpyObj<Router>;
 
@@ -14,7 +14,7 @@ describe('AuthorizationService', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule.withRoutes([])],
       providers: [
-        AuthorizationService,
+        AuthService,
         {
           provide: Storage,
           useValue: jasmine.createSpyObj('Storage', [
@@ -30,7 +30,7 @@ describe('AuthorizationService', () => {
       ]
     });
 
-    service = TestBed.get(AuthorizationService);
+    service = TestBed.get(AuthService);
     storageSpy = TestBed.get(Storage);
     routerSpy = TestBed.get(Router);
   });

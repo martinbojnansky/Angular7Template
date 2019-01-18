@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppRoutes } from './shared';
 import {
   AuthorizedLayoutComponent,
-  AuthorizationGuard,
+  AuthGuard,
   LoginPageComponent,
   NotFoundPageComponent
 } from './core';
@@ -23,7 +23,7 @@ const routes: Routes = [
   {
     path: AppRoutes.AUTH,
     component: AuthorizedLayoutComponent,
-    canActivate: [AuthorizationGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
@@ -37,7 +37,7 @@ const routes: Routes = [
       {
         path: AppRoutes.USERS,
         loadChildren: () => UsersModule,
-        canActivate: [AuthorizationGuard]
+        canActivate: [AuthGuard]
       }
     ]
   },

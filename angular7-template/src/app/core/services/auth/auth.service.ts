@@ -3,14 +3,14 @@ import { Router } from '@angular/router';
 
 import { LocalStorageKeys, AppRoutes } from '@app/shared';
 
-export abstract class AuthorizationService {
-  abstract isAuthorized(): boolean;
+export abstract class AuthService {
+  abstract isAuth(): boolean;
   abstract signIn(): void;
   abstract signOut(): void;
 }
 
 @Injectable()
-export class FakeAuthorizationService extends AuthorizationService {
+export class FakeAuthService extends AuthService {
   private authToken: string;
 
   constructor(private storage: Storage, private router: Router) {
@@ -18,7 +18,7 @@ export class FakeAuthorizationService extends AuthorizationService {
     this.authToken = storage.getItem(LocalStorageKeys.AUTHORIZATION_TOKEN);
   }
 
-  isAuthorized(): boolean {
+  isAuth(): boolean {
     return this.authToken ? true : false;
   }
 

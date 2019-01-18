@@ -7,23 +7,20 @@ import {
 } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { AuthorizationService } from '../services/';
+import { AuthService } from '../../services';
 import { AppRoutes } from '@app/shared';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthorizationGuard implements CanActivate {
-  constructor(
-    private authorizationService: AuthorizationService,
-    private router: Router
-  ) {}
+export class AuthGuard implements CanActivate {
+  constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    const isAuthorized = this.authorizationService.isAuthorized();
+    const isAuthorized = this.authService.isAuth();
 
     if (!isAuthorized) {
       this.router.navigate([AppRoutes.LOGIN]);
