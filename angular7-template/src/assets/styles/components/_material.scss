@@ -33,3 +33,11 @@ $angular7-template-theme: mat-light-theme(
 // Include the theme styles for only specified components.
 @include mat-core-theme($angular7-template-theme);
 @include mat-button-theme($angular7-template-theme);
+@include mat-form-field-theme($angular7-template-theme);
+* {
+  border-radius: 0 !important;
+  box-shadow: none;
+}
+.cdk-overlay-connected-position-bounding-box {
+  margin: 0.2rem 0;
+}
