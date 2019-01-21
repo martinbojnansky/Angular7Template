@@ -26,6 +26,14 @@ $angular7-template-theme: mat-light-theme(
   $angular7-template-warn
 );
 
+* {
+  border-radius: 0 !important;
+
+  box-shadow: none;
+}
+.cdk-overlay-connected-position-bounding-box {
+  margin: 0.2rem 0;
+}
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
@@ -34,10 +42,3 @@ $angular7-template-theme: mat-light-theme(
 @include mat-core-theme($angular7-template-theme);
 @include mat-button-theme($angular7-template-theme);
 @include mat-form-field-theme($angular7-template-theme);
-* {
-  border-radius: 0 !important;
-  box-shadow: none;
-}
-.cdk-overlay-connected-position-bounding-box {
-  margin: 0.2rem 0;
-}

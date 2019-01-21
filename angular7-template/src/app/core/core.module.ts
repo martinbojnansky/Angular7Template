@@ -1,5 +1,8 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  BrowserAnimationsModule,
+  NoopAnimationsModule
+} from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -19,6 +22,7 @@ import * as guards from './guards';
   ],
   imports: [
     BrowserAnimationsModule,
+    // NoopAnimationsModule,
     CommonModule,
     HttpClientModule,
     RouterModule
