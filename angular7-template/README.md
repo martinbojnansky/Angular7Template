@@ -371,7 +371,7 @@ e.g. You can create a folder for each feature module and its scenarios.
 
 To run E2E tests run command `npm run e2e`.
  
-## 8. Anylyzing
+## 8. Analyzing
 
 ### 8.1 Linting
 
