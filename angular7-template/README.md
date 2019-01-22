@@ -74,7 +74,7 @@ For a basic overview of folder structure see following list:
     * **assets** - Application assets folder.
       * **scripts** - Shared script files and libraries folder.
       * **images** - Shared images files and folder.
-      * **styles** - Shared styles, variables and mixins folder.
+      * **styles** - Shared styles, variables and mixins folder. Architecture of global styles is based on [official SASS guidelines](https://sass-guidelin.es/#architecture).
 
 ### 3.2 Modules
 
@@ -107,27 +107,30 @@ e.g:
 
 *module/services/index.ts*
 
-<code>
-  export * from './storage.service';
+
   
-  export * from './local-storage.service';
-</code>
+    export * from './storage.service';  
+    export * from './local-storage.service';
+   
+
 
 and than we can manage export all needed services with a single `@import`:
 
 *module/module.module.ts*
 
-<code>
-  import * as services from './services';
 
-  @NgModule({
-    providers: [
-        // Services
-        services.StorageService,
-        ...
-    ]
-  });
-</code>
+    
+    import * as services from './services';
+
+    @NgModule({
+      providers: [
+          // Services
+          services.StorageService,
+          ...
+      ]
+    });
+    
+
 
 #### 3.2.1 Core Module
 
@@ -150,6 +153,33 @@ e.g.:
 ### Localization
 
 ### SCSS Structure
+
+## 5. Naming Conventions & Code Organization
+
+Here you can find some additional conventions that should be considered.
+
+### 5.1 Naming Conventions
+
+1. `Class/Interface/Enum` should be `UpperCase` named and end with a type name. e.g. `LocalStorageService`.
+1. `Class/Interface/Enum` file name should be `lower-case-with-dash` named and end with with a type name separated by dot. e.g. `local-storage.service.ts`
+1. `Constants` should be `camelCased` named. e.g. `myConstant`
+1. Do not use `var` unless you need global variable. Use `const` for single-assignable properties and `let` for scoped multi-assignable propeties.
+
+### 5.2 Code Organization
+
+1. Use thrid-party `imports` first and separate them with empty line.
+
+        import { NgModule } from '@angular/core';
+
+        import { SharedModule } from '@app/shared';
+        import { HomeRoutingModule } from './home-routing.module';
+    
+1. All `properties/functions/attributes` are considered `public` if you won't provide any access modifier. 
+Therefore, always define `public` `properties/functions/attributes` before `private`. 
+1. Always mark input/output properties of components with `@Input/@Output`.
+
+ 
+
 
 
 
