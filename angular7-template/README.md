@@ -74,7 +74,7 @@ For a basic overview of folder structure see following list:
     * **assets** - Application assets folder.
       * **scripts** - Shared script files and libraries folder.
       * **images** - Shared images files and folder.
-      * **styles** - Shared styles, variables and mixins folder. Architecture of global styles is based on [official SASS guidelines](https://sass-guidelin.es/#architecture).
+      * **styles** - Shared styles, variables and mixins folder.
 
 ### 3.2 Modules
 
@@ -154,7 +154,7 @@ e.g.
 #### 3.2.3 Feature Modules
 
 Feature Modules contains multiple application parts and features that were logically encapsulated. Those modules should have its own routing module and therefore doesn't need to be loaded until needed. 
-To create a new module with routing navigate to `app/modules` folder and run Angular CLI command `ng generate module <<module_name>> --routing`.
+To create a new module with routing navigate to `app/modules` folder and run Angular CLI command `ng generate module module_name --routing`.
 Any feature module should use `Shared Module`.
 
 ## 4. Principles
@@ -279,6 +279,49 @@ to be add..
 
 ## 5. Styling
 
+To make styling easier and less boilerplate, use SCSS also known as SASS. If you are not familiar with SASS, please read [introduction](https://sass-guidelin.es/#introduction) first.
+
+### 5.1 Global Styles
+
+Global `styles/variables/mixins/functions` that affects whole application or will be used in application modules should be placed in `src/assets/styles` folder. Its architecture is based on [official SASS guidelines](https://sass-guidelin.es/#architecture) and is divided to following folders:
+
+* **styles**
+  * **abstracts** - Contains variables, mixins or functions that might be used across the application styles. Those files cannot contain any direct CSS code.
+    * _variables.scss - Contains variables for colors, sizes, etc.
+    * _mixins.scss - Contains mixins that generates CSS output based on input parameters.
+    * _functions.scss - Contains functions that modifies values based on input parameters.
+  * **base** - Contains what is usually called boilerplate code for the project. You might find here reset file, typography settings and other basic styles used anywhere in the application.
+    * _reset.scss
+    * _typography.scss
+  * **vendors** - Contains all external styles like Bootstrap, Normalize, etc.
+  * **_global.scss** - References all available `variables, mixins` and `functions` that can be used in any SCSS file. It is important that this file won't contain any direct CSS styles, otherwise it would copied multiple times.
+  * **main.scss** - Contains references to all SCSS that should be part of the output CSS.
+  
+but could also contain:
+
+  * **components**
+  * **layouts**
+  * **pages**
+  * **themes**
+
+folders, when styles may be used across the application.
+
+---
+
+**To use all defined `variables, mixins` and `functions` in any SCSS file, import the `_global.scss` as following:**
+
+    @import 'global';
+
+### 5.2 Scoped Styles
+
+If you generate new component with Angular CLI command `ng generate component component-name` it will create `component-name.component.scss` file that affects only component's template. Any component related styles should be defined here, unless they are shared across the multiple components.
+
+---
+
+All defined `variables, mixins` and `functions` has to be imported as following:
+
+    @import 'global';
+
 ## 6. Naming Conventions & Code Organization
 
 Here you can find some additional conventions that should be considered.
@@ -305,9 +348,15 @@ Therefore, always define `public` `properties/functions/attributes` before `priv
 
 ## 7. Testing
 
-to be add..
+### 7.1 Unit/Integration Tests
+
+### 7.2 End-to-End Tests
  
 ## 8. Anylyzing
+
+### 8.1 Linting
+
+### 8.2 
 
 to be add..
 
