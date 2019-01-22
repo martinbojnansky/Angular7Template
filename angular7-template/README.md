@@ -159,28 +159,97 @@ Any feature module should use `Shared Module`.
 
 ## 4. Principles
 
-### Routing
+### 4.1 Routing
 
-### 3.2.4 Lazy Loading
+Main application routing module `AppRoutingModule` contains top-level navigation that registers routes for all feature modules.
 
-### Dependency Injection & Dependency Inversion
+    const routes: Routes = [
+      ...,
+      {
+        path: AppRoutes.LOGIN,
+        component: LoginPageComponent
+      },     
+      ...
+    ];
 
-### Localization
+    @NgModule({
+      imports: [RouterModule.forRoot(routes)],
+      exports: [RouterModule]
+    })
+    export class AppRoutingModule {}
+    
+From example above you can see that if we visit `AppRoutes.LOGIN` than `LoginPageComponent` should be initiated.
 
-### SCSS Structure
+If we want to protect any routes from accessing we use [guards]().
 
-## 5. Naming Conventions & Code Organization
+The easiest way to create protected section of application is by creating a base route with `canActivate` property guard and place all protected routes as its `children` routes.
+
+    {
+      path: AppRoutes.AUTH,
+      component: AuthorizedLayoutComponent,
+      canActivate: [AuthGuard],
+      children: [
+        {
+          path: AppRoutes.HOME,
+          loadChildren: () => HomeModule
+        },
+        {
+          path: AppRoutes.USERS,
+          loadChildren: () => UsersModule
+        }
+      ]
+    }
+    
+Notice that for `AppRoutes.HOME` and `AppRoutes.USERS` we do not provide component class name, but lamba factory that references modules. This practice allows you to apply lazy-loading on modules, what basically means that `HomeModule` won't be downloaded by the client until it will access `AppRoutes.HOME` route. Moreover, routing for `HomeModule` is not specified here, but relies on the fact that module implements its own routing.
+
+### 4.3 Dependency Injection (DI) & Dependency Inversion Principle (DIP)
+
+#### 4.3.1 Dependency Injection (DI)
+
+> Dependency injection (DI), is an important application design pattern. Angular has its own DI framework, which is typically used in the design of Angular applications to increase their efficiency and modularity. Dependencies are services or objects that a class needs to perform its function. DI is a coding pattern in which a class asks for dependencies from external sources rather than creating them itself.
+
+Imagine a repository service to retrieve users from REST API. To make our application more testable, its a good practice to provide its dependencies in a `constructor`. This way you will be able to recognize all services needed by the component and easily replace/mock them. To make a class injectable, we need it to register it with DI framework built-in Angular.
+
+1. First of all, you need to mark dependency with a `@Injectable` decorator.
+
+        @Injectable()
+        export class UsersRepositoryService {
+          constructor(private http: HttpClient) {}
+
+          getUsers(): Observable<Object> {
+            return this.http.get('https://reqres.in/api/users');
+          }
+        }
+    
+2. And register dependency as a provider in its module.
+
+        @NgModule({
+          providers: [services.UsersRepositoryService]
+        })
+        export class UsersModule {}
+        
+#### 4.3.2 Dependency Inversion Principle (DIP)
+
+
+
+### 4.4 Localization
+
+to be add..
+
+## 5. Styling
+
+## 6. Naming Conventions & Code Organization
 
 Here you can find some additional conventions that should be considered.
 
-### 5.1 Naming Conventions
+### 6.1 Naming Conventions
 
 1. `Class/Interface/Enum` should be `UpperCase` named and end with a type name. e.g. `LocalStorageService`.
 1. `Class/Interface/Enum` file name should be `lower-case-with-dash` named and end with with a type name separated by dot. e.g. `local-storage.service.ts`
 1. `Constants` should be `camelCased` named. e.g. `myConstant`
 1. Do not use `var` unless you need global variable. Use `const` for single-assignable properties and `let` for scoped multi-assignable propeties.
 
-### 5.2 Code Organization
+### 6.2 Code Organization
 
 1. Use thrid-party `imports` first and separate them with empty line.
 
@@ -193,11 +262,11 @@ Here you can find some additional conventions that should be considered.
 Therefore, always define `public` `properties/functions/attributes` before `private`. 
 1. Always mark input/output properties of components with `@Input/@Output`.
 
-## 6. Testing
+## 7. Testing
 
 ... to be add
  
-
+## 8. Anylyzing
 
 
 
