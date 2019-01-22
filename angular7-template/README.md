@@ -80,7 +80,8 @@ For a basic overview of folder structure see following list:
 
 For a faster code location, lower coupling, better performance and scalability is application divided into multiple modules placed in `src/app` folder.
 
-e.g.:
+e.g.
+
 * **core** - Contains single instance features shared across the application.
 * **shared** - Contains features shared across different modules.
 * **modules** - Contains logically grouped features that represents some part of the application.
@@ -103,7 +104,7 @@ e.g:
   
 Each module should define `index.ts` file that re-exports all exports of the its folder.
 
-e.g:
+e.g
 
 *module/services/index.ts*
 
@@ -136,17 +137,31 @@ and than we can manage export all needed services with a single `@import`:
 
 The Core Module takes on the role of the root AppModule , but is not the module which gets bootstrapped by Angular at run-time. It should contain singleton services, universal components and other features which has only one instance per application.
 
-e.g.:
+e.g.
+
 * Authentication service should be initiated only once and may be used across different modules. 
-* 
+* Header/Footer component should be here.
 
 #### 3.2.2 Shared Module
 
+The Shared Module should contain features that are going to be used in multiple modules (`components/pipes/directives`) and therefore be initiated multiple times.
+
+e.g.
+
+* LoadingOverlay component should be here.
+* IBAN formatting pipe should be here.
+
 #### 3.2.3 Feature Modules
 
-#### 3.2.4 Lazy Loading
+Feature Modules contains multiple application parts and features that were logically encapsulated. Those modules should have its own routing module and therefore doesn't need to be loaded until needed. 
+To create a new module with routing navigate to `app/modules` folder and run Angular CLI command `ng generate module <<module_name>> --routing`.
+Any feature module should use `Shared Module`.
 
 ## 4. Principles
+
+### Routing
+
+### 3.2.4 Lazy Loading
 
 ### Dependency Injection & Dependency Inversion
 
@@ -178,6 +193,9 @@ Here you can find some additional conventions that should be considered.
 Therefore, always define `public` `properties/functions/attributes` before `private`. 
 1. Always mark input/output properties of components with `@Input/@Output`.
 
+## 6. Testing
+
+... to be add
  
 
 
