@@ -180,9 +180,7 @@ Main application routing module `AppRoutingModule` contains top-level navigation
     
 From example above you can see that if we visit `AppRoutes.LOGIN` than `LoginPageComponent` should be initiated.
 
-If we want to protect any routes from accessing we use [guards]().
-
-The easiest way to create protected section of application is by creating a base route with `canActivate` property guard and place all protected routes as its `children` routes.
+If we want to protect any routes from accessing we use [guards](https://angular.io/guide/router#canactivate-requiring-authentication). The easiest way to create protected section of application is by creating a base route with `canActivate` property guard and place all protected routes as its `children` routes.
 
     {
       path: AppRoutes.AUTH,
@@ -230,7 +228,50 @@ Imagine a repository service to retrieve users from REST API. To make our applic
         
 #### 4.3.2 Dependency Inversion Principle (DIP)
 
+> Dependency Inversion Principle is one of the commonly used [SOLID principles of object-oriented programming](https://en.wikipedia.org/wiki/SOLID) and says that classes should depend on abstractions, not concretions.
 
+Dependency Inversion Principle helps you to decouple your application by defining abstractions of dependencies that are used instead of concrete implementations. This way you can make your software less coupled and easier to maintain, because you can easily tell to DI framework which implementation of abstraction should be injected. Also, its safer to re-implement some service, when it implements an interface.
+
+In Angular, you won't be able to register services with interfaces, but you can create an abstract class.
+
+1. Create an abstraction of your dependency.
+
+        export abstract class StorageService implements Storage {
+          abstract getItem(key: string): string;
+          abstract setItem(key: string, value: string): void;
+        }
+2. Create an implementation of the abstraction and mark it with `@Injectable` decorator.
+
+        import { StorageService } from './storage.service';
+
+        @Injectable()
+        export class LocalStorageService implements StorageService {
+          private storage: Storage;
+
+          constructor() {
+            this.storage = localStorage;
+          }
+
+          getItem(key: string): string {
+            return this.storage.getItem(key);
+          }
+
+          setItem(key: string, value: string): void {
+            this.storage.setItem(key, value);
+            this.updateLength();
+          }
+        }
+3. Register provider, that will provide concreation when constructor asks for abstraction.
+
+        @NgModule({
+          providers: [
+            // Services
+            {
+              provide: services.StorageService,
+              useClass: services.LocalStorageService
+            }
+          ]
+        })
 
 ### 4.4 Localization
 
@@ -264,10 +305,10 @@ Therefore, always define `public` `properties/functions/attributes` before `priv
 
 ## 7. Testing
 
-... to be add
+to be add..
  
 ## 8. Anylyzing
 
-
+to be add..
 
 
