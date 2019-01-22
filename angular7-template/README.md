@@ -344,13 +344,32 @@ Therefore, always define `public` `properties/functions/attributes` before `priv
 
 ## 7. Testing
 
-### 7.1 Unit/Integration Tests
+### 7.1 Unit / Integration Tests
 
-If you generate new files with Angular CLI, they comes also with a test file with `.spec.ts` extension. Unit/Integration test follows [official documentation](https://angular.io/guide/testing#use-a-page-object).
+If you generate new files with Angular CLI, they comes also with a test file with `.spec.ts` extension. Unit / Integration testing follows [official documentation](https://angular.io/guide/testing#use-a-page-object).
 
-### 7.2 End-to-End Tests
+---
 
-to be add..
+To run Unit / Integration tests run command `npm run test`.
+
+### 7.2 End-to-End Tests (E2E)
+
+End-to-End a.k.a. E2E tests simulates user interaction with a page. Unfortunately those tests are more fragile than basic unit / integration tests, however they might be good tests some scenarios, even for a multiple browsers. If you are not familiar with writing tests in [Protractor](http://www.protractortest.org/), take a look on [Protractor tutorial](http://www.protractortest.org/#/tutorial).
+
+E2E tests are located separately in `e2e/src` folder. You may create an folder structure for the tests based on the project needs. 
+
+e.g. You can create a folder for each feature module and its scenarios.
+
+* e2e
+  * src
+    * users
+      * user-selection
+      * user-add
+      * ...
+      
+---
+
+To run E2E tests run command `npm run e2e`.
  
 ## 8. Anylyzing
 
