@@ -16,28 +16,28 @@ It proposes and showcases implementation of the following commonly used principl
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
 
-### Development server
+### 1.1 Development server
 
 Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-### Code scaffolding
+### 1.2 Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. 
 You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-### Build
+### 1.3 Build
 
 Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `npm run build:prod` for a production build.
 
-### Running unit tests
+### 1.4 Running unit tests
 
 Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-### Running end-to-end tests
+### 1.5 Running end-to-end tests
 
 Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-### Further help
+### 1.6 Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
@@ -50,7 +50,7 @@ This template was created using [Visual Studio Code](https://code.visualstudio.c
 * Syntax higlighting and autocomplete (IntelliSense)
 * Integratated console
 
-### Extensions
+### 2.1 Extensions
 
 Moreover it is recommended to use Visual Studio Code with following extensions to reach the best productivity.
 
@@ -62,7 +62,7 @@ Moreover it is recommended to use Visual Studio Code with following extensions t
 
 ## 3. Architecture
 
-### Folders Structure
+### 3.1 Folders Structure
 
 For a basic overview of folder structure see following list:
 
@@ -76,7 +76,7 @@ For a basic overview of folder structure see following list:
       * **images** - Shared images files and folder.
       * **styles** - Shared styles, variables and mixins folder.
 
-### Modules
+### 3.2 Modules
 
 For a faster code location, lower coupling, better performance and scalability is application divided into multiple modules placed in `src/app` folder.
 
@@ -129,7 +129,7 @@ and than we can manage export all needed services with a single `@import`:
   });
 </code>
 
-### Core Module
+#### 3.2.1 Core Module
 
 The Core Module takes on the role of the root AppModule , but is not the module which gets bootstrapped by Angular at run-time. It should contain singleton services, universal components and other features which has only one instance per application.
 
@@ -137,11 +137,11 @@ e.g.:
 * Authentication service should be initiated only once and may be used across different modules. 
 * 
 
-### Shared Module
+#### 3.2.2 Shared Module
 
-### Feature Modules
+#### 3.2.3 Feature Modules
 
-### Lazy Loading
+#### 3.2.4 Lazy Loading
 
 ## 4. Principles
 
