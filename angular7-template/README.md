@@ -273,10 +273,6 @@ In Angular, you won't be able to register services with interfaces, but you can 
           ]
         })
 
-### 4.4 Localization
-
-to be add..
-
 ## 5. Styling
 
 To make styling easier and less boilerplate, use SCSS also known as SASS. If you are not familiar with SASS, please read [introduction](https://sass-guidelin.es/#introduction) first.
@@ -350,14 +346,30 @@ Therefore, always define `public` `properties/functions/attributes` before `priv
 
 ### 7.1 Unit/Integration Tests
 
+If you generate new files with Angular CLI, they comes also with a test file with `.spec.ts` extension. Unit/Integration test follows [official documentation](https://angular.io/guide/testing#use-a-page-object).
+
 ### 7.2 End-to-End Tests
+
+to be add..
  
 ## 8. Anylyzing
 
 ### 8.1 Linting
 
-### 8.2 
+Application requires to write a code in specified formats by `tslint.json` and `.stylelintrc` files. Currently, linting is done before every build, therefore you won't be able to run the application when a single mistake in code formatting is done. For a productivity increase consider usage Visual Studio Code and extensions.
 
-to be add..
+### 8.2 Optimization
 
+Sometimes, you might accidentally import unnecessary files and encounter large size of application bundles. To examine what might be an issue, you can use `source-map-explorer` which visualizes bundle's dependencies and its sizes.
 
+1. First of all make sure you've installed `source-map-explorer`.
+
+        npm install -g source-map-explorer
+
+2. Create a production build.
+
+        npm run build:prod
+
+3. Run `source-map-explorer` for with path of the bundle file.
+
+        source-map-explorer dist/angular7-template/vendor.xxx.js
