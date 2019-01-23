@@ -1,6 +1,6 @@
 # Angular7Template
 
-This template was inspired by Angular best-practices mentioned in the [Pluralsight course by Jim Cooper](https://app.pluralsight.com/player?course=best-practices-angular&author=jim-cooper&name=099afa72-35ee-4f15-9f26-257b10c11665&clip=2&mode=live) and author's experience with front-end development.
+This template was inspired by Angular best-practices mentioned in the [Pluralsight course by Jim Cooper](https://app.pluralsight.com/player?course=best-practices-angular&author=jim-cooper&name=099afa72-35ee-4f15-9f26-257b10c11665&clip=2&mode=live) and author's experience in front-end development.
 
 The main goal of this template is to create a stable infrastructure and solid foundation for a long-term Angular projects. 
 It proposes and showcases implementation of the following commonly used principles in front-end programming:
@@ -10,6 +10,7 @@ It proposes and showcases implementation of the following commonly used principl
 * Dependency Inversion
 * Software Modularity & Lazy Loading
 * Code Debugging
+* Automated Testing
 * Type Checking & Code Formatting shared across the development team
 
 ## 1. Angular CLI
@@ -45,20 +46,20 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 This template was created using [Visual Studio Code](https://code.visualstudio.com/) that provides tools for:
 
-* Refactoring (rename, search, replace, ..)
-* Type-checking
-* Syntax higlighting and autocomplete (IntelliSense)
+* Syntax higlighting, type check and auto completion (IntelliSense)
+* Easy Refactoring (Rename - F2, Search - Ctrl + F, Replace - Ctrl + H, ..)
 * Integratated console
 
 ### 2.1 Extensions
 
 Moreover it is recommended to use Visual Studio Code with following extensions to reach the best productivity.
 
-1. [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) enables to set break point and watch variables while running an application.
+1. [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) enables to set a break point in a code and watch variables while running an application in the browser.
 1. [NPM](https://marketplace.visualstudio.com/items?itemName=eg2.vscode-npm-script) validates dependencies defined in package.json.
+1. [Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) provides IntelliSense for template files.
 1. [TSLint](https://marketplace.visualstudio.com/items?itemName=eg2.tslint) displays errors in TypeScript file formatting as you write a code.
 1. [StyleLint](https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint) displays errors in CSS/SCSS/Less file formatting as you write a code.
-1. [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) automatically fixes TSLint/StyleLint errors and formats code on document save. Formatting is based on project settings and has to be allowed in Visual Studio Code settings.
+1. [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) automatically fixes TSLint / StyleLint errors and formats code on document save. *Formatting is based on project settings and has to be allowed in Visual Studio Code settings.*
 
 ## 3. Architecture
 
@@ -102,7 +103,7 @@ e.g:
   * **pipes** - Contains module specific pipes.
   * **assets** - Contains module specific assets like scripts, images or global styles.
   
-Each module should define `index.ts` file that re-exports all exports of the its folder.
+Each module should define `index.ts` file (*also known as barrel files*) that re-exports all exports of its parent folder.
 
 e.g
 
@@ -115,7 +116,7 @@ e.g
    
 
 
-and than we can manage export all needed services with a single `@import`:
+and than we can manage export all needed services with a single `import`:
 
 *module/module.module.ts*
 
@@ -261,7 +262,7 @@ In Angular, you won't be able to register services with interfaces, but you can 
             this.updateLength();
           }
         }
-3. Register provider, that will provide concreation when constructor asks for abstraction.
+3. Register a provider, that will provide concretition when constructor asks for the abstraction.
 
         @NgModule({
           providers: [
@@ -346,7 +347,7 @@ Therefore, always define `public` `properties/functions/attributes` before `priv
 
 ### 7.1 Unit / Integration Tests
 
-If you generate new files with Angular CLI, they comes also with a test file with `.spec.ts` extension. Unit / Integration testing follows [official documentation](https://angular.io/guide/testing#use-a-page-object).
+If you generate new files with Angular CLI, they comes also with a test file appended by `.spec.ts` extension. Unit / Integration testing follows [official documentation](https://angular.io/guide/testing#use-a-page-object).
 
 ---
 
@@ -354,7 +355,7 @@ To run Unit / Integration tests run command `npm run test`.
 
 ### 7.2 End-to-End Tests (E2E)
 
-End-to-End a.k.a. E2E tests simulates user interaction with a page. Unfortunately those tests are more fragile than basic unit / integration tests, however they might be good tests some scenarios, even for a multiple browsers. If you are not familiar with writing tests in [Protractor](http://www.protractortest.org/), take a look on [Protractor tutorial](http://www.protractortest.org/#/tutorial).
+End-to-End a.k.a. E2E tests simulates user interaction with a page. Unfortunately those tests are more fragile than basic unit / integration tests, however they might be good to verify some scenarios, even in a multiple browsers. If you are not familiar with writing tests in [Protractor](http://www.protractortest.org/), take a look on [Protractor tutorial](http://www.protractortest.org/#/tutorial).
 
 E2E tests are located separately in `e2e/src` folder. You may create an folder structure for the tests based on the project needs. 
 
@@ -375,7 +376,7 @@ To run E2E tests run command `npm run e2e`.
 
 ### 8.1 Linting
 
-Application requires to write a code in specified formats by `tslint.json` and `.stylelintrc` files. Currently, linting is done before every build, therefore you won't be able to run the application when a single mistake in code formatting is done. For a productivity increase consider usage Visual Studio Code and extensions.
+Application requires to write a code in specified formats by `tslint.json` and `.stylelintrc` files. Currently, linting is done before every build, therefore you won't be able to run the application when a single mistake in code formatting is done. For a productivity increase consider usage of Visual Studio Code and recommended extensions.
 
 ### 8.2 Optimization
 
