@@ -13,7 +13,7 @@ import { HomeModule, UsersModule } from './modules';
 const routes: Routes = [
   {
     path: AppRoutes.DEFAULT,
-    redirectTo: `${AppRoutes.AUTH}`,
+    redirectTo: AppRoutes.AUTH,
     pathMatch: 'full'
   },
   {
@@ -36,8 +36,7 @@ const routes: Routes = [
       },
       {
         path: AppRoutes.USERS,
-        loadChildren: () => UsersModule,
-        canActivate: [AuthGuard]
+        loadChildren: () => UsersModule
       }
     ]
   },
