@@ -371,6 +371,19 @@ e.g. You can create a folder for each feature module and its scenarios.
 ---
 
 To run E2E tests run command `npm run e2e`.
+
+### 7.3 Manual Tests
+
+To simplify manual testing you can take advantage of browser synchronization provided by [browser-sync module](https://www.browsersync.io/). 
+
+1. Make sure your application is up and running on `http://localhost:4200`.
+1. Run `npm run browsersync` command.
+1. Navigate to `http://localhost:4201` in all your browsers.
+1. Now, all changes in code, clicks and manipulation with forms will reflect in all browsers simultaneously. 
+1. To access and change browser-sync settings, you can access `http://localhosti:4202`.
+
+>> As to date 25.1.2019, current version of browser-sync synchronizes clicks only done in Google Chrome. Moreover, running IE and Edge will end up in browser-sync failure.
+
  
 ## 8. Analyzing
 
