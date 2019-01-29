@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { LocalStorageKeys, AppRoutes } from '@app/shared';
-import { StorageService } from '../storage';
+import { LocalStorageService } from '../storage';
 import { AuthService } from './auth.service';
 
 @Injectable()
 export class FakeAuthService extends AuthService {
   private authToken: string;
 
-  constructor(private storage: StorageService, private router: Router) {
+  constructor(private storage: LocalStorageService, private router: Router) {
     super();
     this.authToken = this.storage.getItem(LocalStorageKeys.AUTHORIZATION_TOKEN);
   }

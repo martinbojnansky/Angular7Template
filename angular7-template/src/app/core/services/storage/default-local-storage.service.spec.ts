@@ -1,18 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LocalStorageService } from './local-storage.service';
+import { DefaultLocalStorageService } from './default-local-storage.service';
 
 describe('LocalStorageService', () => {
-  let service: LocalStorageService;
+  let service: DefaultLocalStorageService;
   let serviceLengthSpy: jasmine.Spy;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [LocalStorageService]
+      providers: [DefaultLocalStorageService]
     });
 
     serviceLengthSpy = spyOnProperty(localStorage, 'length').and.returnValue(1);
-    service = TestBed.get(LocalStorageService);
+    service = TestBed.get(DefaultLocalStorageService);
   });
 
   it('should be created', () => {

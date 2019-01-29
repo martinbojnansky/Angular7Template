@@ -1,7 +1,9 @@
 <header>
   <h1>angular7-template</h1>
   <nav>
-    <a routerLink="/auth/home">Home</a> <a routerLink="/auth/users">Users</a>
+    <a routerLink="/auth/home">Home</a> <a routerLink="/auth/users">Users</a> |
+    <button (click)="localeService.changeLocale('en-us')">en</button> /
+    <button (click)="localeService.changeLocale('de-ch')">de</button> |
     <button class="signout-btn" (click)="signOut()">Sign Out</button>
   </nav>
 </header>

@@ -1,4 +1,4 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { NgModule, Optional, SkipSelf, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -32,8 +32,12 @@ import * as guards from './guards';
       useClass: services.FakeAuthService
     },
     {
-      provide: services.StorageService,
-      useClass: services.LocalStorageService
+      provide: services.LocalStorageService,
+      useClass: services.DefaultLocalStorageService
+    },
+    {
+      provide: services.LocaleService,
+      useClass: services.DefaultLocaleService
     }
   ]
 })

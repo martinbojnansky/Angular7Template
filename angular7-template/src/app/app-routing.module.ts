@@ -8,7 +8,6 @@ import {
   LoginPageComponent,
   NotFoundPageComponent
 } from './core';
-import { HomeModule, UsersModule } from './modules';
 
 const routes: Routes = [
   {
@@ -32,11 +31,11 @@ const routes: Routes = [
       },
       {
         path: AppRoutes.HOME,
-        loadChildren: () => HomeModule
+        loadChildren: './modules/home/home.module#HomeModule'
       },
       {
         path: AppRoutes.USERS,
-        loadChildren: () => UsersModule
+        loadChildren: './modules/users/users.module#UsersModule'
       }
     ]
   },

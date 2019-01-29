@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocaleService } from '@app/core';
 
 @Component({
   selector: 'app-home-page',
@@ -6,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
+  date: Date = new Date();
 
-  constructor() { }
+  constructor(public localeService: LocaleService) {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 
 import { LocalStorageKeys, AppRoutes } from '@app/shared';
 import { FakeAuthService } from './fake-auth.service';
-import { StorageService } from '../storage/';
+import { LocalStorageService } from '../storage/';
 
 describe('FakeAuthService', () => {
   let service: FakeAuthService;
-  let storageServiceSpy: jasmine.SpyObj<StorageService>;
+  let storageServiceSpy: jasmine.SpyObj<LocalStorageService>;
   let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
@@ -17,7 +17,7 @@ describe('FakeAuthService', () => {
       providers: [
         FakeAuthService,
         {
-          provide: StorageService,
+          provide: LocalStorageService,
           useValue: jasmine.createSpyObj('StorageService', [
             'getItem',
             'setItem',
@@ -32,7 +32,7 @@ describe('FakeAuthService', () => {
     });
 
     service = TestBed.get(FakeAuthService);
-    storageServiceSpy = TestBed.get(StorageService);
+    storageServiceSpy = TestBed.get(LocalStorageService);
     routerSpy = TestBed.get(Router);
   });
 
