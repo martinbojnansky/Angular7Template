@@ -36,8 +36,8 @@ import * as guards from './guards';
       useClass: services.DefaultLocalStorageService
     },
     {
-      provide: services.LocaleService,
-      useClass: services.DefaultLocaleService
+      provide: services.LocalizationService,
+      useClass: services.DefaultLocalizationService
     }
   ]
 })

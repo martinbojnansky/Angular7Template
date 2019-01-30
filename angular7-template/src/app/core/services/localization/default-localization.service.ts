@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 
-import { LocaleService } from './locale.service';
-import { LocaleValues } from './locale-values';
+import { LocalizationService } from './localization.service';
+import { LocalizationValues } from './localization-values';
 import { Locale } from './locale';
 import * as values from '@assets/locales';
 import { LocalStorageService } from '../storage';
 import { LocalStorageKeys } from '@app/shared';
 
 @Injectable()
-export class DefaultLocaleService implements LocaleService {
+export class DefaultLocalizationService implements LocalizationService {
   readonly locales = {
     [Locale.EN]: values.en,
     [Locale.DE]: values.de
   };
 
   private locale: Locale;
-  private values: LocaleValues;
+  private values: LocalizationValues;
 
   constructor(private localStorageService: LocalStorageService) {
     this.restoreLocaleSetting();
@@ -25,16 +25,24 @@ export class DefaultLocaleService implements LocaleService {
     return this.locale;
   }
 
-  getValues(): LocaleValues {
+  getValues(): LocalizationValues {
     return this.values;
   }
 
-  changeLocale(locale: Locale) {
-    this.values = this.locales[locale];
+  changeLocale(locale: Locale, reload: boolean = true) {
+    const localeValues = this.locales[locale];
 
-    if (this.values) {
-      this.locale = locale;
+    if (localeValues) {
       this.saveLocaleSetting(locale);
+
+      // Comment this condition if you're not using ChangeDetectionStrategy.OnPush
+      if (reload) {
+        location.reload();
+        return;
+      }
+
+      this.locale = locale;
+      this.values = this.locales[locale];
     } else {
       this.setDefaultLocale();
     }
@@ -46,7 +54,7 @@ export class DefaultLocaleService implements LocaleService {
     );
 
     if (localeSetting) {
-      this.changeLocale(localeSetting);
+      this.changeLocale(localeSetting, false);
     } else {
       this.setDefaultLocale();
     }
@@ -57,6 +65,6 @@ export class DefaultLocaleService implements LocaleService {
   }
 
   private setDefaultLocale() {
-    this.changeLocale(Locale.EN);
+    this.changeLocale(Locale.EN, false);
   }
 }

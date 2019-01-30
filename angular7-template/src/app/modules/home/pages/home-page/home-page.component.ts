@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LocaleService } from '@app/core';
+import { LocalizationService } from '@app/core';
 
 @Component({
   selector: 'app-home-page',
@@ -9,7 +9,7 @@ import { LocaleService } from '@app/core';
 export class HomePageComponent implements OnInit {
   date: Date = new Date();
 
-  constructor(public localeService: LocaleService) {}
+  constructor(public localizationService: LocalizationService) {}
 
   ngOnInit() {}
 }

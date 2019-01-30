@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthService, LocaleService, LocaleValues } from './../../services';
+import {
+  AuthService,
+  LocalizationService,
+  LocalizationValues
+} from './../../services';
 
 @Component({
   selector: 'app-authorized-layout',
@@ -9,7 +13,7 @@ import { AuthService, LocaleService, LocaleValues } from './../../services';
 })
 export class AuthorizedLayoutComponent implements OnInit {
   constructor(
-    public localeService: LocaleService,
+    public localizationService: LocalizationService,
     private authService: AuthService
   ) {}
 
