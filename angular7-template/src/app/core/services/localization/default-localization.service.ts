@@ -6,6 +6,7 @@ import { Locale } from './locale';
 import * as values from '@assets/locales';
 import { LocalStorageService } from '../storage';
 import { LocalStorageKeys } from '@app/shared';
+import { LocalizationSettings } from './localization-settings';
 
 @Injectable()
 export class DefaultLocalizationService implements LocalizationService {
@@ -17,7 +18,10 @@ export class DefaultLocalizationService implements LocalizationService {
   private locale: Locale;
   private values: LocalizationValues;
 
-  constructor(private localStorageService: LocalStorageService) {
+  constructor(
+    private localizationSettings: LocalizationSettings,
+    private localStorageService: LocalStorageService
+  ) {
     this.restoreLocaleSetting();
   }
 
@@ -39,8 +43,7 @@ export class DefaultLocalizationService implements LocalizationService {
     if (localeValues) {
       this.saveLocaleSetting(locale);
 
-      // Comment this condition if you're not using ChangeDetectionStrategy.OnPush
-      if (reload) {
+      if (this.localizationSettings.useReload && reload) {
         location.reload();
         return;
       }
@@ -69,6 +72,6 @@ export class DefaultLocalizationService implements LocalizationService {
   }
 
   private setDefaultLocale() {
-    this.changeLocale(Locale.EN, false);
+    this.changeLocale(this.localizationSettings.defaultLocale, false);
   }
 }

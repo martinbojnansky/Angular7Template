@@ -8,6 +8,7 @@ import * as layouts from './layouts';
 import * as pages from './pages';
 import * as services from './services';
 import * as guards from './guards';
+import { LocalizationSettings, Locale } from './services';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,13 @@ import * as guards from './guards';
     {
       provide: services.LocalizationService,
       useClass: services.DefaultLocalizationService
+    },
+    {
+      provide: services.LocalizationSettings,
+      useValue: <LocalizationSettings>{
+        defaultLocale: Locale.EN,
+        useReload: true
+      }
     }
   ]
 })
