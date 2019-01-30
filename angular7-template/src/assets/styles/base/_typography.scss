@@ -1,1 +1,6 @@
 // Set typography styles here.
+@import 'global';
+
+button {
+  padding: $padding-button;
+}

@@ -1,6 +1,12 @@
 export abstract class LocalizationValues {
-  abstract welcomeText: (name: string) => string;
   abstract shortDateFormat: string;
-  abstract firstName: string;
-  abstract lastName: string;
+  abstract notFoundPageText: string;
+  abstract homePageText: (name: string) => string;
+  abstract usersPageText: string;
+  abstract signInButtonText: string;
+  abstract signOutButtonText: string;
+  abstract homeModuleLinkText: string;
+  abstract usersModuleLinkText: string;
+  abstract firstNameCaption: string;
+  abstract lastNameCaption: string;
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { User } from '../../models';
 import { UsersRepositoryService } from '../../services';
+import { LocalizationService } from '@app/core';
 
 @Component({
   selector: 'app-users-page',
@@ -15,7 +16,10 @@ export class UsersPageComponent implements OnInit {
   private usersOrderByProp: string;
   private usersOrderByDesc: boolean;
 
-  constructor(private usersRepositoryService: UsersRepositoryService) {}
+  constructor(
+    public localizationService: LocalizationService,
+    private usersRepositoryService: UsersRepositoryService
+  ) {}
 
   ngOnInit() {
     this.initUsers();

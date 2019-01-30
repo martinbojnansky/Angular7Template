@@ -1,5 +1,5 @@
 <section class="user-detail" *ngIf="user">
   <img [src]="user.avatar" />
   <app-user-name [user]="user"></app-user-name>
-  <button class="close-btn" (click)="onClose()">Close</button>
+  <button class="close-btn" (click)="onClose()">&times;</button>
 </section>

@@ -2,7 +2,13 @@ import { LocalizationValues } from '@app/core/services/localization/localization
 
 export const en: LocalizationValues = {
   shortDateFormat: 'MM/dd/yyyy',
-  welcomeText: name => `Hello ${name}. Welcome!`,
-  firstName: 'Fist Name',
-  lastName: 'Last Name'
+  notFoundPageText: `The page you've requested was not found.`,
+  homePageText: name => `Hello ${name}. Welcome!`,
+  usersPageText: 'This is users page with sample repository service.',
+  signInButtonText: 'Sign In',
+  signOutButtonText: 'Sign Out',
+  homeModuleLinkText: 'Home',
+  usersModuleLinkText: 'Users',
+  firstNameCaption: 'Fist Name',
+  lastNameCaption: 'Last Name'
 };

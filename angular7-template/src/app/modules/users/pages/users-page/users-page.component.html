@@ -1,5 +1,5 @@
 <section>
-  <p>This is users page with sample repository to retrieve users.</p>
+  <p>{{ localizationService.getValues().usersPageText }}</p>
   <br />
   <div class="container">
     <table class="users-table container-half">
@@ -7,8 +7,12 @@
         <tr>
           <th>Avatar</th>
           <th (click)="orderBy('id')">Id</th>
-          <th (click)="orderBy('first_name')">First Name</th>
-          <th (click)="orderBy('last_name')">Last Name</th>
+          <th (click)="orderBy('first_name')">
+            {{ localizationService.getValues().firstNameCaption }}
+          </th>
+          <th (click)="orderBy('last_name')">
+            {{ localizationService.getValues().lastNameCaption }}
+          </th>
         </tr>
       </thead>
       <tbody>

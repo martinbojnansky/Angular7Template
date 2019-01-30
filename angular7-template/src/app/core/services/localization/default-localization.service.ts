@@ -30,6 +30,10 @@ export class DefaultLocalizationService implements LocalizationService {
   }
 
   changeLocale(locale: Locale, reload: boolean = true) {
+    if (this.locale === locale) {
+      return;
+    }
+
     const localeValues = this.locales[locale];
 
     if (localeValues) {
