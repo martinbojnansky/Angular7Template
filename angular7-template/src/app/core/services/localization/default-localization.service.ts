@@ -10,11 +10,10 @@ import { LocalizationSettings } from './localization-settings';
 
 @Injectable()
 export class DefaultLocalizationService implements LocalizationService {
-  readonly locales = {
+  private locales = {
     [Locale.EN]: values.en,
     [Locale.DE]: values.de
   };
-
   private locale: Locale;
   private values: LocalizationValues;
 

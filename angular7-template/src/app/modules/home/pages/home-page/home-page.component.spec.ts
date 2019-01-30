@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomePageComponent } from './home-page.component';
+import { LocalizationService } from '@app/core';
+import { localizationServiceSpyFactory } from '@app/core/spies';
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;
@@ -8,9 +10,14 @@ describe('HomePageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomePageComponent ]
-    })
-    .compileComponents();
+      declarations: [HomePageComponent],
+      providers: [
+        {
+          provide: LocalizationService,
+          useFactory: localizationServiceSpyFactory
+        }
+      ]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

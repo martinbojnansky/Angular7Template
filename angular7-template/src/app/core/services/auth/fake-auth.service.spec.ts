@@ -4,7 +4,11 @@ import { Router } from '@angular/router';
 
 import { LocalStorageKeys, AppRoutes } from '@app/shared';
 import { FakeAuthService } from './fake-auth.service';
-import { LocalStorageService } from '../storage/';
+import { LocalStorageService } from '@app/core/services';
+import {
+  routerSpyFactory,
+  localStorageServiceSpyFactory
+} from '@app/core/spies';
 
 describe('FakeAuthService', () => {
   let service: FakeAuthService;
@@ -18,15 +22,11 @@ describe('FakeAuthService', () => {
         FakeAuthService,
         {
           provide: LocalStorageService,
-          useValue: jasmine.createSpyObj('StorageService', [
-            'getItem',
-            'setItem',
-            'removeItem'
-          ])
+          useFactory: localStorageServiceSpyFactory
         },
         {
           provide: Router,
-          useValue: jasmine.createSpyObj('Router', ['navigate'])
+          useFactory: routerSpyFactory
         }
       ]
     });

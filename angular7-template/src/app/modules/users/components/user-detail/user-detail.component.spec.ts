@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { UserDetailComponent } from './user-detail.component';
 import { User } from '../../models';
@@ -16,7 +17,8 @@ describe('UserDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [UserDetailComponent]
+      declarations: [UserDetailComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
@@ -46,10 +48,10 @@ describe('UserDetailComponent', () => {
     expect(section).toBeNull();
   });
 
-  it('should display first name', () => {
-    const section = compiled.querySelector('p').textContent;
+  it('should display avatar', () => {
+    const section = compiled.querySelector('img').src;
 
-    expect(section).toBe(userMock.first_name);
+    expect(section).toContain(userMock.avatar);
   });
 
   it('should emit closed on button click', () => {

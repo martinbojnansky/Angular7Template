@@ -2,7 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AuthorizedLayoutComponent } from './authorized-layout.component';
-import { AuthService } from './../../services';
+import { AuthService, LocalizationService } from '@app/core/services';
+import {
+  localizationServiceSpyFactory,
+  authorizationServiceSpyFactory
+} from '@app/core/spies';
 
 describe('AuthorizedLayoutComponent', () => {
   let component: AuthorizedLayoutComponent;
@@ -16,7 +20,11 @@ describe('AuthorizedLayoutComponent', () => {
       providers: [
         {
           provide: AuthService,
-          useValue: jasmine.createSpyObj('AuthService', ['signOut'])
+          useFactory: authorizationServiceSpyFactory
+        },
+        {
+          provide: LocalizationService,
+          useFactory: localizationServiceSpyFactory
         }
       ],
       schemas: [NO_ERRORS_SCHEMA]

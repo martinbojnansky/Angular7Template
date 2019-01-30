@@ -5,6 +5,8 @@ import { UsersRepositoryService } from '../../services';
 import { UsersRepositoryServiceMock } from '../../mocks';
 import { User } from '../../models';
 import { Component, Input } from '@angular/core';
+import { LocalizationService } from '@app/core';
+import { localizationServiceSpyFactory } from '@app/core/spies';
 
 @Component({ selector: 'app-user-detail', template: '' })
 class UserDetailStubComponent {
@@ -23,6 +25,10 @@ describe('UsersPageComponent', () => {
         {
           provide: UsersRepositoryService,
           useFactory: () => new UsersRepositoryServiceMock(null)
+        },
+        {
+          provide: LocalizationService,
+          useFactory: localizationServiceSpyFactory
         }
       ]
     }).compileComponents();

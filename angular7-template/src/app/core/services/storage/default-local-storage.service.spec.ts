@@ -1,16 +1,24 @@
 import { TestBed } from '@angular/core/testing';
 
 import { DefaultLocalStorageService } from './default-local-storage.service';
+import { localStorageSpyFactory } from '@app/core/spies';
 
 describe('LocalStorageService', () => {
   let service: DefaultLocalStorageService;
+  let localStorageSpy: jasmine.SpyObj<Storage>;
   let serviceLengthSpy: jasmine.Spy;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [DefaultLocalStorageService]
-    });
+    localStorageSpy = localStorageSpyFactory();
 
+    TestBed.configureTestingModule({
+      providers: [
+        {
+          provide: DefaultLocalStorageService,
+          useFactory: () => new DefaultLocalStorageService(localStorageSpy)
+        }
+      ]
+    });
     serviceLengthSpy = spyOnProperty(localStorage, 'length').and.returnValue(1);
     service = TestBed.get(DefaultLocalStorageService);
   });
@@ -24,18 +32,16 @@ describe('LocalStorageService', () => {
   });
 
   it('should call clear correctly', () => {
-    const spy = spyOn(localStorage, 'clear');
     serviceLengthSpy.and.returnValue(0);
     service.clear();
-    expect(spy).toHaveBeenCalled();
+    expect(localStorageSpy.clear).toHaveBeenCalled();
     expect(service.length).toBe(0);
   });
 
   it('should call getItem correctly', () => {
-    const spy = spyOn(localStorage, 'getItem').and.returnValue('value');
     const result = service.getItem('key');
-    expect(spy).toHaveBeenCalledTimes(1);
-    expect(spy).toHaveBeenCalledWith('key');
+    expect(localStorageSpy.getItem).toHaveBeenCalledTimes(1);
+    expect(localStorageSpy.getItem).toHaveBeenCalledWith('key');
     expect(result).toBe('value');
   });
 
@@ -48,20 +54,18 @@ describe('LocalStorageService', () => {
   });
 
   it('should call removeItem correctly', () => {
-    const spy = spyOn(localStorage, 'removeItem');
     serviceLengthSpy.and.returnValue(0);
     service.removeItem('key');
-    expect(spy).toHaveBeenCalledTimes(1);
-    expect(spy).toHaveBeenCalledWith('key');
+    expect(localStorageSpy.removeItem).toHaveBeenCalledTimes(1);
+    expect(localStorageSpy.removeItem).toHaveBeenCalledWith('key');
     expect(service.length).toBe(0);
   });
 
   it('should call setItem correctly', () => {
-    const spy = spyOn(localStorage, 'setItem');
     serviceLengthSpy.and.returnValue(2);
     service.setItem('key', 'value');
-    expect(spy).toHaveBeenCalledTimes(1);
-    expect(spy).toHaveBeenCalledWith('key', 'value');
+    expect(localStorageSpy.setItem).toHaveBeenCalledTimes(1);
+    expect(localStorageSpy.setItem).toHaveBeenCalledWith('key', 'value');
     expect(service.length).toBe(2);
   });
 });

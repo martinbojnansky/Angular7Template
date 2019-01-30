@@ -7,8 +7,8 @@ export class DefaultLocalStorageService implements LocalStorageService {
   length: number;
   private storage: Storage;
 
-  constructor() {
-    this.storage = localStorage;
+  constructor(storage: Storage) {
+    this.storage = storage;
     this.updateLength();
   }
 
@@ -36,6 +36,6 @@ export class DefaultLocalStorageService implements LocalStorageService {
   }
 
   private updateLength() {
-    this.length = localStorage.length;
+    this.length = this.storage.length;
   }
 }

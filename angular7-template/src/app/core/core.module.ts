@@ -34,7 +34,7 @@ import { LocalizationSettings, Locale } from './services';
     },
     {
       provide: services.LocalStorageService,
-      useClass: services.DefaultLocalStorageService
+      useFactory: () => new services.DefaultLocalStorageService(localStorage)
     },
     {
       provide: services.LocalizationService,

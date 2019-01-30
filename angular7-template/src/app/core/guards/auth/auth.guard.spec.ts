@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from '../../services';
 import { AppRoutes } from '@app/shared/';
+import {
+  authorizationServiceSpyFactory,
+  routerSpyFactory
+} from '@app/core/spies';
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;
@@ -18,11 +22,11 @@ describe('AuthGuard', () => {
         AuthGuard,
         {
           provide: AuthService,
-          useValue: jasmine.createSpyObj('AuthService', ['isAuth'])
+          useFactory: authorizationServiceSpyFactory
         },
         {
           provide: Router,
-          useValue: jasmine.createSpyObj('Router', ['navigate'])
+          useFactory: routerSpyFactory
         }
       ]
     });
