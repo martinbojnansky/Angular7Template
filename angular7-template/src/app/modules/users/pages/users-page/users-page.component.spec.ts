@@ -2,11 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UsersPageComponent } from './users-page.component';
 import { UsersRepositoryService } from '../../services';
-import { UsersRepositoryServiceMock } from '../../mocks';
+import { UsersRepositoryServiceFake } from '../../test-doubles/fakes';
 import { User } from '../../models';
 import { Component, Input } from '@angular/core';
 import { LocalizationService } from '@app/core';
-import { localizationServiceSpyFactory } from '@app/core/spies';
+import { localizationServiceSpyFactory } from '@app/core/test-doubles/spies';
 
 @Component({ selector: 'app-user-detail', template: '' })
 class UserDetailStubComponent {
@@ -24,7 +24,7 @@ describe('UsersPageComponent', () => {
       providers: [
         {
           provide: UsersRepositoryService,
-          useFactory: () => new UsersRepositoryServiceMock(null)
+          useClass: UsersRepositoryServiceFake
         },
         {
           provide: LocalizationService,

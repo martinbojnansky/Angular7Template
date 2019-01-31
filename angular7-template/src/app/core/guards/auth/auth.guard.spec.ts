@@ -8,7 +8,7 @@ import { AppRoutes } from '@app/shared/';
 import {
   authorizationServiceSpyFactory,
   routerSpyFactory
-} from '@app/core/spies';
+} from '@app/core/test-doubles/spies';
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;

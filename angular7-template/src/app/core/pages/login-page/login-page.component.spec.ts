@@ -5,7 +5,7 @@ import { AuthService, LocalizationService } from './../../services';
 import {
   localizationServiceSpyFactory,
   authorizationServiceSpyFactory
-} from '@app/core/spies';
+} from '@app/core/test-doubles/spies';
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;

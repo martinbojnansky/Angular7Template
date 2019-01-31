@@ -8,7 +8,7 @@ import { LocalStorageService } from '@app/core/services';
 import {
   routerSpyFactory,
   localStorageServiceSpyFactory
-} from '@app/core/spies';
+} from '@app/core/test-doubles/spies';
 
 describe('FakeAuthService', () => {
   let service: FakeAuthService;

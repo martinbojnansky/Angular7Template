@@ -4,7 +4,11 @@ import { UsersRepositoryService } from '../../services';
 import { of } from 'rxjs/internal/observable/of';
 
 @Injectable()
-export class UsersRepositoryServiceMock extends UsersRepositoryService {
+export class UsersRepositoryServiceFake extends UsersRepositoryService {
+  constructor() {
+    super(null);
+  }
+
   getUsers(): Observable<any> {
     return of({
       data: [

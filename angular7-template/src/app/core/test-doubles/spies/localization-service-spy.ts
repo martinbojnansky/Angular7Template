@@ -1,4 +1,4 @@
-import { LocalizationService, Locale } from '../services';
+import { LocalizationService, Locale } from '@app/core/services';
 import { en } from '@assets/locales/en';
 
 export const localizationServiceSpyFactory = () => {

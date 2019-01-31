@@ -3,17 +3,13 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { UserDetailComponent } from './user-detail.component';
 import { User } from '../../models';
+import { userFakeFactory } from '../../test-doubles/fakes/user-fake';
 
 describe('UserDetailComponent', () => {
   let component: UserDetailComponent;
   let fixture: ComponentFixture<UserDetailComponent>;
   let compiled: any;
-  const userMock = {
-    id: 1,
-    first_name: 'fn',
-    last_name: 'ln',
-    avatar: 'av'
-  };
+  const userFake: User = userFakeFactory();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -25,7 +21,7 @@ describe('UserDetailComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(UserDetailComponent);
     component = fixture.componentInstance;
-    component.user = Object.assign({}, userMock);
+    component.user = Object.assign({}, userFakeFactory());
     fixture.detectChanges();
     compiled = fixture.debugElement.nativeElement;
   });
@@ -51,7 +47,7 @@ describe('UserDetailComponent', () => {
   it('should display avatar', () => {
     const section = compiled.querySelector('img').src;
 
-    expect(section).toContain(userMock.avatar);
+    expect(section).toContain(userFake.avatar);
   });
 
   it('should emit closed on button click', () => {
@@ -63,6 +59,6 @@ describe('UserDetailComponent', () => {
     });
     button.click();
 
-    expect(emittedUser.id).toBe(userMock.id);
+    expect(emittedUser.id).toBe(userFake.id);
   });
 });

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomePageComponent } from './home-page.component';
 import { LocalizationService } from '@app/core';
-import { localizationServiceSpyFactory } from '@app/core/spies';
+import { localizationServiceSpyFactory } from '@app/core/test-doubles/spies';
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;

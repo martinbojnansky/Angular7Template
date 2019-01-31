@@ -6,7 +6,7 @@ import { AuthService, LocalizationService } from '@app/core/services';
 import {
   localizationServiceSpyFactory,
   authorizationServiceSpyFactory
-} from '@app/core/spies';
+} from '@app/core/test-doubles/spies';
 
 describe('AuthorizedLayoutComponent', () => {
   let component: AuthorizedLayoutComponent;
