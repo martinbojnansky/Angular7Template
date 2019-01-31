@@ -1,4 +1,4 @@
-import { NgModule, Optional, SkipSelf, LOCALE_ID } from '@angular/core';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -8,7 +8,6 @@ import * as layouts from './layouts';
 import * as pages from './pages';
 import * as services from './services';
 import * as guards from './guards';
-import { LocalizationSettings, Locale } from './services';
 
 @NgModule({
   declarations: [
@@ -42,10 +41,7 @@ import { LocalizationSettings, Locale } from './services';
     },
     {
       provide: services.LocalizationSettings,
-      useValue: <LocalizationSettings>{
-        defaultLocale: Locale.EN,
-        useReload: true
-      }
+      useValue: new services.LocalizationSettings()
     }
   ]
 })
