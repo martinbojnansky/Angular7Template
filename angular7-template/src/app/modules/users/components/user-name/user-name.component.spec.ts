@@ -4,7 +4,7 @@ import { UserNameComponent } from './user-name.component';
 import { LocalizationService } from '@app/core';
 import { localizationServiceSpyFactory } from '@app/core/test-doubles/spies';
 import { User } from '../../models';
-import { userFakeFactory } from '../../test-doubles/fakes/user-fake';
+import { userFakeFactory } from '../../test-doubles/fakes/user.fake';
 
 describe('UserNameComponent', () => {
   let component: UserNameComponent;

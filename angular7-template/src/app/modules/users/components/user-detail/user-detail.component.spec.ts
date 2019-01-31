@@ -3,7 +3,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { UserDetailComponent } from './user-detail.component';
 import { User } from '../../models';
-import { userFakeFactory } from '../../test-doubles/fakes/user-fake';
+import { userFakeFactory } from '../../test-doubles/fakes/user.fake';
 
 describe('UserDetailComponent', () => {
   let component: UserDetailComponent;

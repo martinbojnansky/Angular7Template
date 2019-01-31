@@ -6,6 +6,6 @@ export class HomePage {
   }
 
   getParagraphText() {
-    return element(by.tagName('p')).getText();
+    return element(by.css('p:first-child')).getText();
   }
 }

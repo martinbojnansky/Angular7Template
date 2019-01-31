@@ -9,6 +9,6 @@ describe('Home page', () => {
   });
 
   it('should display text', () => {
-    expect(page.getParagraphText()).toContain('home page');
+    expect(page.getParagraphText()).toContain('Hello');
   });
 });
