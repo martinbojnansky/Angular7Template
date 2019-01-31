@@ -2,18 +2,13 @@ import { Injectable } from '@angular/core';
 
 import { LocalizationService } from './localization.service';
 import { LocalizationValues } from './localization-values';
-import { Locale } from './locale';
-import * as values from '@assets/locales';
+import { Locale, locales } from './locales';
 import { LocalStorageService } from '../storage';
 import { LocalStorageKeys } from '@app/shared';
 import { LocalizationSettings } from './localization-settings';
 
 @Injectable()
 export class DefaultLocalizationService implements LocalizationService {
-  private locales = {
-    [Locale.EN]: values.en,
-    [Locale.DE]: values.de
-  };
   private locale: Locale;
   private values: LocalizationValues;
 
@@ -37,7 +32,7 @@ export class DefaultLocalizationService implements LocalizationService {
       return;
     }
 
-    const localeValues = this.locales[locale];
+    const localeValues = locales[locale];
 
     if (localeValues) {
       this.saveLocaleSetting(locale);
@@ -48,7 +43,7 @@ export class DefaultLocalizationService implements LocalizationService {
       }
 
       this.locale = locale;
-      this.values = this.locales[locale];
+      this.values = locales[locale];
     } else {
       this.setDefaultLocale();
     }

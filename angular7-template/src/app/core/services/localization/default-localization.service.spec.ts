@@ -5,7 +5,7 @@ import { LocalizationSettings } from './localization-settings';
 import { LocalStorageService } from '../storage';
 import { localStorageServiceSpyFactory } from '@app/core/test-doubles';
 import { LocalizationService } from './localization.service';
-import { Locale } from './locale';
+import { Locale } from './locales';
 import { LocalStorageKeys } from '@app/shared';
 import { en, de } from '@assets/locales';
 

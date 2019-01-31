@@ -1,5 +1,5 @@
 import { LocalizationValues } from './localization-values';
-import { Locale } from './locale';
+import { Locale } from './locales';
 
 export abstract class LocalizationService {
   abstract getValues(): LocalizationValues;

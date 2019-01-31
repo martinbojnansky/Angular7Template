@@ -2,16 +2,16 @@
 
 This template was inspired by Angular best-practices mentioned in the [Pluralsight course by Jim Cooper](https://app.pluralsight.com/player?course=best-practices-angular&author=jim-cooper&name=099afa72-35ee-4f15-9f26-257b10c11665&clip=2&mode=live) and author's experience in front-end development.
 
-The main goal of this template is to create a stable infrastructure and solid foundation for a long-term Angular projects. 
+The main goal of this template is to create a stable infrastructure and solid foundation for a long-term Angular projects.
 It proposes and showcases implementation of the following commonly used principles in front-end programming:
 
-* Single Resposibility
-* Dependency Injection
-* Dependency Inversion
-* Software Modularity & Lazy Loading
-* Code Debugging
-* Automated Testing
-* Type Checking & Code Formatting shared across the development team
+- Single Resposibility
+- Dependency Injection
+- Dependency Inversion
+- Software Modularity & Lazy Loading
+- Code Debugging
+- Automated Testing
+- Type Checking & Code Formatting shared across the development team
 
 ## 1. Angular CLI
 
@@ -23,7 +23,7 @@ Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app 
 
 ### 1.2 Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. 
+Run `ng generate component component-name` to generate a new component.
 You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ### 1.3 Build
@@ -46,9 +46,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 This template was created using [Visual Studio Code](https://code.visualstudio.com/) that provides tools for:
 
-* Syntax higlighting, type check and auto completion (IntelliSense)
-* Easy Refactoring (Rename - F2, Search - Ctrl + F, Replace - Ctrl + H, ..)
-* Integratated console
+- Syntax higlighting, type check and auto completion (IntelliSense)
+- Easy Refactoring (Rename - F2, Search - Ctrl + F, Replace - Ctrl + H, ..)
+- Integratated console
 
 ### 2.1 Extensions
 
@@ -59,7 +59,7 @@ Moreover it is recommended to use Visual Studio Code with following extensions t
 1. [Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) provides IntelliSense for template files.
 1. [TSLint](https://marketplace.visualstudio.com/items?itemName=eg2.tslint) displays errors in TypeScript file formatting as you write a code.
 1. [StyleLint](https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint) displays errors in CSS/SCSS/Less file formatting as you write a code.
-1. [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) automatically fixes TSLint / StyleLint errors and formats code on document save. *Formatting is based on project settings and has to be allowed in Visual Studio Code settings.*
+1. [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) automatically fixes TSLint / StyleLint errors and formats code on document save. _Formatting is based on project settings and has to be allowed in Visual Studio Code settings._
 
 ## 3. Architecture
 
@@ -67,15 +67,15 @@ Moreover it is recommended to use Visual Studio Code with following extensions t
 
 For a basic overview of folder structure see following list:
 
-* **angular7-template** - Project folder.
-  * **e2e** - End-to-End tests folder.
-    * **src** - E2E test modules folder.
-  * **src** - Application source folder.
-    * **app** - Application modules folder.
-    * **assets** - Application assets folder.
-      * **scripts** - Shared script files and libraries folder.
-      * **images** - Shared images files and folder.
-      * **styles** - Shared styles, variables and mixins folder.
+- **angular7-template** - Project folder.
+  - **e2e** - End-to-End tests folder.
+    - **src** - E2E test modules folder.
+  - **src** - Application source folder.
+    - **app** - Application modules folder.
+    - **assets** - Application assets folder.
+      - **scripts** - Shared script files and libraries folder.
+      - **images** - Shared images files and folder.
+      - **styles** - Shared styles, variables and mixins folder.
 
 ### 3.2 Modules
 
@@ -83,45 +83,42 @@ For a faster code location, lower coupling, better performance and scalability i
 
 e.g.
 
-* **core** - Contains single instance features shared across the application.
-* **shared** - Contains features shared across different modules.
-* **modules** - Contains logically grouped features that represents some part of the application.
-  * **users** - Application part for the user management.
-  * **orders** - Application part for the orders management.
-  * ...
-  
+- **core** - Contains single instance features shared across the application.
+- **shared** - Contains features shared across different modules.
+- **modules** - Contains logically grouped features that represents some part of the application.
+
+  - **users** - Application part for the user management.
+  - **orders** - Application part for the orders management.
+  - ...
+
 Also, each module should implement reasonable folder structure created according to responsibility of files.
 
 e.g:
-* **module**
-  * **components** - Contains control components reused across the module. This controls doesn't rely on services but should be controlled by `@Input` and `@Output` properties.
-  * **layouts** - Contains layout components that wraps multiple navigation pages with the same HTML structure.
-  * **pages** - Contains page components that can be accessed by url. Pages may be displayed in the layouts and may use components.
-  * **services** - Contains services and providers.
-  * **models** - Contains models used across the components, services and other parts of the module.
-  * **guards** - Contains module specific guards.
-  * **pipes** - Contains module specific pipes.
-  * **assets** - Contains module specific assets like scripts, images or global styles.
-  
-Each module should define `index.ts` file (*also known as barrel files*) that re-exports all exports of its parent folder.
+
+- **module**
+
+  - **components** - Contains control components reused across the module. This controls doesn't rely on services but should be controlled by `@Input` and `@Output` properties.
+  - **layouts** - Contains layout components that wraps multiple navigation pages with the same HTML structure.
+  - **pages** - Contains page components that can be accessed by url. Pages may be displayed in the layouts and may use components.
+  - **services** - Contains services and providers.
+  - **models** - Contains models used across the components, services and other parts of the module.
+  - **guards** - Contains module specific guards.
+  - **pipes** - Contains module specific pipes.
+  - **assets** - Contains module specific assets like scripts, images or global styles.
+
+Each module should define `index.ts` file (_also known as barrel files_) that re-exports all exports of its parent folder.
 
 e.g
 
-*module/services/index.ts*
+_module/services/index.ts_
 
-
-  
-    export * from './storage.service';  
+    export * from './storage.service';
     export * from './local-storage.service';
-   
-
 
 and than we can manage export all needed services with a single `import`:
 
-*module/module.module.ts*
+_module/module.module.ts_
 
-
-    
     import * as services from './services';
 
     @NgModule({
@@ -131,8 +128,6 @@ and than we can manage export all needed services with a single `import`:
           ...
       ]
     });
-    
-
 
 #### 3.2.1 Core Module
 
@@ -140,8 +135,8 @@ The Core Module takes on the role of the root AppModule , but is not the module 
 
 e.g.
 
-* Authentication service should be initiated only once and may be used across different modules. 
-* Header/Footer component should be here.
+- Authentication service should be initiated only once and may be used across different modules.
+- Header/Footer component should be here.
 
 #### 3.2.2 Shared Module
 
@@ -149,12 +144,12 @@ The Shared Module should contain features that are going to be used in multiple 
 
 e.g.
 
-* LoadingOverlay component should be here.
-* IBAN formatting pipe should be here.
+- LoadingOverlay component should be here.
+- IBAN formatting pipe should be here.
 
 #### 3.2.3 Feature Modules
 
-Feature Modules contains multiple application parts and features that were logically encapsulated. Those modules should have its own routing module and therefore doesn't need to be loaded until needed. 
+Feature Modules contains multiple application parts and features that were logically encapsulated. Those modules should have its own routing module and therefore doesn't need to be loaded until needed.
 To create a new module with routing navigate to `app/modules` folder and run Angular CLI command `ng generate module module_name --routing`.
 Any feature module should use `Shared Module`.
 
@@ -169,7 +164,7 @@ Main application routing module `AppRoutingModule` contains top-level navigation
       {
         path: AppRoutes.LOGIN,
         component: LoginPageComponent
-      },     
+      },
       ...
     ];
 
@@ -178,7 +173,7 @@ Main application routing module `AppRoutingModule` contains top-level navigation
       exports: [RouterModule]
     })
     export class AppRoutingModule {}
-    
+
 From example above you can see that if we visit `AppRoutes.LOGIN` than `LoginPageComponent` should be initiated.
 
 If we want to protect any routes from accessing we use [guards](https://angular.io/guide/router#canactivate-requiring-authentication). The easiest way to create protected section of application is by creating a base route with `canActivate` property guard and place all protected routes as its `children` routes.
@@ -190,16 +185,18 @@ If we want to protect any routes from accessing we use [guards](https://angular.
       children: [
         {
           path: AppRoutes.HOME,
-          loadChildren: () => HomeModule
+          loadChildren: './modules/home/home.module#HomeModule'
         },
         {
           path: AppRoutes.USERS,
-          loadChildren: () => UsersModule
+          loadChildren: './modules/users/users.module#UsersModule'
         }
       ]
     }
-    
-Notice that for `AppRoutes.HOME` and `AppRoutes.USERS` we do not provide component class name, but lamba factory that references modules. This practice allows you to apply lazy-loading on modules, what basically means that `HomeModule` won't be downloaded by the client until it will access `AppRoutes.HOME` route. Moreover, routing for `HomeModule` is not specified here, but relies on the fact that module implements its own routing.
+
+Notice that for `AppRoutes.HOME` and `AppRoutes.USERS` we do not provide component class name, but ~~lamba factory~~ special path to a feature module that will be recognized and compiled as standalone dependency. This practice allows you to apply lazy-loading on modules, what basically means that `HomeModule` won't be downloaded by the client until it will access `AppRoutes.HOME` route. Moreover, routing for `HomeModule` is not specified here, but relies on the fact that module implements its own routing.
+
+> Lambda factories that reference module `() => HomeModule` can't be used anymore, because they were not included in production build.
 
 ### 4.3 Dependency Injection (DI) & Dependency Inversion Principle (DIP)
 
@@ -209,7 +206,7 @@ Notice that for `AppRoutes.HOME` and `AppRoutes.USERS` we do not provide compone
 
 Imagine a repository service to retrieve users from REST API. To make our application more testable, its a good practice to provide its dependencies in a `constructor`. This way you will be able to recognize all services needed by the component and easily replace/mock them. To make a class injectable, we need it to register it with DI framework built-in Angular.
 
-1. First of all, you need to mark dependency with a `@Injectable` decorator.
+1.  First of all, you need to mark dependency with a `@Injectable` decorator.
 
         @Injectable()
         export class UsersRepositoryService {
@@ -219,14 +216,14 @@ Imagine a repository service to retrieve users from REST API. To make our applic
             return this.http.get('https://reqres.in/api/users');
           }
         }
-    
-2. And register dependency as a provider in its module.
+
+2.  And register dependency as a provider in its module.
 
         @NgModule({
           providers: [services.UsersRepositoryService]
         })
         export class UsersModule {}
-        
+
 #### 4.3.2 Dependency Inversion Principle (DIP)
 
 > Dependency Inversion Principle is one of the commonly used [SOLID principles of object-oriented programming](https://en.wikipedia.org/wiki/SOLID) and says that classes should depend on abstractions, not concretions.
@@ -235,13 +232,14 @@ Dependency Inversion Principle helps you to decouple your application by definin
 
 In Angular, you won't be able to register services with interfaces, but you can create an abstract class.
 
-1. Create an abstraction of your dependency.
+1.  Create an abstraction of your dependency.
 
         export abstract class StorageService implements Storage {
           abstract getItem(key: string): string;
           abstract setItem(key: string, value: string): void;
         }
-2. Create an implementation of the abstraction and mark it with `@Injectable` decorator.
+
+2.  Create an implementation of the abstraction and mark it with `@Injectable` decorator.
 
         import { StorageService } from './storage.service';
 
@@ -262,7 +260,8 @@ In Angular, you won't be able to register services with interfaces, but you can 
             this.updateLength();
           }
         }
-3. Register a provider, that will provide concretition when constructor asks for the abstraction.
+
+3.  Register a provider, that will provide concretition when constructor asks for the abstraction.
 
         @NgModule({
           providers: [
@@ -282,24 +281,25 @@ To make styling easier and less boilerplate, use SCSS also known as SASS. If you
 
 Global `styles/variables/mixins/functions` that affects whole application or will be used in application modules should be placed in `src/assets/styles` folder. Its architecture is based on [official SASS guidelines](https://sass-guidelin.es/#architecture) and is divided to following folders:
 
-* **styles**
-  * **abstracts** - Contains variables, mixins or functions that might be used across the application styles. Those files cannot contain any direct CSS code.
-    * _variables.scss - Contains variables for colors, sizes, etc.
-    * _mixins.scss - Contains mixins that generates CSS output based on input parameters.
-    * _functions.scss - Contains functions that modifies values based on input parameters.
-  * **base** - Contains what is usually called boilerplate code for the project. You might find here reset file, typography settings and other basic styles used anywhere in the application.
-    * _reset.scss
-    * _typography.scss
-  * **vendors** - Contains all external styles like Bootstrap, Normalize, etc.
-  * **_global.scss** - References all available `variables, mixins` and `functions` that can be used in any SCSS file. It is important that this file won't contain any direct CSS styles, otherwise it would copied multiple times.
-  * **main.scss** - Contains references to all SCSS that should be part of the output CSS.
-  
+- **styles**
+
+  - **abstracts** - Contains variables, mixins or functions that might be used across the application styles. Those files cannot contain any direct CSS code.
+    - \_variables.scss - Contains variables for colors, sizes, etc.
+    - \_mixins.scss - Contains mixins that generates CSS output based on input parameters.
+    - \_functions.scss - Contains functions that modifies values based on input parameters.
+  - **base** - Contains what is usually called boilerplate code for the project. You might find here reset file, typography settings and other basic styles used anywhere in the application.
+    - \_reset.scss
+    - \_typography.scss
+  - **vendors** - Contains all external styles like Bootstrap, Normalize, etc.
+  - **\_global.scss** - References all available `variables, mixins` and `functions` that can be used in any SCSS file. It is important that this file won't contain any direct CSS styles, otherwise it would copied multiple times.
+  - **main.scss** - Contains references to all SCSS that should be part of the output CSS.
+
 but could also contain:
 
-  * **components**
-  * **layouts**
-  * **pages**
-  * **themes**
+- **components**
+- **layouts**
+- **pages**
+- **themes**
 
 folders, when styles may be used across the application.
 
@@ -332,16 +332,16 @@ Here you can find some additional conventions that should be considered.
 
 ### 6.2 Code Organization
 
-1. Use thrid-party `imports` first and separate them with empty line.
+1.  Use thrid-party `imports` first and separate them with empty line.
 
         import { NgModule } from '@angular/core';
 
         import { SharedModule } from '@app/shared';
         import { HomeRoutingModule } from './home-routing.module';
-    
-1. All `properties/functions/attributes` are considered `public` if you won't provide any access modifier. 
-Therefore, always define `public` `properties/functions/attributes` before `private`. 
-1. Always mark input/output properties of components with `@Input/@Output`.
+
+1.  All `properties/functions/attributes` are considered `public` if you won't provide any access modifier.
+    Therefore, always define `public` `properties/functions/attributes` before `private`.
+1.  Always mark input/output properties of components with `@Input/@Output`.
 
 ## 7. Testing
 
@@ -357,34 +357,36 @@ To run Unit / Integration tests run command `npm run test`.
 
 End-to-End a.k.a. E2E tests simulates user interaction with a page. Unfortunately those tests are more fragile than basic unit / integration tests, however they might be good to verify some scenarios, even in a multiple browsers. If you are not familiar with writing tests in [Protractor](http://www.protractortest.org/), take a look on [Protractor tutorial](http://www.protractortest.org/#/tutorial).
 
-E2E tests are located separately in `e2e/src` folder. You may create an folder structure for the tests based on the project needs. 
+E2E tests are located separately in `e2e/src` folder. You may create an folder structure for the tests based on the project needs.
 
 e.g. You can create a folder for each feature module and its scenarios.
 
-* e2e
-  * src
-    * users
-      * user-selection
-      * user-add
-      * ...
-      
+- e2e
+
+  - src
+
+    - users
+
+      - user-selection
+      - user-add
+      - ...
+
 ---
 
 To run E2E tests run command `npm run e2e`.
 
 ### 7.3 Manual Tests
 
-To simplify manual testing you can take advantage of browser synchronization provided by [browser-sync module](https://www.browsersync.io/). 
+To simplify manual testing you can take advantage of browser synchronization provided by [browser-sync module](https://www.browsersync.io/).
 
 1. Make sure your application is up and running on `http://localhost:4200`.
 1. Run `npm run browsersync` command.
 1. Navigate to `http://localhost:4201` in all your browsers.
-1. Now, all changes in code, clicks and manipulation with forms will reflect in all browsers simultaneously. 
+1. Now, all changes in code, clicks and manipulation with forms will reflect in all browsers simultaneously.
 1. To access and change browser-sync settings, you can access `http://localhosti:4202`.
 
->> As to date 25.1.2019, current version of browser-sync synchronizes clicks only done in Google Chrome. Moreover, running IE and Edge will end up in browser-sync failure.
+> As to date 25.1.2019, current version of browser-sync synchronizes clicks only done in Google Chrome. Moreover, running IE and Edge will end up in browser-sync failure.
 
- 
 ## 8. Analyzing
 
 ### 8.1 Linting
@@ -395,14 +397,112 @@ Application requires to write a code in specified formats by `tslint.json` and `
 
 Sometimes, you might accidentally import unnecessary files and encounter large size of application bundles. To examine what might be an issue, you can use `source-map-explorer` which visualizes bundle's dependencies and its sizes.
 
-1. First of all make sure you've installed `source-map-explorer`.
+1.  First of all make sure you've installed `source-map-explorer`.
 
         npm install -g source-map-explorer
 
-2. Create a production build.
+2.  Create a production build.
 
         npm run build:prod
 
-3. Run `source-map-explorer` for with path of the bundle file.
+3.  Run `source-map-explorer` for with path of the bundle file.
 
         source-map-explorer dist/angular7-template/vendor.xxx.js
+
+## 9. Localization
+
+This template implements its own localization architecture that translate components with dynamic bindings.
+
+With `LocalizationService` you get:
+
+- Static variable translations: `applicationTitle: string`
+- Parametrized translation functions: `welcomeText: (name: string): string`
+- Type-checking whenever there is a missing or misspelled translation.
+- Single application bundle.
+- No need of application / page reload when switching a language.
+
+However,:
+
+- Localization can slightly effect application performance.
+- Won't be indexed by search engines.
+
+> If you use `ChangeDetectionStrategy.OnPush` in any components, dynamic translation won't work in those and all nested components. In this case you change the provider of `LocalizationSettings` in `CoreModule` to set default value `useReload` to `true`. This way, the translation will be applied right after automatic page reload on language switch.
+
+### 9.1 Localization values
+
+In `app/core/services/localization` folder you can find abstract class `LocalizationValues`. It defines an interface of all values and functions that should be implemented by each localization file.
+
+      export abstract class LocalizationValues {
+        abstract shortDateFormat: string;
+        abstract notFoundPageText: string;
+        abstract homePageText: (name: string) => string;
+        ...
+      }
+
+### 9.2 Localization files
+
+Translation files are located at `assets/locales` folder, in separate files with appropriate name. Those files contains constant values of custom implementation of `LocalizationValues` class.
+
+import { LocalizationValues } from '@app/core/services/localization/localization-values';
+
+      export const en: LocalizationValues = {
+        shortDateFormat: 'MM/dd/yyyy',
+        notFoundPageText: `The page you've requested was not found.`,
+        homePageText: name => `Hello ${name}. Welcome!`,
+        ...
+      };
+
+### 9.3 Supported localizations
+
+Supported locales can be added in two steps:
+
+1.  Register new locale id in `Locale` enum of `app/core/services/localization/locales.ts`
+
+        import { en, de } from '@assets/locales';
+
+        export enum Locale {
+          EN = 'en',
+          DE = 'de',
+          ...
+        }
+
+2.  Add implementation of `LocaleValues` and its corresponding id from `Locale` enum to `locales` constant object.
+
+        export const locales = {
+          [Locale.EN]: en,
+          [Locale.DE]: de,
+          ...
+        };
+
+### 9.4 Localize components
+
+To use localized values in your components use following steps:
+
+1.  Inject `LocalizationService` into your component as public.
+
+        export class AuthorizedLayoutComponent implements OnInit {
+          constructor(public localizationService: LocalizationService, ...) {}
+        }
+
+2.  Add bindings for localized values to component's template:
+
+
+        {{ localizationService.getValues().notFoundPageText }}
+        {{ localizationService.getValue().homePageText('John Doe') }}
+
+### 9.5 Testing localized components
+
+Injecting localization service to components that uses localized values comes with a drawback. In all test of such components, you need to register fake provider with implemented spy factory `localizationServiceSpyFactory`.
+
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+          declarations: [AuthorizedLayoutComponent],
+          providers: [
+            ...
+            {
+              provide: LocalizationService,
+              useFactory: localizationServiceSpyFactory
+            }
+          ]
+        }).compileComponents();
+      }));
