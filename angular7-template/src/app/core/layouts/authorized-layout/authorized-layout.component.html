@@ -7,8 +7,8 @@
     <a routerLink="/auth/users">{{
       localizationService.getValues().usersModuleLinkText
     }}</a>
-    | <button (click)="localizationService.changeLocale('en-us')">en</button> /
-    <button (click)="localizationService.changeLocale('de-ch')">de</button> |
+    | <button (click)="localizationService.changeLocale('en')">en</button> /
+    <button (click)="localizationService.changeLocale('de')">de</button> |
     <button class="signout-btn" (click)="signOut()">
       {{ localizationService.getValues().signOutButtonText }}
     </button>
