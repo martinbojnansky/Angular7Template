@@ -105,6 +105,7 @@ e.g:
   - **guards** - Contains module specific guards.
   - **pipes** - Contains module specific pipes.
   - **assets** - Contains module specific assets like scripts, images or global styles.
+  - **test-doubles** - Contains dummies, fakes, spies and stubs needed for testing purposes.
 
 Each module should define `index.ts` file (_also known as barrel files_) that re-exports all exports of its parent folder.
 
@@ -349,7 +350,49 @@ Here you can find some additional conventions that should be considered.
 
 If you generate new files with Angular CLI, they comes also with a test file appended by `.spec.ts` extension. Unit / Integration testing follows [official documentation](https://angular.io/guide/testing#use-a-page-object).
 
----
+#### 7.1.1 Test doubles
+
+In order to be able to test all of the components and services it may be needed to replace some dependencies or make sure that they're doing something.
+
+For this purposes, template uses 4 types of test-doubles:
+
+1. **Dummies (\*.dummy.ts)** - Does nothing. (e.g. empty functions)
+2. **Fakes (\*.fake.ts)** - Returns the same value everytime. (e.g. fake repository that returns array of users)
+3. **Stubs (\*.stub.ts)** - Simplifies implementation by overriding. (e.g. replaces access to production database by referencing in-memory database)
+4. **Spies (\*.spy.ts)** - Used to verify bahviour by inspecting calls, its arguments. It can also provide fake calls and return values.
+
+> To get more information on test-doubles take a look [here](https://www.mokacoding.com/blog/swift-test-doubles/), [here](https://www.javacodegeeks.com/2015/11/test-doubles-mocks-dummies-and-stubs.html) or [here](https://martinfowler.com/bliki/TestDouble.html).
+
+When you test-doubles always use following structure and file extensions in your modules. Otherwise, those files might be included in builds and fail during running or testing, or include unnecessary dependencies in your bundles.
+
+- **test-doubles**
+  - **dummies**
+    - \*.dummy.ts
+    - index.ts
+  - **fakes**
+    - \*.fake.ts
+    - index.ts
+  - **stubs**
+    - \*.stub.ts
+    - index.ts
+  - **spies**
+    - \*.spy.ts
+    - index.ts
+  - index.ts
+
+#### 7.1.2 No errors schema
+
+When you are writting tests for components that uses other components you have to provide its _stub_ implementations or use `NO_ERRORS_SCHEMA` that will ignore errors caused by unknown component tags.
+
+    beforeEach(async(() => {
+      TestBed.configureTestingModule({
+        declarations: [AuthorizedLayoutComponent],
+        ...
+        schemas: [NO_ERRORS_SCHEMA]
+      }).compileComponents();
+    }));
+
+#### 7.1.3 Running tests
 
 To run Unit / Integration tests run command `npm run test`.
 
@@ -362,16 +405,13 @@ E2E tests are located separately in `e2e/src` folder. You may create an folder s
 e.g. You can create a folder for each feature module and its scenarios.
 
 - e2e
-
   - src
-
     - users
+    - user-selection
+    - user-add
+    - ...
 
-      - user-selection
-      - user-add
-      - ...
-
----
+#### 7.2.1 Running tests
 
 To run E2E tests run command `npm run e2e`.
 
@@ -380,10 +420,10 @@ To run E2E tests run command `npm run e2e`.
 To simplify manual testing you can take advantage of browser synchronization provided by [browser-sync module](https://www.browsersync.io/).
 
 1. Make sure your application is up and running on `http://localhost:4200`.
-1. Run `npm run browsersync` command.
-1. Navigate to `http://localhost:4201` in all your browsers.
-1. Now, all changes in code, clicks and manipulation with forms will reflect in all browsers simultaneously.
-1. To access and change browser-sync settings, you can access `http://localhosti:4202`.
+2. Run `npm run browsersync` command.
+3. Navigate to `http://localhost:4201` in all your browsers.
+4. Now, all changes in code, clicks and manipulation with forms will reflect in all browsers simultaneously.
+5. To access and change browser-sync settings, you can access `http://localhosti:4202`.
 
 > As to date 25.1.2019, current version of browser-sync synchronizes clicks only done in Google Chrome. Moreover, running IE and Edge will end up in browser-sync failure.
 
