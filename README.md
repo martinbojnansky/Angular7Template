@@ -549,7 +549,7 @@ Injecting localization service to components that uses localized values comes wi
 
 To change language simply call `changeLocale` method on `LocalizationService` instance and provide `Locale` value.
 
-    <button (click)="localizationService.changeLocale('en-us')">en</button>
-    <button (click)="localizationService.changeLocale('de-ch')">de</button>
+    <button (click)="localizationService.changeLocale('en')">en</button>
+    <button (click)="localizationService.changeLocale('de')">de</button>
 
 > If you use `ChangeDetectionStrategy.OnPush` in any components, dynamic translation won't work in those and all nested components. In this case you change the provider of `LocalizationSettings` in `CoreModule` to set default value `useReload` to `true`. This way, the translation will be applied right after automatic page reload on language switch.
