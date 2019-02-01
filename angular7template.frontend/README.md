@@ -67,7 +67,7 @@ Moreover it is recommended to use Visual Studio Code with following extensions t
 
 For a basic overview of folder structure see following list:
 
-- **angular7-template** - Project folder.
+- **angular7template** - Project folder.
   - **e2e** - End-to-End tests folder.
     - **src** - E2E test modules folder.
   - **src** - Application source folder.
@@ -447,7 +447,7 @@ Sometimes, you might accidentally import unnecessary files and encounter large s
 
 3.  Run `source-map-explorer` for with path of the bundle file.
 
-        source-map-explorer dist/angular7-template/vendor.xxx.js
+        source-map-explorer dist/angular7template/vendor.xxx.js
 
 ## 9. Localization
 

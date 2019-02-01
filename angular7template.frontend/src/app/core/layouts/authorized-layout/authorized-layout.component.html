@@ -1,5 +1,5 @@
 <header>
-  <h1>angular7-template</h1>
+  <h1>angular7template</h1>
   <nav>
     <a routerLink="/auth/home">{{
       localizationService.getValues().homeModuleLinkText
@@ -7,8 +7,9 @@
     <a routerLink="/auth/users">{{
       localizationService.getValues().usersModuleLinkText
     }}</a>
-    | <button (click)="localizationService.changeLocale('en')">en</button> /
-    <button (click)="localizationService.changeLocale('de')">de</button> |
+    |
+    <button (click)="localizationService.changeLocale(locale.EN)">en</button> /
+    <button (click)="localizationService.changeLocale(locale.DE)">de</button> |
     <button class="signout-btn" (click)="signOut()">
       {{ localizationService.getValues().signOutButtonText }}
     </button>

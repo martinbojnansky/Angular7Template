@@ -7,6 +7,6 @@ export class UsersRepositoryService {
   constructor(private http: HttpClient) {}
 
   getUsers(): Observable<Object> {
-    return this.http.get('https://reqres.in/api/users');
+    return this.http.get('/api/users');
   }
 }

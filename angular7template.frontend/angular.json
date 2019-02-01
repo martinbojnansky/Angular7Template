@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular7-template": {
+    "angular7template": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular7-template",
+            "outputPath": "target/classes/static/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -39,7 +39,7 @@
               ],
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": true,
+              "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
               "aot": true,
@@ -59,18 +59,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular7-template:build"
+            "browserTarget": "angular7template:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular7-template:build:production"
+              "browserTarget": "angular7template:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular7-template:build"
+            "browserTarget": "angular7template:build"
           }
         },
         "test": {
@@ -97,7 +97,7 @@
         }
       }
     },
-    "angular7-template-e2e": {
+    "angular7template-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -106,11 +106,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular7-template:serve"
+            "devServerTarget": "angular7template:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angular7-template:serve:production"
+              "devServerTarget": "angular7template:serve:production"
             }
           }
         },
@@ -124,5 +124,5 @@
       }
     }
   },
-  "defaultProject": "angular7-template"
+  "defaultProject": "angular7template"
 }

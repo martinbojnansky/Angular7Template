@@ -30,6 +30,6 @@ describe('UsersRepositoryService', () => {
 
   it('should call getUsers with correct url', () => {
     usersRepositoryService.getUsers().subscribe(() => {});
-    httpTestingController.expectOne('https://reqres.in/api/users').flush({});
+    httpTestingController.expectOne('/api/users').flush({});
   });
 });
