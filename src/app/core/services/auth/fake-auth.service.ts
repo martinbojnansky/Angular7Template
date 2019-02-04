@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LocalStorageKeys, AppRoutes } from '@app/shared';
+import { LocalStorageKeys, AppRoutes } from '@assets/constants';
 import { LocalStorageService } from '../storage';
 import { AuthService, AuthServiceState } from './auth.service';
 
@@ -11,7 +11,7 @@ export class FakeAuthService extends AuthService {
 
   constructor(private storage: LocalStorageService, private router: Router) {
     super(new AuthServiceState());
-    this.authToken = this.storage.getItem(LocalStorageKeys.AUTHORIZATION_TOKEN);
+    this.init();
   }
 
   signIn(): void {
@@ -26,6 +26,11 @@ export class FakeAuthService extends AuthService {
     this.authToken = null;
     this.router.navigate([AppRoutes.LOGIN]);
     this.setState({ ...this.state, isAuth: false });
+  }
+
+  private init(): void {
+    this.authToken = this.storage.getItem(LocalStorageKeys.AUTHORIZATION_TOKEN);
+    this.setState({ ...this.state, isAuth: !!this.authToken });
   }
 }
 

@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, DoCheck } from '@angular/core';
 
 import { User } from '../../models';
-import { LocalizationService } from '@app/core';
 
 @Component({
   selector: 'app-user-name',
@@ -11,7 +10,7 @@ import { LocalizationService } from '@app/core';
 export class UserNameComponent implements OnInit, DoCheck {
   @Input() user: User;
 
-  constructor(public localizationService: LocalizationService) {}
+  constructor() {}
 
   ngOnInit() {}
 

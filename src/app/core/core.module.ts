@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
-import * as layouts from './layouts';
-import * as pages from './pages';
+import { SharedModule } from '@app/shared';
 import * as services from './services';
 import * as guards from './guards';
+import * as layouts from './layouts';
+import * as pages from './pages';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,13 @@ import * as guards from './guards';
     pages.LoginPageComponent,
     pages.NotFoundPageComponent
   ],
-  imports: [BrowserModule, CommonModule, HttpClientModule, RouterModule],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    HttpClientModule,
+    RouterModule,
+    SharedModule
+  ],
   exports: [
     // Layouts
     layouts.AuthorizedLayoutComponent,
@@ -42,7 +49,9 @@ import * as guards from './guards';
     {
       provide: services.LocalizationSettings,
       useValue: new services.LocalizationSettings()
-    }
+    },
+    // Guards
+    guards.AuthGuard
   ]
 })
 export class CoreModule {

@@ -4,13 +4,13 @@ import { LocalizationService } from './localization.service';
 import { LocalizationValues } from './localization-values';
 import { Locale, locales } from './locales';
 import { LocalStorageService } from '../storage';
-import { LocalStorageKeys } from '@app/shared';
+import { LocalStorageKeys } from '@assets/constants';
 import { LocalizationSettings } from './localization-settings';
 
 @Injectable()
 export class DefaultLocalizationService implements LocalizationService {
-  private locale: Locale;
-  private values: LocalizationValues;
+  private _locale: Locale;
+  private _values: LocalizationValues;
 
   constructor(
     private localizationSettings: LocalizationSettings,
@@ -19,12 +19,12 @@ export class DefaultLocalizationService implements LocalizationService {
     this.restoreLocaleSetting();
   }
 
-  getLocale(): Locale {
-    return this.locale;
+  get locale(): Locale {
+    return this._locale;
   }
 
-  getValues(): LocalizationValues {
-    return this.values;
+  get values(): LocalizationValues {
+    return this._values;
   }
 
   changeLocale(locale: Locale, reload: boolean = true) {
@@ -42,8 +42,8 @@ export class DefaultLocalizationService implements LocalizationService {
         return;
       }
 
-      this.locale = locale;
-      this.values = locales[locale];
+      this._locale = locale;
+      this._values = locales[locale];
     } else {
       this.setDefaultLocale();
     }

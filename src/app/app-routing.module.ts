@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AppRoutes } from './shared';
+import { AppRoutes } from '@assets/constants';
 import {
-  AuthorizedLayoutComponent,
   AuthGuard,
-  LoginPageComponent,
+  AuthorizedLayoutComponent,
   NotFoundPageComponent
 } from './core';
+import { LoginPageComponent } from './core';
 
 const routes: Routes = [
   {
@@ -38,10 +38,6 @@ const routes: Routes = [
         loadChildren: './modules/users/users.module#UsersModule'
       }
     ]
-  },
-  {
-    path: AppRoutes.NOT_FOUND,
-    component: NotFoundPageComponent
   },
   {
     // Any other unknown route is redirected to not found error page.

@@ -1,5 +1,5 @@
 <section>
-  <p>{{ localizationService.getValues().usersPageText }}</p>
+  <p>{{ ('' | localize).usersPageText }}</p>
   <br />
   <div class="container">
     <table class="users-table container-half">
@@ -8,10 +8,10 @@
           <th>Avatar</th>
           <th (click)="orderBy('id')">Id</th>
           <th (click)="orderBy('first_name')">
-            {{ localizationService.getValues().firstNameCaption }}
+            {{ ('' | localize).firstNameCaption }}
           </th>
           <th (click)="orderBy('last_name')">
-            {{ localizationService.getValues().lastNameCaption }}
+            {{ ('' | localize).lastNameCaption }}
           </th>
         </tr>
       </thead>

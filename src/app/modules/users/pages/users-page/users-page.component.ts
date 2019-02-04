@@ -16,10 +16,7 @@ export class UsersPageComponent implements OnInit {
   private usersOrderByProp: string;
   private usersOrderByDesc: boolean;
 
-  constructor(
-    public localizationService: LocalizationService,
-    private usersRepositoryService: UsersRepositoryService
-  ) {}
+  constructor(private usersRepositoryService: UsersRepositoryService) {}
 
   ngOnInit() {
     this.initUsers();

@@ -5,7 +5,7 @@ import { LocalizationSettings } from './localization-settings';
 import { LocalStorageService } from '../storage';
 import { localStorageServiceSpyFactory } from '@app/core/test-doubles';
 import { Locale } from './locales';
-import { LocalStorageKeys } from '@app/shared';
+import { LocalStorageKeys } from '@assets/constants';
 import { en, de } from '@assets/locales';
 
 describe('DefaultLocalizationService', () => {
@@ -41,7 +41,7 @@ describe('DefaultLocalizationService', () => {
     expect(localStorageServiceSpy.getItem).toHaveBeenCalledWith(
       LocalStorageKeys.LOCALE
     );
-    expect(service.getLocale()).toBe(new LocalizationSettings().defaultLocale);
+    expect(service.locale).toBe(new LocalizationSettings().defaultLocale);
   });
 
   it('should return default values when no locale id is saved in local storage', () => {
@@ -50,14 +50,14 @@ describe('DefaultLocalizationService', () => {
     expect(localStorageServiceSpy.getItem).toHaveBeenCalledWith(
       LocalStorageKeys.LOCALE
     );
-    expect(service.getValues()).toEqual(en);
+    expect(service.values).toEqual(en);
   });
 
   it('should change the locale correctly', () => {
     service.changeLocale(Locale.DE);
 
-    expect(service.getLocale()).toBe(Locale.DE);
-    expect(service.getValues()).toEqual(de);
+    expect(service.locale).toBe(Locale.DE);
+    expect(service.values).toEqual(de);
     expect(localStorageServiceSpy.setItem).toHaveBeenCalledWith(
       LocalStorageKeys.LOCALE,
       Locale.DE
@@ -99,7 +99,7 @@ describe('DefaultLocalizationService', () => {
     expect(localStorageServiceSpy.getItem).toHaveBeenCalledWith(
       LocalStorageKeys.LOCALE
     );
-    expect(service.getLocale()).toBe(Locale.DE);
+    expect(service.locale).toBe(Locale.DE);
   });
 
   it('should return values of saved locale when locale id is saved in local storage', () => {
@@ -108,6 +108,6 @@ describe('DefaultLocalizationService', () => {
     expect(localStorageServiceSpy.getItem).toHaveBeenCalledWith(
       LocalStorageKeys.LOCALE
     );
-    expect(service.getValues()).toEqual(de);
+    expect(service.values).toEqual(de);
   });
 });

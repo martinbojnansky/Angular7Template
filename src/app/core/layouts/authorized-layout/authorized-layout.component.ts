@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthService, LocalizationService } from './../../services';
+import { LocalizationService, AuthService } from './../../services';
 
 @Component({
   selector: 'app-authorized-layout',

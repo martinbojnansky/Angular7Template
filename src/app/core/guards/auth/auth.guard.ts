@@ -8,11 +8,9 @@ import {
 import { Observable } from 'rxjs/internal/Observable';
 
 import { AuthService } from '../../services';
-import { AppRoutes } from '@app/shared';
+import { AppRoutes } from '@assets/constants';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 

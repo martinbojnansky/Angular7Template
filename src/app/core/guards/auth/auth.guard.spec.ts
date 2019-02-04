@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from '../../services';
 import { FakeAuthServiceStub, routerSpyFactory } from '@app/core/test-doubles';
-import { AppRoutes } from '@app/shared';
+import { AppRoutes } from '@assets/constants';
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;

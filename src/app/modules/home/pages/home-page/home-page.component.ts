@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalizationService } from '@app/core';
 
 @Component({
   selector: 'app-home-page',
@@ -8,8 +7,6 @@ import { LocalizationService } from '@app/core';
 })
 export class HomePageComponent implements OnInit {
   date: Date = new Date();
-
-  constructor(public localizationService: LocalizationService) {}
 
   ngOnInit() {}
 }

@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 
-import { LocalStorageKeys, AppRoutes } from '@app/shared';
+import { LocalStorageKeys, AppRoutes } from '@assets/constants';
 import { FakeAuthService } from './fake-auth.service';
 import { LocalStorageService } from '@app/core/services';
 import {

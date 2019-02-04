@@ -525,7 +525,7 @@ To use localized values in your components use following steps:
 2.  Add bindings for localized values to component's template:
 
 
-        {{ localizationService.getValues().notFoundPageText }}
+        {{ ('' | localize).notFoundPageText }}
         {{ localizationService.getValue().homePageText('John Doe') }}
 
 ### 9.5 Testing localized components
