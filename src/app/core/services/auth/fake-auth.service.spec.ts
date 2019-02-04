@@ -40,6 +40,30 @@ describe('FakeAuthService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('should have isAuth state false by default', () => {
+    expect(service.state.isAuth).toBeFalsy();
+  });
+
+  it('should change isAuth state on sign in', () => {
+    service.signIn();
+    expect(service.state.isAuth).toBeTruthy();
+  });
+
+  it('should change isAuth state on sign out', () => {
+    service.signOut();
+    expect(service.state.isAuth).toBeFalsy();
+  });
+
+  it('should navigate to admin route on sign in', () => {
+    service.signIn();
+    expect(routerSpy.navigate).toHaveBeenCalledWith([AppRoutes.AUTH]);
+  });
+
+  it('should navigate to login route on sign out', () => {
+    service.signOut();
+    expect(routerSpy.navigate).toHaveBeenCalledWith([AppRoutes.LOGIN]);
+  });
+
   it('should save token on sign in', () => {
     service.signIn();
     expect(storageServiceSpy.setItem.calls.mostRecent().args[0]).toBe(
@@ -52,15 +76,5 @@ describe('FakeAuthService', () => {
     expect(storageServiceSpy.removeItem).toHaveBeenCalledWith(
       LocalStorageKeys.AUTHORIZATION_TOKEN
     );
-  });
-
-  it('should navigate to admin route on sign in', () => {
-    service.signIn();
-    expect(routerSpy.navigate).toHaveBeenCalledWith([AppRoutes.AUTH]);
-  });
-
-  it('should navigate to login route on sign out', () => {
-    service.signOut();
-    expect(routerSpy.navigate).toHaveBeenCalledWith([AppRoutes.LOGIN]);
   });
 });

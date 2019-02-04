@@ -1,18 +1,15 @@
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 
 import { AuthGuard } from './auth.guard';
 import { AuthService } from '../../services';
-import { AppRoutes } from '@app/shared/';
-import {
-  authorizationServiceSpyFactory,
-  routerSpyFactory
-} from '@app/core/test-doubles/spies';
+import { FakeAuthServiceStub, routerSpyFactory } from '@app/core/test-doubles';
+import { AppRoutes } from '@app/shared';
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;
-  let authServiceSpy: jasmine.SpyObj<AuthService>;
+  let authService: AuthService;
   let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
@@ -22,7 +19,7 @@ describe('AuthGuard', () => {
         AuthGuard,
         {
           provide: AuthService,
-          useFactory: authorizationServiceSpyFactory
+          useClass: FakeAuthServiceStub
         },
         {
           provide: Router,
@@ -32,7 +29,7 @@ describe('AuthGuard', () => {
     });
 
     guard = TestBed.get(AuthGuard);
-    authServiceSpy = TestBed.get(AuthService);
+    authService = TestBed.get(AuthService);
     routerSpy = TestBed.get(Router);
   });
 
@@ -40,18 +37,16 @@ describe('AuthGuard', () => {
     expect(guard).toBeTruthy();
   });
 
-  it('should activate when is authorized === true', () => {
-    authServiceSpy.isAuth.and.returnValue(true);
+  it('should activate when signed in', () => {
+    authService.signIn();
     expect(guard.canActivate(null, null)).toBeTruthy();
   });
 
-  it('should not activate when is authorized === false', () => {
-    authServiceSpy.isAuth.and.returnValue(false);
+  it('should not activate when not signed in', () => {
     expect(guard.canActivate(null, null)).toBeFalsy();
   });
 
-  it('should navigate to login route when is authorized === false', () => {
-    authServiceSpy.isAuth.and.returnValue(false);
+  it('should navigate to login route when not signed in', () => {
     guard.canActivate(null, null);
     expect(routerSpy.navigate).toHaveBeenCalledWith([`${AppRoutes.LOGIN}`]);
   });
