@@ -32,21 +32,11 @@ describe('UserDetailComponent', () => {
 
   it('should display content when user is set', () => {
     const section = compiled.querySelector('section');
-
     expect(section).toBeTruthy();
-  });
-
-  it('should not display when user is not set', () => {
-    component.user = null;
-    fixture.detectChanges();
-    const section = compiled.querySelector('section');
-
-    expect(section).toBeNull();
   });
 
   it('should display avatar', () => {
     const section = compiled.querySelector('img').src;
-
     expect(section).toContain(userFake.avatar);
   });
 

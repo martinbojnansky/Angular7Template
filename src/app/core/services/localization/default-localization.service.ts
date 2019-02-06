@@ -27,26 +27,13 @@ export class DefaultLocalizationService implements LocalizationService {
     return this._values;
   }
 
-  changeLocale(locale: Locale, reload: boolean = true) {
+  changeLocale(locale: Locale, onApply: () => void = this.reload) {
     if (this.locale === locale) {
       return;
     }
 
-    const localeValues = locales[locale];
-
-    if (localeValues) {
-      this.saveLocaleSetting(locale);
-
-      if (this.localizationSettings.useReload && reload) {
-        location.reload();
-        return;
-      }
-
-      this._locale = locale;
-      this._values = locales[locale];
-    } else {
-      this.setDefaultLocale();
-    }
+    this.setLocale(locale);
+    onApply();
   }
 
   private restoreLocaleSetting(): void {
@@ -55,17 +42,27 @@ export class DefaultLocalizationService implements LocalizationService {
     );
 
     if (localeSetting) {
-      this.changeLocale(localeSetting, false);
+      this.setLocale(localeSetting);
     } else {
       this.setDefaultLocale();
     }
   }
 
-  private saveLocaleSetting(locale: Locale) {
-    this.localStorageService.setItem(LocalStorageKeys.LOCALE, locale);
+  private setLocale(locale: Locale) {
+    if (locales[locale]) {
+      this._locale = locale;
+      this._values = locales[locale];
+      this.localStorageService.setItem(LocalStorageKeys.LOCALE, locale);
+    } else {
+      throw new Error(`Locale ${locale} not supported.`);
+    }
   }
 
   private setDefaultLocale() {
-    this.changeLocale(this.localizationSettings.defaultLocale, false);
+    this.setLocale(this.localizationSettings.defaultLocale);
+  }
+
+  private reload() {
+    window.location.reload();
   }
 }

@@ -16,6 +16,6 @@ import { UserNameComponent } from './components/user-name/user-name.component';
     UserNameComponent
   ],
   imports: [SharedModule, UsersRoutingModule],
-  providers: [services.UsersRepositoryService]
+  providers: [services.UsersService]
 })
 export class UsersModule {}

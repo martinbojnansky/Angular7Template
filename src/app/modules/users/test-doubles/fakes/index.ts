@@ -1,1 +1,2 @@
-export * from './users-repository-service.fake';
+export * from './user.fake';
+export * from './users.fake';

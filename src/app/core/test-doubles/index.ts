@@ -1,4 +1,4 @@
 // export * from './dummies';
-// export * from './mocks';
+export * from './fakes';
 export * from './spies';
 export * from './stubs';

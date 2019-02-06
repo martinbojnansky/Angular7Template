@@ -50,6 +50,7 @@ describe('FakeAuthService', () => {
   });
 
   it('should change isAuth state on sign out', () => {
+    service.signIn();
     service.signOut();
     expect(service.state.isAuth).toBeFalsy();
   });

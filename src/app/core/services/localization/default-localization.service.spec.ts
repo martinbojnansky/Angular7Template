@@ -1,10 +1,12 @@
-import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import { DefaultLocalizationService } from './default-localization.service';
-import { LocalizationSettings } from './localization-settings';
-import { LocalStorageService } from '../storage';
+import {
+  DefaultLocalizationService,
+  LocalizationSettings,
+  LocalStorageService,
+  Locale
+} from '@app/core';
 import { localStorageServiceSpyFactory } from '@app/core/test-doubles';
-import { Locale } from './locales';
 import { LocalStorageKeys } from '@assets/constants';
 import { en, de } from '@assets/locales';
 
@@ -36,8 +38,6 @@ describe('DefaultLocalizationService', () => {
   });
 
   it('should return default locale when no locale id is saved in local storage', () => {
-    localStorageServiceSpy.getItem.and.returnValue(undefined);
-
     expect(localStorageServiceSpy.getItem).toHaveBeenCalledWith(
       LocalStorageKeys.LOCALE
     );
@@ -45,8 +45,6 @@ describe('DefaultLocalizationService', () => {
   });
 
   it('should return default values when no locale id is saved in local storage', () => {
-    localStorageServiceSpy.getItem.and.returnValue(undefined);
-
     expect(localStorageServiceSpy.getItem).toHaveBeenCalledWith(
       LocalStorageKeys.LOCALE
     );
@@ -54,18 +52,19 @@ describe('DefaultLocalizationService', () => {
   });
 
   it('should change the locale correctly', () => {
-    service.changeLocale(Locale.DE);
-
+    localStorageServiceSpy.getItem.and.returnValue(Locale.DE);
+    service.changeLocale(Locale.DE, () => {});
     expect(service.locale).toBe(Locale.DE);
     expect(service.values).toEqual(de);
     expect(localStorageServiceSpy.setItem).toHaveBeenCalledWith(
       LocalStorageKeys.LOCALE,
       Locale.DE
     );
+    // expect(locationSpy).toHaveBeenCalledTimes(1);
   });
 });
 
-describe('DefaultLocalizationService', () => {
+describe('DefaultLocalizationService with saved locale', () => {
   let service: DefaultLocalizationService;
   let localStorageServiceSpy: jasmine.SpyObj<LocalStorageService>;
 

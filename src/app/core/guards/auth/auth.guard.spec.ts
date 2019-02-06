@@ -2,8 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 
-import { AuthGuard } from './auth.guard';
-import { AuthService } from '../../services';
+import { AuthGuard, AuthService } from '@app/core';
 import { FakeAuthServiceStub, routerSpyFactory } from '@app/core/test-doubles';
 import { AppRoutes } from '@assets/constants';
 
@@ -43,6 +42,12 @@ describe('AuthGuard', () => {
   });
 
   it('should not activate when not signed in', () => {
+    expect(guard.canActivate(null, null)).toBeFalsy();
+  });
+
+  it('should not activate when signed out', () => {
+    authService.signIn();
+    authService.signOut();
     expect(guard.canActivate(null, null)).toBeFalsy();
   });
 

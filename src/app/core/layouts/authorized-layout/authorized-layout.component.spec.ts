@@ -1,12 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { AuthorizedLayoutComponent } from './authorized-layout.component';
-import { AuthService, LocalizationService } from '@app/core/services';
+import { AuthorizedLayoutComponent, AuthService, LocalizationService } from '@app/core';
 import {
+  LocalizePipeStub,
   localizationServiceSpyFactory,
   authorizationServiceSpyFactory
-} from '@app/core/test-doubles/spies';
+} from '@app/core/test-doubles';
 
 describe('AuthorizedLayoutComponent', () => {
   let component: AuthorizedLayoutComponent;
@@ -16,7 +16,7 @@ describe('AuthorizedLayoutComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AuthorizedLayoutComponent],
+      declarations: [AuthorizedLayoutComponent, LocalizePipeStub],
       providers: [
         {
           provide: AuthService,
@@ -42,11 +42,6 @@ describe('AuthorizedLayoutComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should call authorization service on signOut method', () => {
-    component.signOut();
-    expect(authServiceSpy.signOut).toHaveBeenCalled();
   });
 
   it('should call authorization service on button click', () => {

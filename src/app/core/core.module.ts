@@ -44,7 +44,7 @@ import * as pages from './pages';
     },
     {
       provide: services.LocalizationService,
-      useClass: services.DefaultLocalizationService
+      useClass: services.DefaultLocalizationService,
     },
     {
       provide: services.LocalizationSettings,

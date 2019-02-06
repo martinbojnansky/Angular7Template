@@ -1,6 +1,5 @@
 import { UsersPage } from './users';
-import { ElementFinder } from 'protractor';
-import { timeout, delay } from 'q';
+import { delay } from 'q';
 
 describe('Users page', () => {
   let page: UsersPage;

@@ -7,8 +7,7 @@ import { LocalizationValues, LocalizationService } from '@app/core/services';
 export class LocalizePipe implements PipeTransform {
   constructor(private localizationService: LocalizationService) {}
 
-  transform(value: string, args?: any): LocalizationValues | string {
-    const values = this.localizationService.values;
-    return values ? values : value;
+  transform(value: string, args?: any): LocalizationValues {
+    return this.localizationService.values;
   }
 }

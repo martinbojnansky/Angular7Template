@@ -1,11 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoginPageComponent } from './login-page.component';
-import { AuthService, LocalizationService } from './../../services';
-import {
-  localizationServiceSpyFactory,
-  authorizationServiceSpyFactory
-} from '@app/core/test-doubles/spies';
+import {LoginPageComponent, AuthService } from '@app/core';
+import {LocalizePipeStub, authorizationServiceSpyFactory} from '@app/core/test-doubles';
+
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
@@ -15,15 +12,11 @@ describe('LoginPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginPageComponent],
+      declarations: [LoginPageComponent, LocalizePipeStub],
       providers: [
         {
           provide: AuthService,
           useFactory: authorizationServiceSpyFactory
-        },
-        {
-          provide: LocalizationService,
-          useFactory: localizationServiceSpyFactory
         }
       ]
     }).compileComponents();
@@ -40,11 +33,6 @@ describe('LoginPageComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should call authorization service on signIn method', () => {
-    component.signIn();
-    expect(authServiceSpy.signIn).toHaveBeenCalled();
   });
 
   it('should call authorization service on button click', () => {

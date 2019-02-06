@@ -1,4 +1,5 @@
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subscription } from 'rxjs';
+import { OnInit, OnDestroy } from '@angular/core';
 
 export abstract class StoreService<T> {
   state$: Observable<T>;
@@ -15,5 +16,27 @@ export abstract class StoreService<T> {
 
   setState(nextState: T): void {
     this._state$.next(nextState);
+  }
+}
+
+export abstract class Container implements OnInit, OnDestroy {
+  private subscriptions: Subscription[];
+
+  ngOnInit(): void {
+    this.subscriptions = this.subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe();
+  }
+
+  abstract subscribe(): Subscription[];
+
+  protected unsubscribe() {
+    this.subscriptions.forEach(subscription => {
+      subscription.unsubscribe();
+    });
+    console.log('unsubscribed ' + this.subscriptions.length);
+    this.subscriptions = [];
   }
 }

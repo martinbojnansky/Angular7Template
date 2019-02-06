@@ -1,38 +1,40 @@
-<section>
-  <p>{{ ('' | localize).usersPageText }}</p>
-  <br />
-  <div class="container">
-    <table class="users-table container-half">
-      <thead>
-        <tr>
-          <th>Avatar</th>
-          <th (click)="orderBy('id')">Id</th>
-          <th (click)="orderBy('first_name')">
-            {{ ('' | localize).firstNameCaption }}
-          </th>
-          <th (click)="orderBy('last_name')">
-            {{ ('' | localize).lastNameCaption }}
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          *ngFor="let user of users"
-          [class.selected]="user === selectedUser"
-          (click)="onSelectUser(user)"
-        >
-          <td><img [src]="user.avatar" class="user-avatar" /></td>
-          <td>{{ user.id }}</td>
-          <td>{{ user.first_name }}</td>
-          <td>{{ user.last_name | uppercase }}</td>
-        </tr>
-      </tbody>
-    </table>
+<ng-container *ngIf="(usersService.state$ | async) as state">
+  <section>
+    <p>{{ ('' | localize).usersPageText }}</p>
+    <br />
+    <div class="container">
+      <table class="users-table container-half">
+        <thead>
+          <tr>
+            <th>Avatar</th>
+            <th>Id</th>
+            <th>
+              {{ ('' | localize).firstNameCaption }}
+            </th>
+            <th>
+              {{ ('' | localize).lastNameCaption }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let user of state.users"
+            [class.selected]="user === state.selectedUser"
+            (click)="usersService.selectUser(user)"
+          >
+            <td><img [src]="user.avatar" class="user-avatar" /></td>
+            <td>{{ user.id }}</td>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name | uppercase }}</td>
+          </tr>
+        </tbody>
+      </table>
 
-    <app-user-detail
-      [user]="selectedUser"
-      (closed)="onUnselectUser($event)"
-      class="container-half"
-    ></app-user-detail>
-  </div>
-</section>
+      <app-user-detail
+        [user]="state.selectedUser"
+        (closed)="usersService.unselectUser($event)"
+        class="container-half"
+      ></app-user-detail>
+    </div>
+  </section>
+</ng-container>

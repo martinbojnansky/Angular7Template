@@ -1,17 +1,13 @@
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UsersPageComponent } from './users-page.component';
-import { UsersRepositoryService } from '../../services';
-import { UsersRepositoryServiceFake } from '../../test-doubles/fakes';
-import { User } from '../../models';
-import { Component, Input } from '@angular/core';
+import { UsersService } from '../../services';
 import { LocalizationService } from '@app/core';
-import { localizationServiceSpyFactory } from '@app/core/test-doubles/spies';
+import {localizationServiceSpyFactory, LocalizePipeStub} from '@app/core/test-doubles';
 
-@Component({ selector: 'app-user-detail', template: '' })
-class UserDetailStubComponent {
-  @Input() user: User;
-}
+
 
 describe('UsersPageComponent', () => {
   let component: UsersPageComponent;
@@ -20,17 +16,16 @@ describe('UsersPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [UsersPageComponent, UserDetailStubComponent],
+      imports: [HttpClientTestingModule],
+      declarations: [UsersPageComponent, LocalizePipeStub],
       providers: [
-        {
-          provide: UsersRepositoryService,
-          useClass: UsersRepositoryServiceFake
-        },
+        UsersService,
         {
           provide: LocalizationService,
           useFactory: localizationServiceSpyFactory
         }
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 
@@ -46,10 +41,10 @@ describe('UsersPageComponent', () => {
   });
 
   it('should initialize users', () => {
-    expect(component.users.length).toBe(3);
-    expect(component.users[0].id).toBe(1);
-    expect(component.users[1].id).toBe(2);
-    expect(component.users[2].id).toBe(3);
+    expect(component.usersService.state.users.length).toBe(3);
+    expect(component.usersService.state.users[1].id).toBe(2);
+    expect(component.usersService.state.users[2].id).toBe(3);
+    expect(component.usersService.state.users[0].id).toBe(1);
   });
 
   it('should render users table', () => {
@@ -64,33 +59,6 @@ describe('UsersPageComponent', () => {
     );
     row.click();
 
-    expect(component.selectedUser.id).toBe(2);
-  });
-
-  it('should unselect user', () => {
-    const user: User = {
-      id: 1,
-      first_name: 'fn',
-      last_name: 'ln',
-      avatar: 'av'
-    };
-
-    component.onSelectUser(user);
-    expect(component.selectedUser).toBe(user);
-
-    component.onUnselectUser(user);
-    expect(component.selectedUser).toBe(null);
-  });
-
-  it('should order users on header click', () => {
-    const header = compiled.querySelector(
-      '.users-table > thead > tr > th:nth-child(3)'
-    );
-
-    header.click();
-
-    expect(component.users[0].id).toBe(3);
-    expect(component.users[1].id).toBe(1);
-    expect(component.users[2].id).toBe(2);
+    expect(component.usersService.state.selectedUser.id).toBe(2);
   });
 });

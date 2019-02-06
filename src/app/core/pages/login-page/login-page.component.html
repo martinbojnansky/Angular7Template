@@ -1,3 +1,5 @@
-<button (click)="signIn()">
-  {{ ('' | localize).signInButtonText }}
-</button>
+<ng-container>
+  <button (click)="authService.signIn()">
+    {{ ('' | localize).signInButtonText }}
+  </button>
+</ng-container>
