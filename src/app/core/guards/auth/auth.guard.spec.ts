@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { AuthGuard, AuthService } from '@app/core';
 import { FakeAuthServiceStub, routerSpyFactory } from '@app/core/test-doubles';
-import { AppRoutes } from '@assets/constants';
+import { AppRoute } from '@assets/constants';
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;
@@ -53,6 +53,6 @@ describe('AuthGuard', () => {
 
   it('should navigate to login route when not signed in', () => {
     guard.canActivate(null, null);
-    expect(routerSpy.navigate).toHaveBeenCalledWith([`${AppRoutes.LOGIN}`]);
+    expect(routerSpy.navigate).toHaveBeenCalledWith([`${AppRoute.LOGIN}`]);
   });
 });

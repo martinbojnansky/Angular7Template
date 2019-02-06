@@ -7,7 +7,7 @@ import {
   Locale
 } from '@app/core';
 import { localStorageServiceSpyFactory } from '@app/core/test-doubles';
-import { LocalStorageKeys } from '@assets/constants';
+import { LocalStorageKey } from '@assets/constants';
 import { en, de } from '@assets/locales';
 
 describe('DefaultLocalizationService', () => {
@@ -39,14 +39,14 @@ describe('DefaultLocalizationService', () => {
 
   it('should return default locale when no locale id is saved in local storage', () => {
     expect(localStorageServiceSpy.getItem).toHaveBeenCalledWith(
-      LocalStorageKeys.LOCALE
+      LocalStorageKey.LOCALE
     );
     expect(service.locale).toBe(new LocalizationSettings().defaultLocale);
   });
 
   it('should return default values when no locale id is saved in local storage', () => {
     expect(localStorageServiceSpy.getItem).toHaveBeenCalledWith(
-      LocalStorageKeys.LOCALE
+      LocalStorageKey.LOCALE
     );
     expect(service.values).toEqual(en);
   });
@@ -57,7 +57,7 @@ describe('DefaultLocalizationService', () => {
     expect(service.locale).toBe(Locale.DE);
     expect(service.values).toEqual(de);
     expect(localStorageServiceSpy.setItem).toHaveBeenCalledWith(
-      LocalStorageKeys.LOCALE,
+      LocalStorageKey.LOCALE,
       Locale.DE
     );
     // expect(locationSpy).toHaveBeenCalledTimes(1);
@@ -96,7 +96,7 @@ describe('DefaultLocalizationService with saved locale', () => {
 
   it('should return saved locale when locale id is saved in local storage', () => {
     expect(localStorageServiceSpy.getItem).toHaveBeenCalledWith(
-      LocalStorageKeys.LOCALE
+      LocalStorageKey.LOCALE
     );
     expect(service.locale).toBe(Locale.DE);
   });
@@ -105,7 +105,7 @@ describe('DefaultLocalizationService with saved locale', () => {
     localStorageServiceSpy.getItem.and.returnValues(Locale.DE.toString());
 
     expect(localStorageServiceSpy.getItem).toHaveBeenCalledWith(
-      LocalStorageKeys.LOCALE
+      LocalStorageKey.LOCALE
     );
     expect(service.values).toEqual(de);
   });

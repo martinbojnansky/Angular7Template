@@ -8,7 +8,7 @@ import {
 import { Observable } from 'rxjs/internal/Observable';
 
 import { AuthService } from '../../services';
-import { AppRoutes } from '@assets/constants';
+import { AppRoute } from '@assets/constants';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
     const isAuthorized = this.authService.state.isAuth;
 
     if (!isAuthorized) {
-      this.router.navigate([AppRoutes.LOGIN]);
+      this.router.navigate([AppRoute.LOGIN]);
     }
 
     return isAuthorized;

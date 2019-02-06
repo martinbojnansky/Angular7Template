@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 
-import { LocalStorageKeys, AppRoutes } from '@assets/constants';
+import { LocalStorageKey, AppRoute } from '@assets/constants';
 import { FakeAuthService } from './fake-auth.service';
 import { LocalStorageService } from '@app/core/services';
 import {
@@ -57,25 +57,25 @@ describe('FakeAuthService', () => {
 
   it('should navigate to admin route on sign in', () => {
     service.signIn();
-    expect(routerSpy.navigate).toHaveBeenCalledWith([AppRoutes.AUTH]);
+    expect(routerSpy.navigate).toHaveBeenCalledWith([AppRoute.AUTH]);
   });
 
   it('should navigate to login route on sign out', () => {
     service.signOut();
-    expect(routerSpy.navigate).toHaveBeenCalledWith([AppRoutes.LOGIN]);
+    expect(routerSpy.navigate).toHaveBeenCalledWith([AppRoute.LOGIN]);
   });
 
   it('should save token on sign in', () => {
     service.signIn();
     expect(storageServiceSpy.setItem.calls.mostRecent().args[0]).toBe(
-      LocalStorageKeys.AUTHORIZATION_TOKEN
+      LocalStorageKey.AUTHORIZATION_TOKEN
     );
   });
 
   it('should remove token on sign out', () => {
     service.signOut();
     expect(storageServiceSpy.removeItem).toHaveBeenCalledWith(
-      LocalStorageKeys.AUTHORIZATION_TOKEN
+      LocalStorageKey.AUTHORIZATION_TOKEN
     );
   });
 });

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AppRoutes } from '@assets/constants';
+import { AppRoute } from '@assets/constants';
 import {
   AuthGuard,
   AuthorizedLayoutComponent,
@@ -11,30 +11,30 @@ import { LoginPageComponent } from './core';
 
 const routes: Routes = [
   {
-    path: AppRoutes.DEFAULT,
-    redirectTo: AppRoutes.AUTH,
+    path: AppRoute.DEFAULT,
+    redirectTo: AppRoute.AUTH,
     pathMatch: 'full'
   },
   {
-    path: AppRoutes.LOGIN,
+    path: AppRoute.LOGIN,
     component: LoginPageComponent
   },
   {
-    path: AppRoutes.AUTH,
+    path: AppRoute.AUTH,
     component: AuthorizedLayoutComponent,
     canActivate: [AuthGuard],
     children: [
       {
         path: '',
-        redirectTo: AppRoutes.HOME,
+        redirectTo: AppRoute.HOME,
         pathMatch: 'full'
       },
       {
-        path: AppRoutes.HOME,
+        path: AppRoute.HOME,
         loadChildren: './modules/home/home.module#HomeModule'
       },
       {
-        path: AppRoutes.USERS,
+        path: AppRoute.USERS,
         loadChildren: './modules/users/users.module#UsersModule'
       }
     ]

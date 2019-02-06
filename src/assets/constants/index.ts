@@ -1,3 +1,3 @@
-export * from './api-routes.enum';
-export * from './app-routes.enum';
-export * from './local-storage-keys.enum';
+export * from './api-route.enum';
+export * from './app-route.enum';
+export * from './local-storage-key.enum';

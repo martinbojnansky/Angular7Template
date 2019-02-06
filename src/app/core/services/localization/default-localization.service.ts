@@ -4,7 +4,7 @@ import { LocalizationService } from './localization.service';
 import { LocalizationValues } from './localization-values';
 import { Locale, locales } from './locales';
 import { LocalStorageService } from '../storage';
-import { LocalStorageKeys } from '@assets/constants';
+import { LocalStorageKey } from '@assets/constants';
 import { LocalizationSettings } from './localization-settings';
 
 @Injectable()
@@ -38,7 +38,7 @@ export class DefaultLocalizationService implements LocalizationService {
 
   private restoreLocaleSetting(): void {
     const localeSetting = <Locale>(
-      this.localStorageService.getItem(LocalStorageKeys.LOCALE)
+      this.localStorageService.getItem(LocalStorageKey.LOCALE)
     );
 
     if (localeSetting) {
@@ -52,7 +52,7 @@ export class DefaultLocalizationService implements LocalizationService {
     if (locales[locale]) {
       this._locale = locale;
       this._values = locales[locale];
-      this.localStorageService.setItem(LocalStorageKeys.LOCALE, locale);
+      this.localStorageService.setItem(LocalStorageKey.LOCALE, locale);
     } else {
       throw new Error(`Locale ${locale} not supported.`);
     }
