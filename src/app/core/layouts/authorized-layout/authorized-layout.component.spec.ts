@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AuthorizedLayoutComponent, AuthService, LocalizationService } from '@app/core';
+import {ConstantsPipe} from '@app/shared';
 import {
   LocalizePipeStub,
   localizationServiceSpyFactory,
@@ -16,7 +17,7 @@ describe('AuthorizedLayoutComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AuthorizedLayoutComponent, LocalizePipeStub],
+      declarations: [AuthorizedLayoutComponent, LocalizePipeStub, ConstantsPipe],
       providers: [
         {
           provide: AuthService,

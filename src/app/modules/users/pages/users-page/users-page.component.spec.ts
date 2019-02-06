@@ -1,25 +1,33 @@
 import {NO_ERRORS_SCHEMA} from '@angular/core';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {HttpClient} from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {of} from 'rxjs';
 
 import { UsersPageComponent } from './users-page.component';
 import { UsersService } from '../../services';
 import { LocalizationService } from '@app/core';
 import {localizationServiceSpyFactory, LocalizePipeStub} from '@app/core/test-doubles';
-
-
+import {usersFakeFactory} from '@modules/users/test-doubles';
 
 describe('UsersPageComponent', () => {
   let component: UsersPageComponent;
   let fixture: ComponentFixture<UsersPageComponent>;
   let compiled: any;
+  let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
       declarations: [UsersPageComponent, LocalizePipeStub],
       providers: [
         UsersService,
+        {
+          provide: HttpClient,
+          useFactory: () => {
+            const spy = jasmine.createSpyObj('HttpClient', ['get']);
+            spy.get.and.returnValue(of(usersFakeFactory()));
+            return spy;
+          }
+        },
         {
           provide: LocalizationService,
           useFactory: localizationServiceSpyFactory
@@ -34,6 +42,7 @@ describe('UsersPageComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     compiled = fixture.debugElement.nativeElement;
+    httpClientSpy = TestBed.get(HttpClient);
   });
 
   it('should create', () => {
@@ -49,7 +58,6 @@ describe('UsersPageComponent', () => {
 
   it('should render users table', () => {
     const rows = compiled.querySelectorAll('.users-table > tbody > tr');
-
     expect(rows.length).toBe(3);
   });
 
@@ -58,7 +66,6 @@ describe('UsersPageComponent', () => {
       '.users-table > tbody > tr:nth-child(2)'
     );
     row.click();
-
     expect(component.usersService.state.selectedUser.id).toBe(2);
   });
 });
