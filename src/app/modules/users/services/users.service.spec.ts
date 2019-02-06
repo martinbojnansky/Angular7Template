@@ -4,6 +4,7 @@ import {
   HttpTestingController
 } from '@angular/common/http/testing';
 
+import {ApiRoutes} from '@assets/constants';
 import { userFakeFactory, usersFakeFactory } from '@modules/users/test-doubles';
 import { User } from '@modules/users/models';
 import { UsersService } from '@modules/users/services';
@@ -33,7 +34,7 @@ describe('UsersService', () => {
   it('should call fetchUsers correctly', () => {
     service.fetchUsers();
     httpTestingController
-      .expectOne('https://reqres.in/api/users')
+      .expectOne(`${ApiRoutes.BASE}${ApiRoutes.USERS}`)
       .flush(usersFakeFactory());
     expect(service.state.users.length).toBe(3);
   });

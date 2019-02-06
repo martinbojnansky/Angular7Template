@@ -1,8 +1,8 @@
 <header>
   <h1>angular7-template</h1>
   <nav>
-    <a routerLink="/auth/home">{{ ('' | localize).homeModuleLinkText }}</a>
-    <a routerLink="/auth/users">{{ ('' | localize).usersModuleLinkText }}</a>
+    <a [routerLink]="('' | constants).appRoutes.HOME">{{ ('' | localize).homeModuleLinkText }}</a>
+    <a [routerLink]="('' | constants).appRoutes.USERS">{{ ('' | localize).usersModuleLinkText }}</a>
     | <button (click)="localizationService.changeLocale('en')">en</button> /
     <button (click)="localizationService.changeLocale('de')">de</button> |
     <button class="signout-btn" (click)="authService.signOut()">

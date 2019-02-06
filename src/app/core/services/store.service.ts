@@ -18,25 +18,3 @@ export abstract class StoreService<T> {
     this._state$.next(nextState);
   }
 }
-
-export abstract class Container implements OnInit, OnDestroy {
-  private subscriptions: Subscription[];
-
-  ngOnInit(): void {
-    this.subscriptions = this.subscribe();
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe();
-  }
-
-  abstract subscribe(): Subscription[];
-
-  protected unsubscribe() {
-    this.subscriptions.forEach(subscription => {
-      subscription.unsubscribe();
-    });
-    console.log('unsubscribed ' + this.subscriptions.length);
-    this.subscriptions = [];
-  }
-}

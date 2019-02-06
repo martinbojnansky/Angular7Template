@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 
 import { StoreService } from '@app/core';
+import {ApiRoutes} from '@assets/constants';
 import { User } from '../models';
 
 export class UsersServiceState {
@@ -17,7 +18,7 @@ export class UsersService extends StoreService<UsersServiceState> {
   }
 
   fetchUsers(): Observable<any> {
-    const observable = this.http.get('https://reqres.in/api/users');
+    const observable = this.http.get(`${ApiRoutes.BASE}${ApiRoutes.USERS}`);
     observable.subscribe(r => {
       this.setState({ ...this.state, users: (<any>r).data });
     });

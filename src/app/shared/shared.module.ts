@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import * as pipes from './pipes';
 
 @NgModule({
-  declarations: [pipes.LocalizePipe],
+  declarations: [pipes.LocalizePipe, pipes.ConstantsPipe],
   imports: [CommonModule, FormsModule],
-  exports: [CommonModule, FormsModule, pipes.LocalizePipe]
+  exports: [CommonModule, FormsModule, pipes.LocalizePipe, pipes.ConstantsPipe]
 })
 export class SharedModule {}
