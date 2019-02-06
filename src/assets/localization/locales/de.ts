@@ -1,4 +1,4 @@
-import { LocalizationValues } from '@app/core/services/localization/localization-values';
+import {LocalizationValues} from '../localization-config';
 
 export const de: LocalizationValues = {
   shortDateFormat: 'dd.MM.yyyy',

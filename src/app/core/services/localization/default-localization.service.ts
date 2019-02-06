@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 
 import { LocalizationService } from './localization.service';
-import { LocalizationValues } from './localization-values';
-import { Locale, locales } from './locales';
 import { LocalStorageService } from '../storage';
 import { LocalStorageKey } from '@assets/constants';
-import { LocalizationSettings } from './localization-settings';
+import {
+  Locale,
+  locales,
+  LocalizationSettings,
+  LocalizationValues
+} from '@assets/localization';
 
 @Injectable()
 export class DefaultLocalizationService implements LocalizationService {

@@ -1,14 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 
-import {
-  DefaultLocalizationService,
-  LocalizationSettings,
-  LocalStorageService,
-  Locale
-} from '@app/core';
+import { DefaultLocalizationService, LocalStorageService } from '@app/core';
 import { localStorageServiceSpyFactory } from '@app/core/test-doubles';
 import { LocalStorageKey } from '@assets/constants';
-import { en, de } from '@assets/locales';
+import { en, de, LocalizationSettings, Locale } from '@assets/localization';
 
 describe('DefaultLocalizationService', () => {
   let service: DefaultLocalizationService;
@@ -44,7 +39,7 @@ describe('DefaultLocalizationService', () => {
     expect(service.locale).toBe(new LocalizationSettings().defaultLocale);
   });
 
-  it('should return default values when no locale id is saved in local storage', () => {
+  it('should return default locales when no locale id is saved in local storage', () => {
     expect(localStorageServiceSpy.getItem).toHaveBeenCalledWith(
       LocalStorageKey.LOCALE
     );
@@ -101,7 +96,7 @@ describe('DefaultLocalizationService with saved locale', () => {
     expect(service.locale).toBe(Locale.DE);
   });
 
-  it('should return values of saved locale when locale id is saved in local storage', () => {
+  it('should return locales of saved locale when locale id is saved in local storage', () => {
     localStorageServiceSpy.getItem.and.returnValues(Locale.DE.toString());
 
     expect(localStorageServiceSpy.getItem).toHaveBeenCalledWith(

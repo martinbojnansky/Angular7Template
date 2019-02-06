@@ -9,6 +9,7 @@ import * as services from './services';
 import * as guards from './guards';
 import * as layouts from './layouts';
 import * as pages from './pages';
+import { LocalizationSettings } from '@assets/localization';
 
 @NgModule({
   declarations: [
@@ -44,11 +45,11 @@ import * as pages from './pages';
     },
     {
       provide: services.LocalizationService,
-      useClass: services.DefaultLocalizationService,
+      useClass: services.DefaultLocalizationService
     },
     {
-      provide: services.LocalizationSettings,
-      useValue: new services.LocalizationSettings()
+      provide: LocalizationSettings,
+      useValue: new LocalizationSettings()
     },
     // Guards
     guards.AuthGuard
