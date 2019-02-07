@@ -5,8 +5,8 @@ import { LocalizationService } from '@app/core';
 import { localizationServiceSpyFactory } from '@app/core/test-doubles/spies';
 import { User } from '../../models';
 import { userFakeFactory } from '../../test-doubles/fakes/user.fake';
-import {LocalizePipe} from '@app/shared';
-import {LocalizePipeStub} from '@app/core/test-doubles';
+import { LocalizePipe } from '@app/shared';
+import { LocalizePipeStub } from '@app/core/test-doubles';
 
 describe('UserNameComponent', () => {
   let component: UserNameComponent;

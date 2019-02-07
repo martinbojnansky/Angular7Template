@@ -4,7 +4,7 @@ import {
   HttpTestingController
 } from '@angular/common/http/testing';
 
-import {ApiRoute} from '@assets/constants';
+import { ApiRoute } from '@assets/constants';
 import { userFakeFactory, usersFakeFactory } from '@modules/users/test-doubles';
 import { User } from '@modules/users/models';
 import { UsersService } from '@modules/users/services';

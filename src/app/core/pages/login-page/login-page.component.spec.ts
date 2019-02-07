@@ -1,8 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {LoginPageComponent, AuthService } from '@app/core';
-import {LocalizePipeStub, authorizationServiceSpyFactory} from '@app/core/test-doubles';
-
+import { LoginPageComponent, AuthService } from '@app/core';
+import {
+  LocalizePipeStub,
+  authorizationServiceSpyFactory
+} from '@app/core/test-doubles';
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
