@@ -1,1 +1,1 @@
-export * from './localization-service.fake';
+export * from './localization.service.fake';

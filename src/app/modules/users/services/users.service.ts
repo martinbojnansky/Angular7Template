@@ -17,12 +17,11 @@ export class UsersService extends StoreService<UsersServiceState> {
     super(new UsersServiceState());
   }
 
-  fetchUsers(): Observable<any> {
+  fetchUsers(): void {
     const observable = this.http.get(`${ApiRoute.BASE}${ApiRoute.USERS}`);
     observable.subscribe(r => {
       this.setState({ ...this.state, users: (<any>r).data });
     });
-    return observable;
   }
 
   selectUser(user: User) {
