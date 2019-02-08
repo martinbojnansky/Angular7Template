@@ -97,10 +97,10 @@ e.g:
 
 - **module**
 
-  - **components** - Contains control components reused across the module. This controls doesn't rely on services but should be controlled by `@Input` and `@Output` properties.
-  - **layouts** - Contains layout components that wraps multiple navigation pages with the same HTML structure.
-  - **pages** - Contains page components that can be accessed by url. Pages may be displayed in the layouts and may use components.
-  - **services** - Contains services and providers.
+  - **components** - Contains control components reused across the module. This controls doesn't rely on services but should be controlled by `@Input` and `@Output` properties
+  - **views** - Contains components that can have state and use services. Those components can also be accessed by url, but it is not mandatory. Views uses components and maps its own state to inputs and outputs of controls.
+  - **repositories** - Contains services used for communication with endpoints. This should be in 1:1 relationship with backend controllers. Repositories does not have any state, they are used explicitly to CRUD operations.
+  - **services** - Contains stateful / stateless services used to share application logic and data between components or modules. Services exposes actions and immutable state that can be changed only by itself. Services may inject repositories and other services, as long as they don't result in circular dependency.
   - **models** - Contains models used across the components, services and other parts of the module.
   - **guards** - Contains module specific guards.
   - **pipes** - Contains module specific pipes.
