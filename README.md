@@ -224,6 +224,8 @@ Imagine a repository service to retrieve users from REST API. To make our applic
           providers: [services.UsersRepositoryService]
         })
         export class UsersModule {}
+        
+> In lazy-loaded modules use `@Injectable()` without `providedIn: root` setting, if is used by this module only. Otherwise, it has to specify `providedIn: root` to have single instance.
 
 #### 4.3.2 Dependency Inversion Principle (DIP)
 
@@ -262,7 +264,7 @@ In Angular, you won't be able to register services with interfaces, but you can 
           }
         }
 
-3.  Register a provider, that will provide concretition when constructor asks for the abstraction.
+3.  Register a provider, that will provide concretion when constructor asks for the abstraction.
 
         @NgModule({
           providers: [
