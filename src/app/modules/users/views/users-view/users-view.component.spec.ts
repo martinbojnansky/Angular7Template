@@ -1,7 +1,5 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
 
 import { UsersViewComponent } from './users-view.component';
 import { UsersService } from '../../services';
@@ -10,13 +8,13 @@ import {
   localizationServiceSpyFactory,
   LocalizePipeStub
 } from '@app/core/test-doubles';
-import { usersFakeFactory } from '@modules/users/test-doubles';
+import { UsersRepositoryServiceStub } from '@modules/users/test-doubles';
+import { UsersRepositoryService } from '@modules/users/repositories';
 
 describe('UsersViewComponent', () => {
   let component: UsersViewComponent;
   let fixture: ComponentFixture<UsersViewComponent>;
   let compiled: any;
-  let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -24,12 +22,8 @@ describe('UsersViewComponent', () => {
       providers: [
         UsersService,
         {
-          provide: HttpClient,
-          useFactory: () => {
-            const spy = jasmine.createSpyObj('HttpClient', ['get']);
-            spy.get.and.returnValue(of(usersFakeFactory()));
-            return spy;
-          }
+          provide: UsersRepositoryService,
+          useClass: UsersRepositoryServiceStub
         },
         {
           provide: LocalizationService,
@@ -45,7 +39,6 @@ describe('UsersViewComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     compiled = fixture.debugElement.nativeElement;
-    httpClientSpy = TestBed.get(HttpClient);
   });
 
   it('should create', () => {

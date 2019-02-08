@@ -1,41 +1,39 @@
 import { TestBed } from '@angular/core/testing';
-import {
-  HttpClientTestingModule,
-  HttpTestingController
-} from '@angular/common/http/testing';
 
-import { ApiRoute } from '@assets/constants';
-import { userFakeFactory, usersFakeFactory } from '@modules/users/test-doubles';
+import {
+  userFakeFactory,
+  usersFakeFactory,
+  UsersRepositoryServiceStub
+} from '@modules/users/test-doubles';
 import { User } from '@modules/users/models';
 import { UsersService } from '@modules/users/services';
+import { UsersRepositoryService } from '@modules/users/repositories';
 
 describe('UsersService', () => {
   let service: UsersService;
-  let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [UsersService]
+      imports: [],
+      providers: [
+        UsersService,
+        {
+          provide: UsersRepositoryService,
+          useClass: UsersRepositoryServiceStub
+        }
+      ]
     });
 
     service = TestBed.get(UsersService);
-    httpTestingController = TestBed.get(HttpTestingController);
-  });
-
-  afterEach(() => {
-    httpTestingController.verify();
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should call fetchUsers correctly', () => {
+  it('should fetchUsers correctly', () => {
+    expect(service.state.users).toBe(undefined);
     service.fetchUsers();
-    httpTestingController
-      .expectOne(`${ApiRoute.BASE}${ApiRoute.USERS}`)
-      .flush(usersFakeFactory());
     expect(service.state.users.length).toBe(3);
   });
 

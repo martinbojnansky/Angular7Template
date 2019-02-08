@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 import { StoreService } from '@app/core';
-import { ApiRoute } from '@assets/constants';
 import { User } from '../models';
+import { UsersRepositoryService } from '../repositories';
 
 export class UsersServiceState {
   users: User[];
@@ -12,13 +11,12 @@ export class UsersServiceState {
 
 @Injectable()
 export class UsersService extends StoreService<UsersServiceState> {
-  constructor(private http: HttpClient) {
+  constructor(private usersRepository: UsersRepositoryService) {
     super(new UsersServiceState());
   }
 
   fetchUsers(): void {
-    const observable = this.http.get(`${ApiRoute.BASE}${ApiRoute.USERS}`);
-    observable.subscribe(r => {
+    this.usersRepository.getAll().subscribe(r => {
       this.setState({ ...this.state, users: (<any>r).data });
     });
   }
