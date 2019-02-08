@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from '@app/shared';
 import { HomeRoutingModule } from './home-routing.module';
-import * as pages from './pages';
+import * as views from './views';
 
 @NgModule({
   declarations: [
-    // Pages
-    pages.HomePageComponent
+    // Views
+    views.HomeViewComponent
   ],
   imports: [SharedModule, HomeRoutingModule]
 })

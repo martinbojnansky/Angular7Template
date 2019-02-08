@@ -1,0 +1,17 @@
+<header>
+  <h1>angular7-template</h1>
+  <nav>
+    <a [routerLink]="('' | constants).appRoutes.HOME">{{
+      ('' | localize).homeModuleLinkText
+    }}</a>
+    <a [routerLink]="('' | constants).appRoutes.USERS">{{
+      ('' | localize).usersModuleLinkText
+    }}</a>
+    | <button (click)="localizationService.changeLocale(locale.EN)">en</button> /
+    <button (click)="localizationService.changeLocale(locale.DE)">de</button> |
+    <button class="signout-btn" (click)="authService.signOut()">
+      {{ ('' | localize).signOutButtonText }}
+    </button>
+  </nav>
+</header>
+<main><router-outlet></router-outlet></main>

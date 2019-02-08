@@ -3,14 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "npm run lint && ng serve",
-    "build": "npm run lint && ng build",
-    "build:prod": "npm run lint && ng build --prod",
+    "start": "ng serve",
+    "build": "ng build",
+    "build:prod": "ng build --prod",
     "test": "ng test",
     "test:prod": "ng test --watch=false",
     "lint": "ng lint && npm run stylelint",
     "stylelint": "stylelint src/assets/styles/**/*.scss && stylelint src/app/**/*.scss",
-    "e2e": "ng e2e",
+    "e2e": "ng e2e -- --port 4204",
     "browsersync": "browser-sync start --proxy localhost:4200 --port 4201 --ui-port 4202"
   },
   "private": true,

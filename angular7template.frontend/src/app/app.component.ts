@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   constructor() {}
 
-  title = 'angular7template';
+  title = 'angular7-template';
 }

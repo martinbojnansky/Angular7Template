@@ -1,3 +1,4 @@
-// export * from './mocks';
+// export * from './dummies';
+export * from './fakes';
 export * from './spies';
-// export * from './stubs';
+export * from './stubs';

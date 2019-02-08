@@ -1,8 +1,7 @@
-import { LocalizationValues } from './localization-values';
-import { Locale } from './locales';
+import { Locale, LocalizationValues } from '@assets/localization';
 
 export abstract class LocalizationService {
-  abstract getValues(): LocalizationValues;
-  abstract getLocale(): Locale;
+  abstract get values(): LocalizationValues;
+  abstract get locale(): Locale;
   abstract changeLocale(locale: Locale): void;
 }

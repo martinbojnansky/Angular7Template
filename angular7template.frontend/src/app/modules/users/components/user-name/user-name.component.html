@@ -1,10 +1,10 @@
 <div>
   <p>
-    {{ localizationService.getValues().firstNameCaption }}:
+    {{ ('' | localize).firstNameCaption }}:
     <span>{{ user.first_name }}</span>
   </p>
   <p>
-    {{ localizationService.getValues().lastNameCaption }}:
+    {{ ('' | localize).lastNameCaption }}:
     <span>{{ user.last_name }}</span>
   </p>
 </div>

@@ -3,19 +3,24 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '@app/shared';
 import { UsersRoutingModule } from './users-routing.module';
 import * as services from './services';
-import * as pages from './pages';
+import * as repositories from './repositories';
+import * as views from './views';
 import * as components from './components';
-import { UserNameComponent } from './components/user-name/user-name.component';
 
 @NgModule({
   declarations: [
     // Components
     components.UserDetailComponent,
-    // Pages
-    pages.UsersPageComponent,
-    UserNameComponent
+    components.UserNameComponent,
+    // Views
+    views.UsersViewComponent
   ],
   imports: [SharedModule, UsersRoutingModule],
-  providers: [services.UsersRepositoryService]
+  providers: [
+    // Services
+    services.UsersService,
+    // Repositories
+    repositories.UsersRepositoryService
+  ]
 })
 export class UsersModule {}

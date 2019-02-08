@@ -31,13 +31,12 @@
                   <goals>
                      <goal>npm</goal>
                   </goals>
-                  <!-- Optional configuration which provides for running any npm command -->
                   <configuration>
                      <arguments>install</arguments>
                   </configuration>
                </execution>
 
-               <!-- <execution>
+               <execution>
                    <id>npm lint</id>
                    <goals>
                      <goal>npm</goal>
@@ -48,7 +47,7 @@
                    <configuration>
                        <arguments>run lint</arguments>
                    </configuration>
-               </execution> -->
+               </execution>
 
                <execution>
                    <id>npm test</id>
@@ -63,8 +62,21 @@
                    </configuration>
                </execution>
 
+              <execution>
+                <id>npm e2e test</id>
+                <goals>
+                  <goal>npm</goal>
+                </goals>
+                <phase>
+                  verify
+                </phase>
+                <configuration>
+                  <arguments>run e2e</arguments>
+                </configuration>
+              </execution>
+
                <execution>
-                   <id>npm run production</id>
+                   <id>npm run build:prod</id>
                    <goals>
                        <goal>npm</goal>
                    </goals>

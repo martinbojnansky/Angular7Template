@@ -8,11 +8,9 @@ import {
 import { Observable } from 'rxjs/internal/Observable';
 
 import { AuthService } from '../../services';
-import { AppRoutes } from '@app/shared';
+import { AppRoute } from '@assets/constants';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -20,10 +18,10 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    const isAuthorized = this.authService.isAuth();
+    const isAuthorized = this.authService.state.isAuth;
 
     if (!isAuthorized) {
-      this.router.navigate([AppRoutes.LOGIN]);
+      this.router.navigate([AppRoute.LOGIN]);
     }
 
     return isAuthorized;
