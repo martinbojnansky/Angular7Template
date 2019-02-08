@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoginPageComponent, AuthService } from '@app/core';
+import { LoginViewComponent, AuthService } from '@app/core';
 import {
   LocalizePipeStub,
   authorizationServiceSpyFactory
 } from '@app/core/test-doubles';
 
-describe('LoginPageComponent', () => {
-  let component: LoginPageComponent;
-  let fixture: ComponentFixture<LoginPageComponent>;
+describe('LoginViewComponent', () => {
+  let component: LoginViewComponent;
+  let fixture: ComponentFixture<LoginViewComponent>;
   let compiled: any;
   let authServiceSpy: jasmine.SpyObj<AuthService>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginPageComponent, LocalizePipeStub],
+      declarations: [LoginViewComponent, LocalizePipeStub],
       providers: [
         {
           provide: AuthService,
@@ -27,7 +27,7 @@ describe('LoginPageComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginPageComponent);
+    fixture = TestBed.createComponent(LoginViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     compiled = fixture.debugElement.nativeElement;

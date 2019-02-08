@@ -3,12 +3,12 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { LocalizationService, AuthService } from './../../services';
 
 @Component({
-  selector: 'app-authorized-layout',
-  templateUrl: './authorized-layout.component.html',
-  styleUrls: ['./authorized-layout.component.scss'],
+  selector: 'app-authorized-view',
+  templateUrl: './authorized-view.component.html',
+  styleUrls: ['./authorized-view.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AuthorizedLayoutComponent implements OnInit {
+export class AuthorizedViewComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public localizationService: LocalizationService

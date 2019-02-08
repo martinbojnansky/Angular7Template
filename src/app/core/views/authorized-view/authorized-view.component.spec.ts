@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import {
-  AuthorizedLayoutComponent,
+  AuthorizedViewComponent,
   AuthService,
   LocalizationService
 } from '@app/core';
@@ -13,19 +13,15 @@ import {
   authorizationServiceSpyFactory
 } from '@app/core/test-doubles';
 
-describe('AuthorizedLayoutComponent', () => {
-  let component: AuthorizedLayoutComponent;
-  let fixture: ComponentFixture<AuthorizedLayoutComponent>;
+describe('AuthorizedViewComponent', () => {
+  let component: AuthorizedViewComponent;
+  let fixture: ComponentFixture<AuthorizedViewComponent>;
   let compiled: any;
   let authServiceSpy: jasmine.SpyObj<AuthService>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AuthorizedLayoutComponent,
-        LocalizePipeStub,
-        ConstantsPipe
-      ],
+      declarations: [AuthorizedViewComponent, LocalizePipeStub, ConstantsPipe],
       providers: [
         {
           provide: AuthService,
@@ -43,7 +39,7 @@ describe('AuthorizedLayoutComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AuthorizedLayoutComponent);
+    fixture = TestBed.createComponent(AuthorizedViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     compiled = fixture.debugElement.nativeElement;

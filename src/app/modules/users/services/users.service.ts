@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
 
 import { StoreService } from '@app/core';
 import { ApiRoute } from '@assets/constants';

@@ -164,7 +164,7 @@ Main application routing module `AppRoutingModule` contains top-level navigation
       ...,
       {
         path: AppRoutes.LOGIN,
-        component: LoginPageComponent
+        component: LoginViewComponent
       },
       ...
     ];
@@ -175,13 +175,13 @@ Main application routing module `AppRoutingModule` contains top-level navigation
     })
     export class AppRoutingModule {}
 
-From example above you can see that if we visit `AppRoutes.LOGIN` than `LoginPageComponent` should be initiated.
+From example above you can see that if we visit `AppRoutes.LOGIN` than `LoginViewComponent` should be initiated.
 
 If we want to protect any routes from accessing we use [guards](https://angular.io/guide/router#canactivate-requiring-authentication). The easiest way to create protected section of application is by creating a base route with `canActivate` property guard and place all protected routes as its `children` routes.
 
     {
       path: AppRoutes.AUTH,
-      component: AuthorizedLayoutComponent,
+      component: AuthorizedViewComponent,
       canActivate: [AuthGuard],
       children: [
         {
@@ -386,7 +386,7 @@ When you are writting tests for components that uses other components you have t
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
-        declarations: [AuthorizedLayoutComponent],
+        declarations: [AuthorizedViewComponent],
         ...
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
@@ -518,7 +518,7 @@ To use localized values in your components use following steps:
 
 1.  Inject `LocalizationService` into your component as public.
 
-        export class AuthorizedLayoutComponent implements OnInit {
+        export class AuthorizedViewComponent implements OnInit {
           constructor(public localizationService: LocalizationService, ...) {}
         }
 
@@ -534,7 +534,7 @@ Injecting localization service to components that uses localized values comes wi
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-          declarations: [AuthorizedLayoutComponent],
+          declarations: [AuthorizedViewComponent],
           providers: [
             ...
             {

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 
-import { UsersPageComponent } from './users-page.component';
+import { UsersViewComponent } from './users-view.component';
 import { UsersService } from '../../services';
 import { LocalizationService } from '@app/core';
 import {
@@ -12,15 +12,15 @@ import {
 } from '@app/core/test-doubles';
 import { usersFakeFactory } from '@modules/users/test-doubles';
 
-describe('UsersPageComponent', () => {
-  let component: UsersPageComponent;
-  let fixture: ComponentFixture<UsersPageComponent>;
+describe('UsersViewComponent', () => {
+  let component: UsersViewComponent;
+  let fixture: ComponentFixture<UsersViewComponent>;
   let compiled: any;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [UsersPageComponent, LocalizePipeStub],
+      declarations: [UsersViewComponent, LocalizePipeStub],
       providers: [
         UsersService,
         {
@@ -41,7 +41,7 @@ describe('UsersPageComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UsersPageComponent);
+    fixture = TestBed.createComponent(UsersViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     compiled = fixture.debugElement.nativeElement;

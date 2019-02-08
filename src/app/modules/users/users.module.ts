@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '@app/shared';
 import { UsersRoutingModule } from './users-routing.module';
 import * as services from './services';
-import * as pages from './pages';
+import * as views from './views';
 import * as components from './components';
 import { UserNameComponent } from './components/user-name/user-name.component';
 
@@ -11,8 +11,8 @@ import { UserNameComponent } from './components/user-name/user-name.component';
   declarations: [
     // Components
     components.UserDetailComponent,
-    // Pages
-    pages.UsersPageComponent,
+    // Views
+    views.UsersViewComponent,
     UserNameComponent
   ],
   imports: [SharedModule, UsersRoutingModule],

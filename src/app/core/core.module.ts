@@ -7,17 +7,15 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '@app/shared';
 import * as services from './services';
 import * as guards from './guards';
-import * as layouts from './layouts';
-import * as pages from './pages';
+import * as views from './views';
 import { LocalizationSettings } from '@assets/localization';
 
 @NgModule({
   declarations: [
-    // Layouts
-    layouts.AuthorizedLayoutComponent,
     // Pages
-    pages.LoginPageComponent,
-    pages.NotFoundPageComponent
+    views.AuthorizedViewComponent,
+    views.LoginViewComponent,
+    views.NotFoundViewComponent
   ],
   imports: [
     BrowserModule,
@@ -27,11 +25,10 @@ import { LocalizationSettings } from '@assets/localization';
     SharedModule
   ],
   exports: [
-    // Layouts
-    layouts.AuthorizedLayoutComponent,
     // Pages
-    pages.LoginPageComponent,
-    pages.NotFoundPageComponent
+    views.AuthorizedViewComponent,
+    views.LoginViewComponent,
+    views.NotFoundViewComponent
   ],
   providers: [
     // Services

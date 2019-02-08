@@ -3,11 +3,11 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AuthService } from './../../services';
 
 @Component({
-  selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss'],
+  selector: 'app-login-view',
+  templateUrl: './login-view.component.html',
+  styleUrls: ['./login-view.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginPageComponent {
+export class LoginViewComponent {
   constructor(public authService: AuthService) {}
 }
