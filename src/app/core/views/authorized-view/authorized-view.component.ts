@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { LocalizationService, AuthService } from './../../services';
+import { Locale } from '@assets/localization';
 
 @Component({
   selector: 'app-authorized-view',
@@ -9,6 +10,8 @@ import { LocalizationService, AuthService } from './../../services';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthorizedViewComponent implements OnInit {
+  public locale = Locale;
+
   constructor(
     public authService: AuthService,
     public localizationService: LocalizationService
