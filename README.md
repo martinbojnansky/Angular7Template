@@ -1,8 +1,8 @@
 # Angular7Template
 
-This template was inspired by Angular best-practices mentioned in the [Pluralsight course by Jim Cooper](https://app.pluralsight.com/player?course=best-practices-angular&author=jim-cooper&name=099afa72-35ee-4f15-9f26-257b10c11665&clip=2&mode=live) and author's experience in front-end development.
+This application was inspired by Angular best-practices mentioned in the [Pluralsight course by Jim Cooper](https://app.pluralsight.com/player?course=best-practices-angular&author=jim-cooper&name=099afa72-35ee-4f15-9f26-257b10c11665&clip=2&mode=live) and author's experience in front-end development.
 
-The main goal of this template is to create a stable infrastructure and solid foundation for a long-term Angular projects.
+The main goal of this application is to create a stable infrastructure and solid foundation for a long-term Angular projects.
 It proposes and showcases implementation of the following commonly used principles in front-end programming:
 
 - Single Resposibility
@@ -44,7 +44,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## 2. Visual Studio Code
 
-This template was created using [Visual Studio Code](https://code.visualstudio.com/) that provides tools for:
+This application was created using [Visual Studio Code](https://code.visualstudio.com/) that provides tools for:
 
 - Syntax higlighting, type check and auto completion (IntelliSense)
 - Easy Refactoring (Rename - F2, Search - Ctrl + F, Replace - Ctrl + H, ..)
@@ -56,7 +56,7 @@ Moreover it is recommended to use Visual Studio Code with following extensions t
 
 1. [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) enables to set a break point in a code and watch variables while running an application in the browser.
 1. [NPM](https://marketplace.visualstudio.com/items?itemName=eg2.vscode-npm-script) validates dependencies defined in package.json.
-1. [Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) provides IntelliSense for template files.
+1. [Angular Language Service](https://marketplace.visualstudio.com/items?itemName=Angular.ng-template) provides IntelliSense for application files.
 1. [TSLint](https://marketplace.visualstudio.com/items?itemName=eg2.tslint) displays errors in TypeScript file formatting as you write a code.
 1. [StyleLint](https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint) displays errors in CSS/SCSS/Less file formatting as you write a code.
 1. [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) automatically fixes TSLint / StyleLint errors and formats code on document save. _Formatting is based on project settings and has to be allowed in Visual Studio Code settings._
@@ -354,7 +354,7 @@ If you generate new files with Angular CLI, they comes also with a test file app
 
 In order to be able to test all of the components and services it may be needed to replace some dependencies or make sure that they're doing something.
 
-For this purposes, template uses 4 types of test-doubles:
+For this purposes, application uses 4 types of test-doubles:
 
 1. **Dummies (\*.dummy.ts)** - Does nothing. (e.g. empty functions)
 2. **Fakes (\*.fake.ts)** - Returns the same value everytime. (e.g. fake repository that returns array of users)
@@ -451,24 +451,23 @@ Sometimes, you might accidentally import unnecessary files and encounter large s
 
 ## 9. Localization
 
-This template implements its own localization architecture that translate components with dynamic bindings.
+This application implements its own localization architecture that translate components with dynamic bindings.
 
-With `LocalizationService` you get:
+With `LocalizationService` and `LocalizePipe` you get:
 
 - Static variable translations: `applicationTitle: string`
 - Parametrized translation functions: `welcomeText: (name: string): string`
 - Type-checking whenever there is a missing or misspelled translation.
-- Single application bundle.
-- No need of application / page reload when switching a language.
+- Single application bundle (no need to build application for each localization separately).
+- No need of application change when switching a language.
 
 However,:
-
 - Localization can slightly effect application performance.
-- Won't be indexed by search engines.
+- Probably, won't be indexed by search engines.
 
 ### 9.1 Localization values
 
-In `app/core/services/localization` folder you can find abstract class `LocalizationValues`. It defines an interface of all values and functions that should be implemented by each localization file.
+In `assets/localization/localization-config.ts` file you can find abstract class `LocalizationValues`. It defines an interface of all values and formatting functions that has to be implemented by each localization file.
 
       export abstract class LocalizationValues {
         abstract shortDateFormat: string;
@@ -479,9 +478,9 @@ In `app/core/services/localization` folder you can find abstract class `Localiza
 
 ### 9.2 Localization files
 
-Translation files are located at `assets/locales` folder, in separate files with appropriate name. Those files contains constant values of custom implementation of `LocalizationValues` class.
+Translation files are located at `assets/localization/locales` folder, where each localization is located in separate file and appropriate name. Those files exports constant values by implementing `LocalizationValues` class.
 
-import { LocalizationValues } from '@app/core/services/localization/localization-values';
+import { LocalizationValues } from '../localization-config';
 
       export const en: LocalizationValues = {
         shortDateFormat: 'MM/dd/yyyy',
@@ -494,9 +493,9 @@ import { LocalizationValues } from '@app/core/services/localization/localization
 
 Supported locales can be added in two steps:
 
-1.  Register new locale id in `Locale` enum of `app/core/services/localization/locales.ts`
+1.  Register new locale id in `Locale` enum of `assets/localization/localization-config` file.
 
-        import { en, de } from '@assets/locales';
+        import { en, de } from './locales';
 
         export enum Locale {
           EN = 'en',
@@ -506,7 +505,7 @@ Supported locales can be added in two steps:
 
 2.  Add implementation of `LocaleValues` and its corresponding id from `Locale` enum to `locales` constant object.
 
-        export const locales = {
+        export const locales: { [id: string]: LocalizationValues } = {
           [Locale.EN]: en,
           [Locale.DE]: de,
           ...
@@ -516,40 +515,52 @@ Supported locales can be added in two steps:
 
 To use localized values in your components use following steps:
 
-1.  Inject `LocalizationService` into your component as public.
-
-        export class AuthorizedViewComponent implements OnInit {
-          constructor(public localizationService: LocalizationService, ...) {}
-        }
-
-2.  Add bindings for localized values to component's template:
-
+1. Use `localize` pipe directly in template files.
 
         {{ ('' | localize).notFoundPageText }}
-        {{ localizationService.getValue().homePageText('John Doe') }}
+        
+1. Use 'LocalizationService'.
+    1.  Inject `LocalizationService` into your component as public.
+    
+            export class AuthorizedViewComponent implements OnInit {
+              constructor(public localizationService: LocalizationService, ...) {}
+            }
+    
+    2.  Add bindings for localized values to component's template:
+    
+            {{ localizationService.values.homePageText('John Doe') }}
 
 ### 9.5 Testing localized components
 
-Injecting localization service to components that uses localized values comes with a drawback. In all test of such components, you need to register fake provider with implemented spy factory `localizationServiceSpyFactory`.
+If you use localization in any tested components, you will need to configure `TestBed` according to pipe or service usage.
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-          declarations: [AuthorizedViewComponent],
-          providers: [
-            ...
-            {
-              provide: LocalizationService,
-              useFactory: localizationServiceSpyFactory
-            }
-          ]
-        }).compileComponents();
-      }));
+1. **Pipe** - Declare stubbed pipe `LocalizePipeStub` from `app/core/test-doubles`.
+
+        beforeEach(async(() => {
+          TestBed.configureTestingModule({
+            declarations: [AuthorizedViewComponent, LocalizePipeStub],
+            providers: []
+          }).compileComponents();
+        }));
+
+1. **Service** - Register fake provider of `LocalizationService` with implemented spy factory `localizationServiceSpyFactory` from `app/core/test-doubles`.
+
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+              declarations: [AuthorizedViewComponent],
+              providers: [
+                ...
+                {
+                  provide: LocalizationService,
+                  useFactory: localizationServiceSpyFactory
+                }
+              ]
+            }).compileComponents();
+          }));
 
 ### 9.6 Changing locale
 
 To change language simply call `changeLocale` method on `LocalizationService` instance and provide `Locale` value.
 
-    <button (click)="localizationService.changeLocale('en')">en</button>
-    <button (click)="localizationService.changeLocale('de')">de</button>
-
-> If you use `ChangeDetectionStrategy.OnPush` in any components, dynamic translation won't work in those and all nested components. In this case you change the provider of `LocalizationSettings` in `CoreModule` to set default value `useReload` to `true`. This way, the translation will be applied right after automatic page reload on language switch.
+    <button (click)="localizationService.changeLocale(locale.EN)">en</button>
+    <button (click)="localizationService.changeLocale(locale.DE)">de</button>
