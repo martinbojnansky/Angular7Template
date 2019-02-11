@@ -3,13 +3,18 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 
 import { AuthGuard, AuthService } from '@app/core';
-import { FakeAuthServiceStub, routerSpyFactory } from '@app/core/test-doubles';
+import {
+  FakeAuthServiceStub,
+  routerSpyFactory,
+  authInfoFakeFactory
+} from '@app/core/test-doubles';
 import { AppRoute } from '@assets/constants';
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;
   let authService: AuthService;
   let routerSpy: jasmine.SpyObj<Router>;
+  const authInfo = authInfoFakeFactory();
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -37,7 +42,7 @@ describe('AuthGuard', () => {
   });
 
   it('should activate when signed in', () => {
-    authService.signIn();
+    authService.signIn(authInfo.userName, authInfo.password);
     expect(guard.canActivate(null, null)).toBeTruthy();
   });
 
@@ -46,7 +51,7 @@ describe('AuthGuard', () => {
   });
 
   it('should not activate when signed out', () => {
-    authService.signIn();
+    authService.signIn(authInfo.userName, authInfo.password);
     authService.signOut();
     expect(guard.canActivate(null, null)).toBeFalsy();
   });

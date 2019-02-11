@@ -5,7 +5,15 @@ export class LoginPage {
     return browser.get('/login');
   }
 
-  getSignInButton(): ElementFinder {
-    return element(by.tagName('button'));
+  getUserNameField(): ElementFinder {
+    return element(by.tagName('input[type=text]'));
+  }
+
+  getPasswordField(): ElementFinder {
+    return element(by.tagName('input[type=password]'));
+  }
+
+  getSubmitButton(): ElementFinder {
+    return element(by.tagName('input[type=submit]'));
   }
 }

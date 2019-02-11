@@ -11,7 +11,9 @@ describe('Login page', () => {
   });
 
   it('should navigate to auth page on sign in button click', async () => {
-    await page.getSignInButton().click();
+    await page.getUserNameField().sendKeys('user');
+    await page.getPasswordField().sendKeys('password');
+    await page.getSubmitButton().click();
     expect(browser.getCurrentUrl()).toContain('/auth');
   });
 });
