@@ -1,7 +1,13 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { AuthService } from './../../services';
+import { AuthService, StateService } from './../../services';
 import { FormControl } from '@angular/forms';
+
+export class LoginViewState {
+  userName: FormControl = new FormControl();
+  password: FormControl = new FormControl();
+  error: string;
+}
 
 @Component({
   selector: 'app-login-view',
@@ -9,18 +15,19 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./login-view.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginViewComponent {
-  public userName: FormControl = new FormControl();
-  public password: FormControl = new FormControl();
-  public error: string;
-
-  constructor(public authService: AuthService) {}
+export class LoginViewComponent extends StateService<LoginViewState> {
+  constructor(public authService: AuthService) {
+    super(new LoginViewState());
+  }
 
   signIn() {
     try {
-      this.authService.signIn(this.userName.value, this.password.value);
+      this.authService.signIn(
+        this.state.userName.value,
+        this.state.password.value
+      );
     } catch (e) {
-      this.error = e.message;
+      this.setState({ ...this.state, error: e.message });
     }
   }
 }

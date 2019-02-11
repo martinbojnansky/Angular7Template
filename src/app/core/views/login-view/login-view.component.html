@@ -1,13 +1,13 @@
 <ng-container>
   <form (ngSubmit)="signIn()">
-    <label *ngIf="error" class="error">{{ error }}</label>
+    <label *ngIf="state.error" class="error">{{ state.error }}</label>
     <label>
       <span>{{ ('' | localize).userNameCaption }}:</span>
-      <input type="text" [formControl]="userName" />
+      <input type="text" [formControl]="state.userName" />
     </label>
     <label>
       <span>{{ ('' | localize).passwordCaption }}:</span>
-      <input type="password" [formControl]="password" />
+      <input type="password" [formControl]="state.password" />
     </label>
     <input type="submit" [textContent]="('' | localize).signInButtonText" />
   </form>
