@@ -46,7 +46,9 @@ Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.pr
 To get more help on the Angular CLI use `ng help` or go check out the 
 [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-## 2. Visual Studio Code
+## 2. IDE
+
+### 2.1 Visual Studio Code
 
 This application was created using [Visual Studio Code](https://code.visualstudio.com/) that provides tools for:
 
@@ -54,7 +56,7 @@ This application was created using [Visual Studio Code](https://code.visualstudi
 - Easy Refactoring (Rename - F2, Search - Ctrl + F, Replace - Ctrl + H, ..)
 - Integratated console
 
-### 2.1 Extensions
+#### 2.1.1 Extensions
 
 Moreover it is recommended to use Visual Studio Code with following extensions to reach the best productivity.
 
@@ -70,7 +72,29 @@ as you write a code.
 formatting as you write a code.
 1. [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) automatically fixes 
 TSLint / StyleLint errors and formats code on document save. _Formatting is based on project settings and has to be 
-allowed in Visual Studio Code settings._
+allowed in Visual Studio Code settings.
+
+### 2.2 WebStorm
+
+[WebStorm](https://www.jetbrains.com/webstorm/) IDE comes with pre-installed support for Angular projects and provides good integration, refactoring, type checking
+and auto completion.
+
+#### 2.2.1 Extensions
+
+Make sure, you have installed following extensions:
+
+1. AngularJS
+1. CSS Support
+1. Javascript Debugger
+1. Karma
+1. Node.js
+1. Sass support
+
+To take advantage of automatic formatting errors fix add the additional extension [Prettier](https://plugins.jetbrains.com/plugin/10456-prettier) 
+in `Settings -> Plugins -> Marketplace`. 
+
+You can run code formatting by pressing `Ctrl+Shift+Alt+P` or take advantage of file watchers that will run 
+formatting automatically on external changes (save). 
 
 ## 3. Architecture
 

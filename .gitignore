@@ -13,7 +13,7 @@ chrome-profiler-events.json
 speed-measure-plugin.json
 
 # IDEs and editors
-/.idea
+/.idea/*
 .project
 .classpath
 .c9/
@@ -27,6 +27,9 @@ speed-measure-plugin.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# IDE - WebStorm
+!.idea/watcherTasks.xml
 
 # misc
 /.sass-cache
