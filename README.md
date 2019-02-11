@@ -800,11 +800,11 @@ to `components` input properties.
 To separate responsibility and make application more testable, it is a good idea to extract application logic and state,
 that could be used in different components, to a service. However, since we defined every component to use `OnPush` 
 change detection strategy, we also need to make sure of having an immutable state in our services. Because of this,
-each service that contains any state that could be displayed by the components, should extend `StateService<T>` base class.
+each service that contains any state that could be displayed by the components, should extend `ViewModelService<T>` base class.
 
-#### 10.4.1 StateService<T> base class
+#### 10.4.1 ViewModelService<T> base class
 
-By extending `StateService<T>` we can expose a an observable state of any model, subscribe to its changes
+By extending `ViewModelService<T>` we can expose a an observable state of any model, subscribe to its changes
 and make sure that its immutable. Also, to keep services as less coupled as possible, it prohibits any state changes from
 outside the service.
 
@@ -814,7 +814,7 @@ outside the service.
     }
     
     @Injectable()
-    export class UsersService extends StateService<UsersServiceState> {
+    export class UsersService extends ViewModelService<UsersServiceState> {
       constructor(private usersRepository: UsersRepositoryService) {
         super(new UsersServiceState());
       }

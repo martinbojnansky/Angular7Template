@@ -1,6 +1,6 @@
 import { Observable, BehaviorSubject } from 'rxjs';
 
-export abstract class StateService<T> {
+export abstract class ViewModel<T> {
   state$: Observable<T>;
   private _state$: BehaviorSubject<T>;
 

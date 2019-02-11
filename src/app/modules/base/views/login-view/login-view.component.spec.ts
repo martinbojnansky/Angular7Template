@@ -1,12 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { LoginViewComponent, AuthService } from '@app/core';
+import { LoginViewComponent } from './login-view.component';
+import { AuthService } from '@app/core';
 import {
   LocalizePipeStub,
   authorizationServiceSpyFactory,
   authInfoFakeFactory
 } from '@app/core/test-doubles';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('LoginViewComponent', () => {
   let component: LoginViewComponent;
