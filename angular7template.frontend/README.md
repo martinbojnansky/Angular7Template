@@ -119,10 +119,9 @@ For a faster code location, lower coupling, better performance and scalability i
 
 e.g.
 
-- **core** - Contains single instance features shared across the application.
-- **shared** - Contains features shared across different modules.
+- **core** - Contains single instance features shared across the whole application.
+- **shared** - Contains multi-instance features shared across different modules.
 - **modules** - Contains logically grouped features that represents some part of the application.
-  - **base** - Application part for the basic views that are used in top level navigation. 
   - **users** - Application part for the user management.
   - **orders** - Application part for the orders management.
   - ...
@@ -181,6 +180,7 @@ e.g.
 
 - Authentication service should be initiated only once and may be used across different modules.
 - Authentication guard should be here.
+- AuthorizedView component should be here.
 
 #### 3.2.2 Shared Module
 
@@ -195,29 +195,10 @@ e.g.
 #### 3.2.3 Feature Modules
 
 Feature Modules contains multiple application parts and features that were logically encapsulated. Those modules should 
-have its own routing module and therefore doesn't need to be loaded until needed.
+have its own routing module and therefore does not need to be loaded until needed.
 To create a new module with routing navigate to `app/modules` folder and run Angular CLI command 
 `ng generate module module_name --routing`.
 Any feature module should use `Shared Module`.
-
-#### 3.2.3.1 Base Module
-
-There is one more module called `Base`, that is not lazy-loaded and does not contain its own routing module. 
-It is primarily used to encapsulate views that:
- 
-- Are used in top-level navigation.
-- Does not logically belong to any other feature module.
-- Are most common views that supports application lifecycle (e.g. LoginViewComponent, NotFoundViewComponent) 
-or are expected to be shown very often.
-- Are used as layouts for specific navigation groups (e.g. PublicView or AuthorizedView).
-
-They are not part of the `Core` module because:
-
-- We could cause cyclic dependency while localizing views with pipes.
-
-They are not part of the `Shared` module because: 
-
-- Its components should be universal (based on inputs).
 
 ## 4. Principles
 

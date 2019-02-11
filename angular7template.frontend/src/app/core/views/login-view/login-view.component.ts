@@ -1,7 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { AuthService, ViewModel } from '@app/core';
+import { ViewModel } from '../../mvvm';
+import { AuthService } from '../../services';
 
 export class LoginViewState {
   userName: FormControl = new FormControl();
