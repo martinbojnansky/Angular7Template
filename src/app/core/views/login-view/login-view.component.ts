@@ -16,13 +16,13 @@ export class LoginViewState {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginViewComponent extends StateService<LoginViewState> {
-  constructor(public authService: AuthService) {
+  constructor(private authService: AuthService) {
     super(new LoginViewState());
   }
 
-  signIn() {
+  async signIn(): Promise<void> {
     try {
-      this.authService.signIn(
+      await this.authService.signIn(
         this.state.userName.value,
         this.state.password.value
       );

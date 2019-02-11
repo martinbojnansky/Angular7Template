@@ -6,6 +6,6 @@ export class AuthServiceState {
 }
 
 export abstract class AuthService extends StateService<AuthServiceState> {
-  abstract signIn(userName: string, password: string): void;
-  abstract signOut(): void;
+  abstract signIn(userName: string, password: string): Promise<void>;
+  abstract signOut(): Promise<void>;
 }

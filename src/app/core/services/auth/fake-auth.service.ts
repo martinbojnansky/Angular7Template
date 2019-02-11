@@ -19,25 +19,25 @@ export class FakeAuthService extends AuthService {
     this.init();
   }
 
-  signIn(userName: string, password: string): void {
+  async signIn(userName: string, password: string): Promise<void> {
     if (userName === 'user' && password === 'password') {
       this.authToken = 'authToken123456789';
       this.localStorageService.setItem(
         LocalStorageKey.AUTHORIZATION_TOKEN,
         this.authToken
       );
-      this.router.navigate([AppRoute.AUTH]);
       this.setState({ ...this.state, isAuth: true });
+      await this.router.navigate([AppRoute.AUTH]);
     } else {
       throw new Error(this.localizationService.values.invalidCredentialsError);
     }
   }
 
-  signOut(): void {
+  async signOut(): Promise<void> {
     this.localStorageService.removeItem(LocalStorageKey.AUTHORIZATION_TOKEN);
     this.authToken = null;
-    this.router.navigate([AppRoute.LOGIN]);
     this.setState({ ...this.state, isAuth: false });
+    await this.router.navigate([AppRoute.LOGIN]);
   }
 
   private init(): void {

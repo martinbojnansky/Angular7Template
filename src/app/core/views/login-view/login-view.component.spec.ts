@@ -7,7 +7,6 @@ import {
   authInfoFakeFactory
 } from '@app/core/test-doubles';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { eventNames } from 'cluster';
 
 describe('LoginViewComponent', () => {
   let component: LoginViewComponent;
