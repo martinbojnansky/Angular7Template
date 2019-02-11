@@ -5,7 +5,7 @@ import { LoginViewComponent } from './login-view.component';
 import { AuthService } from '@app/core';
 import {
   LocalizePipeStub,
-  authorizationServiceSpyFactory,
+  authServiceSpyFactory,
   authInfoFakeFactory
 } from '@app/core/test-doubles';
 
@@ -27,7 +27,7 @@ describe('LoginViewComponent', () => {
       providers: [
         {
           provide: AuthService,
-          useFactory: authorizationServiceSpyFactory
+          useFactory: authServiceSpyFactory
         }
       ]
     }).compileComponents();
@@ -64,7 +64,7 @@ describe('LoginViewComponent', () => {
     expect(compiled.querySelector('.error')).toBeNull();
   });
 
-  it('should display error on sign in', async(() => {
+  it('should display error on sign in', () => {
     const errorMessage = 'Error message.';
     authServiceSpy.signIn.and.throwError(errorMessage);
 
@@ -80,5 +80,5 @@ describe('LoginViewComponent', () => {
       authInfo.userName
     );
     expect(compiled.querySelector('.error').textContent).toBe(errorMessage);
-  }));
+  });
 });

@@ -1,6 +1,6 @@
 import { AuthService } from '@app/core/services';
 
-export const authorizationServiceSpyFactory = () => {
+export const authServiceSpyFactory = () => {
   const spy = jasmine.createSpyObj<AuthService>('AuthService', [
     'signIn',
     'signOut'
