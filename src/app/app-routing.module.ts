@@ -3,8 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AppRoute } from '@assets/constants';
 import { AuthGuard } from './core';
-import { BaseModule } from './modules/base';
-import * as baseViews from './modules/base';
+import * as views from './core/views';
 
 const routes: Routes = [
   {
@@ -14,11 +13,11 @@ const routes: Routes = [
   },
   {
     path: AppRoute.LOGIN,
-    component: baseViews.LoginViewComponent
+    component: views.LoginViewComponent
   },
   {
     path: AppRoute.AUTH,
-    component: baseViews.AuthorizedViewComponent,
+    component: views.AuthorizedViewComponent,
     canActivate: [AuthGuard],
     children: [
       {
@@ -40,13 +39,13 @@ const routes: Routes = [
     // Any other unknown route is redirected to not found error page.
     // This route has to be registered as the last one.
     path: '**',
-    component: baseViews.NotFoundViewComponent,
+    component: views.NotFoundViewComponent,
     pathMatch: 'full'
   }
 ];
 
 @NgModule({
-  imports: [BaseModule, RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

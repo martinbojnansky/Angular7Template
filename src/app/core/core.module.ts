@@ -4,14 +4,32 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+import { SharedModule } from '@app/shared';
 import * as services from './services';
 import * as guards from './guards';
+import * as views from './views';
 import { LocalizationSettings } from '@assets/localization';
 
 @NgModule({
-  declarations: [],
-  imports: [BrowserModule, CommonModule, HttpClientModule, RouterModule],
-  exports: [],
+  declarations: [
+    // Views
+    views.NotFoundViewComponent,
+    views.LoginViewComponent,
+    views.AuthorizedViewComponent
+  ],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    HttpClientModule,
+    RouterModule,
+    SharedModule
+  ],
+  exports: [
+    // Views
+    views.NotFoundViewComponent,
+    views.LoginViewComponent,
+    views.AuthorizedViewComponent
+  ],
   providers: [
     // Services
     {
