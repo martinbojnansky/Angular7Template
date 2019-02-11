@@ -19,6 +19,9 @@ export abstract class LocalizationValues {
   abstract notFoundPageText: string;
   abstract homePageText: (name: string) => string;
   abstract usersPageText: string;
+  abstract userNameCaption: string;
+  abstract passwordCaption: string;
+  abstract invalidCredentialsError: string;
   abstract signInButtonText: string;
   abstract signOutButtonText: string;
   abstract homeModuleLinkText: string;

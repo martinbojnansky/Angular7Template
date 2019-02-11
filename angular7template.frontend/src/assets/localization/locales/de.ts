@@ -6,6 +6,9 @@ export const de: LocalizationValues = {
   homePageText: name => `Hallo ${name}. Willkomen!`,
   usersPageText:
     'Dies ist eine Benutzerseite mit einem Beispiel von Repository Service.',
+  userNameCaption: 'Nutzername',
+  passwordCaption: 'Passwort',
+  invalidCredentialsError: 'Eingegebene Anmeldeinformationen sind ungültig.',
   signInButtonText: 'Anmelden',
   signOutButtonText: 'Abmelden',
   homeModuleLinkText: 'Zuhause',

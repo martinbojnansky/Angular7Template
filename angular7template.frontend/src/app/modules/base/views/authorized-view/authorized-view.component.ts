@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
-import { LocalizationService, AuthService } from './../../services';
+import { AuthService, LocalizationService } from '@app/core';
 import { Locale } from '@assets/localization';
 
 @Component({

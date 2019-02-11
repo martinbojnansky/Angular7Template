@@ -1,7 +1,6 @@
-import { Observable, BehaviorSubject, Subscription } from 'rxjs';
-import { OnInit, OnDestroy } from '@angular/core';
+import { Observable, BehaviorSubject } from 'rxjs';
 
-export abstract class StoreService<T> {
+export abstract class ViewModel<T> {
   state$: Observable<T>;
   private _state$: BehaviorSubject<T>;
 

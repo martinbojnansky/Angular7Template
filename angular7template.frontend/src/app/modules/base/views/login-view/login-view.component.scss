@@ -1,0 +1,35 @@
+@import 'global';
+
+form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  width: 40rem;
+
+  label {
+    display: flex;
+    margin-bottom: $padding;
+
+    span {
+      flex: 1 1 30%;
+      margin-right: $padding;
+    }
+
+    input {
+      flex: 1 1 70%;
+      border: $border-width solid $color-border;
+      padding: $padding-button;
+    }
+  }
+
+  input[type='submit'] {
+    padding: $padding-button;
+  }
+
+  .error {
+    color: $color-error;
+  }
+}

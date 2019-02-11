@@ -1,10 +1,11 @@
-import { StoreService } from '../store.service';
+import { ViewModel } from '../../mvvm';
 
 export class AuthServiceState {
   isAuth: boolean;
+  errorText: string;
 }
 
-export abstract class AuthService extends StoreService<AuthServiceState> {
-  abstract signIn(): void;
-  abstract signOut(): void;
+export abstract class AuthService extends ViewModel<AuthServiceState> {
+  abstract signIn(userName: string, password: string): Promise<void>;
+  abstract signOut(): Promise<void>;
 }

@@ -2,7 +2,6 @@ import { TestBed } from '@angular/core/testing';
 
 import {
   userFakeFactory,
-  usersFakeFactory,
   UsersRepositoryServiceStub
 } from '@modules/users/test-doubles';
 import { User } from '@modules/users/models';

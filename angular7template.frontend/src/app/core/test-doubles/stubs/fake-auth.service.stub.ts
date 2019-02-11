@@ -1,8 +1,16 @@
 import { FakeAuthService } from '@app/core/services';
-import { localStorageServiceSpyFactory, routerSpyFactory } from '../spies';
+import {
+  localizationServiceSpyFactory,
+  localStorageServiceSpyFactory,
+  routerSpyFactory
+} from '../spies';
 
 export class FakeAuthServiceStub extends FakeAuthService {
   constructor() {
-    super(localStorageServiceSpyFactory(), routerSpyFactory());
+    super(
+      localStorageServiceSpyFactory(),
+      routerSpyFactory(),
+      localizationServiceSpyFactory()
+    );
   }
 }

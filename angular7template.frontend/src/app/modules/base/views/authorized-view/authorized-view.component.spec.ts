@@ -1,11 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-import {
-  AuthorizedViewComponent,
-  AuthService,
-  LocalizationService
-} from '@app/core';
+import { AuthorizedViewComponent } from './authorized-view.component';
+import { AuthService, LocalizationService } from '@app/core';
 import { ConstantsPipe } from '@app/shared';
 import {
   LocalizePipeStub,

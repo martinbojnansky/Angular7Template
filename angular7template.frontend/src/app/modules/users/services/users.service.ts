@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { StoreService } from '@app/core';
+import { ViewModel } from '@app/core';
 import { User } from '../models';
 import { UsersRepositoryService } from '../repositories';
 
@@ -10,7 +10,7 @@ export class UsersServiceState {
 }
 
 @Injectable()
-export class UsersService extends StoreService<UsersServiceState> {
+export class UsersService extends ViewModel<UsersServiceState> {
   constructor(private usersRepository: UsersRepositoryService) {
     super(new UsersServiceState());
   }
