@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { DefaultLocalStorageService } from './default-local-storage.service';
-import { localStorageSpyFactory } from '@app/core/test-doubles/spies';
+import { localStorageSpyFactory } from '../../test-doubles/spies';
 
 describe('LocalStorageService', () => {
   let service: DefaultLocalStorageService;

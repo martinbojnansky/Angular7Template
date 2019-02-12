@@ -1,9 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DefaultLocalizationService, LocalStorageService } from '@app/core';
-import { localStorageServiceSpyFactory } from '@app/core/test-doubles';
-import { LocalStorageKey } from '@assets/constants';
-import { en, de, LocalizationSettings, Locale } from '@assets/localization';
+import { DefaultLocalizationService, LocalStorageService } from '../..';
+import { localStorageServiceSpyFactory } from '../../test-doubles';
+import { LocalStorageKey } from '../../../../assets/constants';
+import {
+  en,
+  de,
+  LocalizationSettings,
+  Locale
+} from '../../../../assets/localization';
 
 describe('DefaultLocalizationService', () => {
   let service: DefaultLocalizationService;

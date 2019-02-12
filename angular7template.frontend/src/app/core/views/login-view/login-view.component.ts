@@ -21,9 +21,9 @@ export class LoginViewComponent extends ViewModel<LoginViewState> {
     super(new LoginViewState());
   }
 
-  async signIn(): Promise<void> {
+  signIn(): void {
     try {
-      await this.authService.signIn(
+      this.authService.signIn(
         this.state.userName.value,
         this.state.password.value
       );

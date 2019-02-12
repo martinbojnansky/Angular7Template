@@ -7,7 +7,7 @@ import { ConstantsPipe } from '@app/shared';
 import {
   LocalizePipeStub,
   localizationServiceSpyFactory,
-  authorizationServiceSpyFactory
+  authServiceSpyFactory
 } from '@app/core/test-doubles';
 
 describe('AuthorizedViewComponent', () => {
@@ -22,7 +22,7 @@ describe('AuthorizedViewComponent', () => {
       providers: [
         {
           provide: AuthService,
-          useFactory: authorizationServiceSpyFactory
+          useFactory: authServiceSpyFactory
         },
         {
           provide: LocalizationService,

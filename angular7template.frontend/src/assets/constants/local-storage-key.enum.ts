@@ -1,4 +1,4 @@
 export enum LocalStorageKey {
-  AUTHORIZATION_TOKEN = 'auth_token',
+  AUTH_TOKEN = 'auth_token',
   LOCALE = 'locale'
 }

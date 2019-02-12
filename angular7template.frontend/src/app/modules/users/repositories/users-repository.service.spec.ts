@@ -28,6 +28,8 @@ describe('UsersRepositoryService', () => {
 
   it('should call getAll correctly', () => {
     service.getAll().subscribe(() => {});
-    httpTestingController.expectOne(`${ApiRoute.BASE}${ApiRoute.USERS}`);
+    httpTestingController.expectOne(
+      `${ApiRoute.BASE}/${ApiRoute.API}/${ApiRoute.USERS}`
+    );
   });
 });

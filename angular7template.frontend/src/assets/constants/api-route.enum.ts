@@ -1,4 +1,7 @@
 export enum ApiRoute {
-  BASE = 'api/',
+  BASE = 'http://localhost:8080',
+  API = 'api',
+  LOGIN = 'login',
+  LOGOUT = 'logout',
   USERS = 'users'
 }

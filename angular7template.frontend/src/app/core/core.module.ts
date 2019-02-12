@@ -1,13 +1,14 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '@app/shared';
 import * as services from './services';
 import * as guards from './guards';
 import * as views from './views';
+import * as interceptors from './interceptors';
 import { LocalizationSettings } from '@assets/localization';
 
 @NgModule({
@@ -34,7 +35,7 @@ import { LocalizationSettings } from '@assets/localization';
     // Services
     {
       provide: services.AuthService,
-      useClass: services.FakeAuthService
+      useClass: services.JwtAuthService
     },
     {
       provide: services.LocalStorageService,
@@ -49,7 +50,13 @@ import { LocalizationSettings } from '@assets/localization';
       useValue: new LocalizationSettings()
     },
     // Guards
-    guards.AuthGuard
+    guards.AuthGuard,
+    // Interceptors
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: interceptors.AuthHeaderInterceptor,
+      multi: true
+    }
   ]
 })
 export class CoreModule {
