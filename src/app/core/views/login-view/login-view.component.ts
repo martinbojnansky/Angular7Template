@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { ViewModel } from '../../mvvm';
+import { Store } from '../../store';
 import { AuthService } from '../../services';
 
 export class LoginViewState {
@@ -16,7 +16,7 @@ export class LoginViewState {
   styleUrls: ['./login-view.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginViewComponent extends ViewModel<LoginViewState> {
+export class LoginViewComponent extends Store<LoginViewState> {
   constructor(private authService: AuthService) {
     super(new LoginViewState());
   }

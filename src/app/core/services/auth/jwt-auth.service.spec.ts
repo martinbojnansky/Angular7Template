@@ -6,9 +6,9 @@ import {
 } from '@angular/common/http/testing';
 import { Router } from '@angular/router';
 
-import { LocalStorageKey, AppRoute } from '@assets/constants';
+import { LocalStorageKey, AppRoute, ApiRoute } from '@assets/constants';
 import { JwtAuthService } from './jwt-auth.service';
-import { LocalizationService, LocalStorageService } from '..';
+import { AuthServiceState, LocalizationService, LocalStorageService } from '..';
 import {
   routerSpyFactory,
   localStorageServiceSpyFactory,
@@ -23,7 +23,6 @@ describe('JwtAuthService', () => {
   let routerSpy: jasmine.SpyObj<Router>;
   let httpTestingController: HttpTestingController;
   const authInfo = authInfoFakeFactory();
-  const jwtToken = 'authToken123456789';
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -62,22 +61,26 @@ describe('JwtAuthService', () => {
 
   it('should change state, save token and redirect on sign in', () => {
     service.signIn(authInfo.userName, authInfo.password);
-    httpTestingController.expectOne(AppRoute.LOGIN).flush(jwtToken);
+    httpTestingController
+      .expectOne(`${ApiRoute.BASE}/${ApiRoute.LOGIN}`)
+      .flush(authInfo.token);
 
     expect(service.state.isAuth).toBeTruthy();
-    expect(service.state.token).toBe(jwtToken);
+    expect(service.state.token).toBe(authInfo.token);
     expect(localStorageServiceSpy.setItem).toHaveBeenCalledWith(
       LocalStorageKey.AUTH_TOKEN,
-      jwtToken
+      authInfo.token
     );
     expect(routerSpy.navigate).toHaveBeenCalledWith([AppRoute.AUTH]);
   });
 
-  it('should change state, remove token and redirect on sign out', () => {
+  it('should change state, remove token and redirect on sign out', async () => {
     service.signIn(authInfo.userName, authInfo.password);
-    service.signOut();
-    httpTestingController.expectOne(AppRoute.LOGIN).flush(jwtToken);
-    httpTestingController.expectOne(AppRoute.LOGOUT).flush({});
+    httpTestingController
+      .expectOne(`${ApiRoute.BASE}/${ApiRoute.LOGIN}`)
+      .flush(authInfo.token);
+
+    await service.signOut();
 
     expect(service.state.isAuth).toBeFalsy();
     expect(service.state.token).toBeNull();

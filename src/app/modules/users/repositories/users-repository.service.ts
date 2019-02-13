@@ -9,6 +9,8 @@ export class UsersRepositoryService {
   constructor(private httpClient: HttpClient) {}
 
   getAll(): Observable<any> {
-    return this.httpClient.get(`${ApiRoute.BASE}${ApiRoute.USERS}`);
+    return this.httpClient.get(
+      `${ApiRoute.BASE}/${ApiRoute.API}/${ApiRoute.USERS}`
+    );
   }
 }

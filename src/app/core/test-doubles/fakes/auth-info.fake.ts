@@ -1,4 +1,5 @@
 export const authInfoFakeFactory = () => ({
   userName: 'user',
-  password: 'password'
+  password: 'password',
+  token: 'authToken123456789'
 });

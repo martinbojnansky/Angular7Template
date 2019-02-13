@@ -4,18 +4,16 @@ import { delay } from 'q';
 describe('Users page', () => {
   let page: UsersPage;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     page = new UsersPage();
-    page.navigateTo();
+    await page.navigateTo();
   });
 
   it('displays user detail on table row click', async () => {
     const row = await page.getUsersTableRow();
-
-    row.click();
+    await row.click();
     const userDetail = await page.getUserDetail();
-    await delay(500);
-
-    expect(await userDetail.isDisplayed()).toBeTruthy();
+    const isDisplayed = await userDetail.isDisplayed();
+    expect(isDisplayed).toBeTruthy();
   });
 });

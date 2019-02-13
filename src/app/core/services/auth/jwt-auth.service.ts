@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
-import { LocalStorageKey, AppRoute } from '../../../../assets/constants';
+import { LocalStorageKey, AppRoute, ApiRoute } from '@assets/constants';
 import { LocalStorageService } from '../storage';
 import { AuthService, AuthServiceState } from './auth.service';
 import { LocalizationService } from '../localization';
@@ -24,32 +24,36 @@ export class JwtAuthService extends AuthService {
     formData.append('username', userName);
     formData.append('password', password);
 
-    this.httpClient.post('login', formData).subscribe(
-      async (token: string) => {
-        this.localStorageService.setItem(LocalStorageKey.AUTH_TOKEN, token);
-        this.setState({ ...this.state, isAuth: true, token: token });
-        await this.router.navigate([AppRoute.AUTH]);
-      },
-      () => {
-        throw new Error(
-          this.localizationService.values.invalidCredentialsError
-        );
-      }
-    );
+    this.httpClient
+      .post(`${ApiRoute.BASE}/${ApiRoute.LOGIN}`, formData, {
+        responseType: 'text'
+      })
+      .subscribe(
+        async token => await this.signInCompleted(token),
+        this.signInFailed
+      );
   }
 
-  signOut(): void {
-    this.httpClient.post(AppRoute.LOGOUT, null).subscribe(async () => {
-      this.localStorageService.removeItem(LocalStorageKey.AUTH_TOKEN);
-      this.setState({ ...this.state, isAuth: false, token: null });
-      await this.router.navigate([AppRoute.LOGIN]);
-    });
+  async signOut(): Promise<void> {
+    this.localStorageService.removeItem(LocalStorageKey.AUTH_TOKEN);
+    this.setState({ ...this.state, isAuth: false, token: null });
+    await this.router.navigate([AppRoute.LOGIN]);
   }
 
-  private init(): void {
+  protected init(): void {
     const authToken = this.localStorageService.getItem(
       LocalStorageKey.AUTH_TOKEN
     );
-    this.setState({ ...this.state, isAuth: !!authToken });
+    this.setState({ ...this.state, isAuth: !!authToken, token: authToken });
+  }
+
+  protected async signInCompleted(token: string): Promise<void> {
+    this.localStorageService.setItem(LocalStorageKey.AUTH_TOKEN, token);
+    this.setState({ ...this.state, isAuth: true, token: token });
+    await this.router.navigate([AppRoute.AUTH]);
+  }
+
+  protected signInFailed() {
+    throw new Error(this.localizationService.values.invalidCredentialsError);
   }
 }

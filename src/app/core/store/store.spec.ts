@@ -1,6 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 
-import { ViewModel } from './view-model';
+import { Store } from './store';
 
 interface State {
   firstName: string;
@@ -17,7 +17,7 @@ const newState: State = {
   lastName: 'Smith'
 };
 
-class ViewModelStub extends ViewModel<State> {
+class StoreStub extends Store<State> {
   constructor() {
     super(initialState);
   }
@@ -27,12 +27,12 @@ class ViewModelStub extends ViewModel<State> {
   }
 }
 
-describe('ViewModel', () => {
-  let service: ViewModelStub;
+describe('Store', () => {
+  let service: StoreStub;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = new ViewModelStub();
+    service = new StoreStub();
   });
 
   it('should be created', () => {

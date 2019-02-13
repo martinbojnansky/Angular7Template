@@ -3,9 +3,9 @@ import { HomePage } from './home.po';
 describe('Home page', () => {
   let page: HomePage;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     page = new HomePage();
-    page.navigateTo();
+    await page.navigateTo();
   });
 
   it('should display text', () => {
