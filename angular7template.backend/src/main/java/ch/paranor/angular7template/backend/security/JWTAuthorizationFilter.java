@@ -78,5 +78,4 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 			throw new NonceExpiredException("Token has expired", e);
 		}
 	}
-
 }

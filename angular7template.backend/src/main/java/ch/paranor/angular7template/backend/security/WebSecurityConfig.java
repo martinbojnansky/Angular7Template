@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     http.authorizeRequests()
 	.antMatchers("/api/**").authenticated()
-	.and()
+	.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
     .addFilter(new JWTAuthenticationFilter(authenticationManager()))
     .addFilter(new JWTAuthorizationFilter(authenticationManager()))
 	.cors().and()

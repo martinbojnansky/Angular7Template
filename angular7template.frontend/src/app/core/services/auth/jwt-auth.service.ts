@@ -19,39 +19,41 @@ export class JwtAuthService extends AuthService {
     this.init();
   }
 
-  async signIn(userName: string, password: string): Promise<void> {
+  signIn(userName: string, password: string): void {
     const formData: FormData = new FormData();
     formData.append('username', userName);
     formData.append('password', password);
 
-    await this.httpClient
+    this.httpClient
       .post(`${ApiRoute.BASE}/${ApiRoute.LOGIN}`, formData, {
         responseType: 'text'
       })
       .subscribe(
-        async (token: string) => {
-          this.localStorageService.setItem(LocalStorageKey.AUTH_TOKEN, token);
-          this.setState({ ...this.state, isAuth: true, token: token });
-          await this.router.navigate([AppRoute.AUTH]);
-        },
-        e => {
-          throw new Error(
-            this.localizationService.values.invalidCredentialsError
-          );
-        }
+        async token => await this.signInCompleted(token),
+        this.signInFailed
       );
   }
 
   async signOut(): Promise<void> {
-      this.localStorageService.removeItem(LocalStorageKey.AUTH_TOKEN);
-      this.setState({ ...this.state, isAuth: false, token: null });
-      await this.router.navigate([AppRoute.LOGIN]);
+    this.localStorageService.removeItem(LocalStorageKey.AUTH_TOKEN);
+    this.setState({ ...this.state, isAuth: false, token: null });
+    await this.router.navigate([AppRoute.LOGIN]);
   }
 
-  private init(): void {
+  protected init(): void {
     const authToken = this.localStorageService.getItem(
       LocalStorageKey.AUTH_TOKEN
     );
-    this.setState({ ...this.state, isAuth: !!authToken });
+    this.setState({ ...this.state, isAuth: !!authToken, token: authToken });
+  }
+
+  protected async signInCompleted(token: string): Promise<void> {
+    this.localStorageService.setItem(LocalStorageKey.AUTH_TOKEN, token);
+    this.setState({ ...this.state, isAuth: true, token: token });
+    await this.router.navigate([AppRoute.AUTH]);
+  }
+
+  protected signInFailed() {
+    throw new Error(this.localizationService.values.invalidCredentialsError);
   }
 }

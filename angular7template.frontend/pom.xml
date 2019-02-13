@@ -49,18 +49,18 @@
                    </configuration>
                </execution>
 
-               <!--<execution>-->
-                   <!--<id>npm test</id>-->
-                   <!--<goals>-->
-                     <!--<goal>npm</goal>-->
-                   <!--</goals>-->
-                   <!--<phase>-->
-                     <!--verify-->
-                   <!--</phase>-->
-                   <!--<configuration>-->
-                       <!--<arguments>run test:prod</arguments>-->
-                   <!--</configuration>-->
-               <!--</execution>-->
+               <execution>
+                   <id>npm test</id>
+                   <goals>
+                     <goal>npm</goal>
+                   </goals>
+                   <phase>
+                     verify
+                   </phase>
+                   <configuration>
+                       <arguments>run test:prod</arguments>
+                   </configuration>
+               </execution>
 
               <!--<execution>-->
                 <!--<id>npm e2e test</id>-->
