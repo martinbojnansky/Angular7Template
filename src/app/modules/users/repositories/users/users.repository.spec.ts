@@ -1,24 +1,23 @@
 import { TestBed } from '@angular/core/testing';
 
-import { UsersRepositoryService } from './users-repository.service';
+import { UsersRepository } from './users.repository';
 import {
   HttpClientTestingModule,
   HttpTestingController
 } from '@angular/common/http/testing';
 import { ApiRoute } from '@assets/constants';
-import { usersFakeFactory } from '@modules/users/test-doubles';
 
-describe('UsersRepositoryService', () => {
-  let service: UsersRepositoryService;
+describe('UsersRepository', () => {
+  let service: UsersRepository;
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [UsersRepositoryService]
+      providers: [UsersRepository]
     });
 
-    service = TestBed.get(UsersRepositoryService);
+    service = TestBed.get(UsersRepository);
     httpTestingController = TestBed.get(HttpTestingController);
   });
 

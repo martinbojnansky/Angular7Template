@@ -1,35 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 
-import { DefaultLocalizationService, LocalStorageService } from '../..';
-import { localStorageServiceSpyFactory } from '../../test-doubles';
-import { LocalStorageKey } from '../../../../assets/constants';
-import {
-  en,
-  de,
-  LocalizationSettings,
-  Locale
-} from '../../../../assets/localization';
+import { testModuleDefFactory } from '@app/core/test-doubles';
+import { LocalStorageKey } from '@assets/constants';
+import { en, de, LocalizationSettings, Locale } from '@assets/localization';
+import { LocalizationService, LocalStorageService } from '../..';
 
-describe('DefaultLocalizationService', () => {
-  let service: DefaultLocalizationService;
+describe('LocalizationService', () => {
+  let service: LocalizationService;
   let localStorageServiceSpy: jasmine.SpyObj<LocalStorageService>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [
-        DefaultLocalizationService,
-        {
-          provide: LocalizationSettings,
-          useClass: LocalizationSettings
-        },
-        {
-          provide: LocalStorageService,
-          useFactory: localStorageServiceSpyFactory
-        }
-      ]
-    });
+    TestBed.configureTestingModule(testModuleDefFactory({}));
 
-    service = TestBed.get(DefaultLocalizationService);
+    service = TestBed.get(LocalizationService);
     localStorageServiceSpy = TestBed.get(LocalStorageService);
   });
 
@@ -37,14 +20,14 @@ describe('DefaultLocalizationService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return default locale when no locale id is saved in local storage', () => {
+  it('should return  locale when no locale id is saved in local storage', () => {
     expect(localStorageServiceSpy.getItem).toHaveBeenCalledWith(
       LocalStorageKey.LOCALE
     );
     expect(service.locale).toBe(new LocalizationSettings().defaultLocale);
   });
 
-  it('should return default locales when no locale id is saved in local storage', () => {
+  it('should return  locales when no locale id is saved in local storage', () => {
     expect(localStorageServiceSpy.getItem).toHaveBeenCalledWith(
       LocalStorageKey.LOCALE
     );
@@ -53,7 +36,7 @@ describe('DefaultLocalizationService', () => {
 
   it('should change the locale correctly', () => {
     localStorageServiceSpy.getItem.and.returnValue(Locale.DE);
-    service.changeLocale(Locale.DE, () => {});
+    service.changeLocale(Locale.DE);
     expect(service.locale).toBe(Locale.DE);
     expect(service.values).toEqual(de);
     expect(localStorageServiceSpy.setItem).toHaveBeenCalledWith(
@@ -64,29 +47,18 @@ describe('DefaultLocalizationService', () => {
   });
 });
 
-describe('DefaultLocalizationService with saved locale', () => {
-  let service: DefaultLocalizationService;
+describe('LocalizationService with saved locale', () => {
+  let service: LocalizationService;
   let localStorageServiceSpy: jasmine.SpyObj<LocalStorageService>;
 
   beforeEach(() => {
-    localStorageServiceSpy = localStorageServiceSpyFactory();
-    localStorageServiceSpy.getItem.and.callFake(() => Locale.DE);
+    TestBed.configureTestingModule(
+      testModuleDefFactory({
+        localStorageValues: { [LocalStorageKey.LOCALE]: Locale.DE }
+      })
+    );
 
-    TestBed.configureTestingModule({
-      providers: [
-        DefaultLocalizationService,
-        {
-          provide: LocalizationSettings,
-          useClass: LocalizationSettings
-        },
-        {
-          provide: LocalStorageService,
-          useValue: localStorageServiceSpy
-        }
-      ]
-    });
-
-    service = TestBed.get(DefaultLocalizationService);
+    service = TestBed.get(LocalizationService);
     localStorageServiceSpy = TestBed.get(LocalStorageService);
   });
 

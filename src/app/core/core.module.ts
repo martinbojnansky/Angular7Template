@@ -5,18 +5,31 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '@app/shared';
-import * as services from './services';
-import * as guards from './guards';
-import * as views from './views';
-import * as interceptors from './interceptors';
 import { LocalizationSettings } from '@assets/localization';
+import { LoginRepository } from '@app/core/repositories/login/login.repository';
+import {
+  AuthorizedViewComponent,
+  LoginViewComponent,
+  NotFoundViewComponent
+} from '@app/core/views';
+import {
+  AuthService,
+  DefaultLocalizationService,
+  FakeAuthService,
+  DefaultAuthService,
+  LocalizationService,
+  LocalStorageService
+} from '@app/core/services';
+import { AuthGuard } from '@app/core/guards';
+import { AuthHeaderInterceptor } from '@app/core/interceptors';
+import { DefaultLoginRepository } from '@app/core/repositories';
 
 @NgModule({
   declarations: [
     // Views
-    views.NotFoundViewComponent,
-    views.LoginViewComponent,
-    views.AuthorizedViewComponent
+    NotFoundViewComponent,
+    LoginViewComponent,
+    AuthorizedViewComponent
   ],
   imports: [
     BrowserModule,
@@ -27,34 +40,39 @@ import { LocalizationSettings } from '@assets/localization';
   ],
   exports: [
     // Views
-    views.NotFoundViewComponent,
-    views.LoginViewComponent,
-    views.AuthorizedViewComponent
+    NotFoundViewComponent,
+    LoginViewComponent,
+    AuthorizedViewComponent
   ],
   providers: [
     // Services
     {
-      provide: services.AuthService,
-      useClass: services.FakeAuthService
+      provide: AuthService,
+      useClass: FakeAuthService // DefaultAuthService //
     },
     {
-      provide: services.LocalStorageService,
-      useFactory: () => new services.DefaultLocalStorageService(localStorage)
+      provide: LocalStorageService,
+      useValue: localStorage
     },
     {
-      provide: services.LocalizationService,
-      useClass: services.DefaultLocalizationService
+      provide: LocalizationService,
+      useClass: DefaultLocalizationService
     },
     {
       provide: LocalizationSettings,
       useValue: new LocalizationSettings()
     },
+    // Repositories
+    {
+      provide: LoginRepository,
+      useClass: DefaultLoginRepository
+    },
     // Guards
-    guards.AuthGuard,
+    AuthGuard,
     // Interceptors
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: interceptors.AuthHeaderInterceptor,
+      useClass: AuthHeaderInterceptor,
       multi: true
     }
   ]

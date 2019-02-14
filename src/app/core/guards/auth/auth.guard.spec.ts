@@ -2,11 +2,10 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 
-import { AuthGuard, AuthService } from '@app/core';
+import { AuthGuard, AuthService, FakeAuthService } from '@app/core';
 import {
-  FakeAuthServiceStub,
-  routerSpyFactory,
-  authInfoFakeFactory
+  authInfoFakeFactory,
+  testModuleDefFactory
 } from '@app/core/test-doubles';
 import { AppRoute } from '@assets/constants';
 
@@ -17,21 +16,7 @@ describe('AuthGuard', () => {
   const authInfo = authInfoFakeFactory();
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule.withRoutes([])],
-      providers: [
-        AuthGuard,
-        {
-          provide: AuthService,
-          useClass: FakeAuthServiceStub
-        },
-        {
-          provide: Router,
-          useFactory: routerSpyFactory
-        }
-      ]
-    });
-
+    TestBed.configureTestingModule(testModuleDefFactory({}));
     guard = TestBed.get(AuthGuard);
     authService = TestBed.get(AuthService);
     routerSpy = TestBed.get(Router);

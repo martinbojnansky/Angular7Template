@@ -1,2 +1,2 @@
-export * from './fake-auth.service.stub';
+export * from './login-repository-service.stub';
 export * from './localize.pipe.stub';

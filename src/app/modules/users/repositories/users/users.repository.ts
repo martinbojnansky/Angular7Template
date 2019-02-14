@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { ApiRoute } from '@assets/constants';
 
 @Injectable()
-export class UsersRepositoryService {
+export class UsersRepository {
   constructor(private httpClient: HttpClient) {}
 
   getAll(): Observable<any> {

@@ -1,17 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotFoundViewComponent } from './not-found-view.component';
-import { LocalizePipeStub } from '@app/core/test-doubles';
+import { LocalizePipeStub, testModuleDefFactory } from '@app/core/test-doubles';
 
 describe('NotFoundViewComponent', () => {
   let component: NotFoundViewComponent;
   let fixture: ComponentFixture<NotFoundViewComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [NotFoundViewComponent, LocalizePipeStub],
-      providers: []
-    }).compileComponents();
+    TestBed.configureTestingModule(
+      testModuleDefFactory({})
+    ).compileComponents();
   }));
 
   beforeEach(() => {

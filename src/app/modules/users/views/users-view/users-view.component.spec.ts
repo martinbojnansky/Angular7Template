@@ -9,7 +9,7 @@ import {
   LocalizePipeStub
 } from '@app/core/test-doubles';
 import { UsersRepositoryServiceStub } from '@modules/users/test-doubles';
-import { UsersRepositoryService } from '@modules/users/repositories';
+import { UsersRepository } from '@modules/users/repositories';
 
 describe('UsersViewComponent', () => {
   let component: UsersViewComponent;
@@ -22,7 +22,7 @@ describe('UsersViewComponent', () => {
       providers: [
         UsersService,
         {
-          provide: UsersRepositoryService,
+          provide: UsersRepository,
           useClass: UsersRepositoryServiceStub
         },
         {

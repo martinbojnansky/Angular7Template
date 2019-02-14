@@ -1,38 +1,30 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AuthorizedViewComponent } from './authorized-view.component';
-import { AuthService, LocalizationService } from '@app/core';
-import { ConstantsPipe } from '@app/shared';
+import { AuthService } from '@app/core';
 import {
-  LocalizePipeStub,
-  localizationServiceSpyFactory,
-  authServiceSpyFactory
+  authInfoFakeFactory,
+  testModuleDefFactory
 } from '@app/core/test-doubles';
+import { LocalStorageKey } from '@assets/constants';
 
 describe('AuthorizedViewComponent', () => {
   let component: AuthorizedViewComponent;
   let fixture: ComponentFixture<AuthorizedViewComponent>;
   let compiled: any;
-  let authServiceSpy: jasmine.SpyObj<AuthService>;
+  let authService: AuthService;
+  let signOutButton: any;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [AuthorizedViewComponent, LocalizePipeStub, ConstantsPipe],
-      providers: [
-        {
-          provide: AuthService,
-          useFactory: authServiceSpyFactory
-        },
-        {
-          provide: LocalizationService,
-          useFactory: localizationServiceSpyFactory
+    TestBed.configureTestingModule(
+      testModuleDefFactory({
+        localStorageValues: {
+          [LocalStorageKey.AUTH_TOKEN]: authInfoFakeFactory().token
         }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+      })
+    ).compileComponents();
 
-    authServiceSpy = TestBed.get(AuthService);
+    authService = TestBed.get(AuthService);
   }));
 
   beforeEach(() => {
@@ -40,15 +32,16 @@ describe('AuthorizedViewComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     compiled = fixture.debugElement.nativeElement;
+    signOutButton = compiled.querySelector('.signout-btn');
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call authorization service on button click', () => {
-    const button = compiled.querySelector('.signout-btn');
-    button.click();
-    expect(authServiceSpy.signOut).toHaveBeenCalled();
+  it('should call auth service on sign out button click', () => {
+    const signOutSpy = spyOn(authService, 'signOut');
+    signOutButton.click();
+    expect(signOutSpy).toHaveBeenCalled();
   });
 });

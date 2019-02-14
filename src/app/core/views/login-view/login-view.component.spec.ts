@@ -1,19 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LoginViewComponent } from './login-view.component';
 import { AuthService } from '@app/core';
 import {
-  LocalizePipeStub,
-  authServiceSpyFactory,
-  authInfoFakeFactory
+  authInfoFakeFactory,
+  testModuleDefFactory
 } from '@app/core/test-doubles';
 
 describe('LoginViewComponent', () => {
   let component: LoginViewComponent;
   let fixture: ComponentFixture<LoginViewComponent>;
   let compiled: any;
-  let authServiceSpy: jasmine.SpyObj<AuthService>;
+  let authService: AuthService;
   let userNameField: any;
   let passwordField: any;
   let submitButton: any;
@@ -21,18 +19,11 @@ describe('LoginViewComponent', () => {
   const authInfo = authInfoFakeFactory();
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [LoginViewComponent, LocalizePipeStub],
-      imports: [FormsModule, ReactiveFormsModule],
-      providers: [
-        {
-          provide: AuthService,
-          useFactory: authServiceSpyFactory
-        }
-      ]
-    }).compileComponents();
+    TestBed.configureTestingModule(
+      testModuleDefFactory({})
+    ).compileComponents();
 
-    authServiceSpy = TestBed.get(AuthService);
+    authService = TestBed.get(AuthService);
   }));
 
   beforeEach(() => {
@@ -45,40 +36,56 @@ describe('LoginViewComponent', () => {
     submitButton = compiled.querySelector('input[type=submit]');
   });
 
+  const login = (userName: string, password: string) => {
+    userNameField.value = userName;
+    userNameField.dispatchEvent(new Event('input'));
+    passwordField.value = password;
+    passwordField.dispatchEvent(new Event('input'));
+    submitButton.click();
+    fixture.detectChanges();
+  };
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call authorization service on sign in', () => {
-    userNameField.value = authInfo.userName;
-    userNameField.dispatchEvent(new Event('input'));
-    passwordField.value = authInfo.password;
-    passwordField.dispatchEvent(new Event('input'));
-    submitButton.click();
-    fixture.detectChanges();
+  // Integration test
+  it('should auth user on submit button click', () => {
+    login(authInfo.userName, authInfo.password);
 
-    expect(authServiceSpy.signIn).toHaveBeenCalledWith(
+    expect(authService.state.isAuth).toBeTruthy();
+    expect(compiled.querySelector('.error')).toBeNull();
+  });
+
+  // Isolated test
+  it('should call auth service on submit button click', () => {
+    const signInSpy = spyOn(authService, 'signIn');
+
+    login(authInfo.userName, authInfo.password);
+
+    expect(signInSpy).toHaveBeenCalledWith(
       authInfo.userName,
       authInfo.password
     );
     expect(compiled.querySelector('.error')).toBeNull();
   });
 
-  it('should display error on sign in', () => {
+  // Integrated tested
+  it('should not auth user on submit button click', () => {
+    login(authInfo.userName, '');
+
+    expect(authService.state.isAuth).toBeFalsy();
+    expect(compiled.querySelector('.error').textContent).toBeTruthy();
+  });
+
+  // Isolated test
+  it('should call auth service on submit button click', () => {
     const errorMessage = 'Error message.';
-    authServiceSpy.signIn.and.throwError(errorMessage);
+    const signInSpy = spyOn(authService, 'signIn').and.throwError(errorMessage);
 
-    userNameField.value = authInfo.password;
-    userNameField.dispatchEvent(new Event('input'));
-    passwordField.value = authInfo.userName;
-    passwordField.dispatchEvent(new Event('input'));
-    submitButton.click();
-    fixture.detectChanges();
+    login(authInfo.userName, '');
 
-    expect(authServiceSpy.signIn).toHaveBeenCalledWith(
-      authInfo.password,
-      authInfo.userName
-    );
-    expect(compiled.querySelector('.error').textContent).toBe(errorMessage);
+    expect(signInSpy).toHaveBeenCalledWith(authInfo.userName, '');
+    expect(compiled.querySelector('.error').textContent).toEqual(errorMessage);
   });
 });

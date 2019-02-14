@@ -1,8 +1,8 @@
-import { UsersRepositoryService } from '@modules/users/repositories';
+import { UsersRepository } from '@modules/users/repositories';
 import { Observable, of } from 'rxjs';
 import { usersFakeFactory } from '@modules/users/test-doubles';
 
-export class UsersRepositoryServiceStub extends UsersRepositoryService {
+export class UsersRepositoryServiceStub extends UsersRepository {
   constructor() {
     super(null);
   }

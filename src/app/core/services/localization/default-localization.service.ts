@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 
-import { LocalizationService } from './localization.service';
-import { LocalStorageService } from '../storage';
-import { LocalStorageKey } from '../../../../assets/constants';
+import { LocalStorageKey } from '@assets/constants';
 import {
   Locale,
   locales,
   LocalizationSettings,
   LocalizationValues
-} from '../../../../assets/localization';
+} from '@assets/localization';
+import { LocalizationService } from './localization.service';
+import { LocalStorageService } from '../storage';
 
 @Injectable()
 export class DefaultLocalizationService implements LocalizationService {
@@ -65,7 +65,7 @@ export class DefaultLocalizationService implements LocalizationService {
     this.setLocale(this.localizationSettings.defaultLocale);
   }
 
-  private reload() {
-    window.location.reload();
+  protected reload() {
+    // window.location.reload();
   }
 }

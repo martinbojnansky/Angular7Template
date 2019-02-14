@@ -1,6 +1,7 @@
 import { LocalizationService } from '@app/core';
-import { en, Locale, LocalizationValues } from '@assets/localization';
 import { throwError } from 'rxjs';
+
+import { en, Locale, LocalizationValues } from '@assets/localization';
 
 export class LocalizationServiceFake implements LocalizationService {
   get locale(): Locale {

@@ -6,7 +6,7 @@ import {
 } from '@modules/users/test-doubles';
 import { User } from '@modules/users/models';
 import { UsersService } from '@modules/users/services';
-import { UsersRepositoryService } from '@modules/users/repositories';
+import { UsersRepository } from '@modules/users/repositories';
 
 describe('UsersService', () => {
   let service: UsersService;
@@ -17,7 +17,7 @@ describe('UsersService', () => {
       providers: [
         UsersService,
         {
-          provide: UsersRepositoryService,
+          provide: UsersRepository,
           useClass: UsersRepositoryServiceStub
         }
       ]

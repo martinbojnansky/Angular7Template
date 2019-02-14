@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LocalStorageKey, AppRoute } from '../../../../assets/constants';
-import { LocalStorageService } from '../storage';
+import { LocalStorageKey, AppRoute } from '@assets/constants';
 import { AuthService, AuthServiceState } from './auth.service';
+import { LocalStorageService } from '../storage';
 import { LocalizationService } from '../localization';
 
 @Injectable()

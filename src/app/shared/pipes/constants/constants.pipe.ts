@@ -5,7 +5,7 @@ import { ApiRoute, AppRoute, LocalStorageKey } from '@assets/constants';
   name: 'constants'
 })
 export class ConstantsPipe implements PipeTransform {
-  transform(value: string, args?: any): any {
+  transform(value: string, args?: any) {
     return {
       apiRoutes: ApiRoute,
       appRoutes: AppRoute,
