@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { testModuleDefFactory } from '@app/core/test-doubles';
+import { coreTestModuleDefFactory } from '@app/core/test-doubles';
 import { LocalStorageKey } from '@assets/constants';
 import { en, de, LocalizationSettings, Locale } from '@assets/localization';
 import { LocalizationService, LocalStorageService } from '../..';
@@ -10,7 +10,7 @@ describe('LocalizationService', () => {
   let localStorageServiceSpy: jasmine.SpyObj<LocalStorageService>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule(testModuleDefFactory({}));
+    TestBed.configureTestingModule(coreTestModuleDefFactory());
 
     service = TestBed.get(LocalizationService);
     localStorageServiceSpy = TestBed.get(LocalStorageService);
@@ -53,7 +53,7 @@ describe('LocalizationService with saved locale', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule(
-      testModuleDefFactory({
+      coreTestModuleDefFactory({
         localStorageValues: { [LocalStorageKey.LOCALE]: Locale.DE }
       })
     );

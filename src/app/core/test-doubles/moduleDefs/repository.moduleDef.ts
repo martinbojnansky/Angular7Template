@@ -3,13 +3,15 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { DefaultLoginRepository, LoginRepository } from '@app/core';
 
-export const repositoryModuleDefFactory = (): TestModuleMetadata => ({
+export const coreRepositoryModuleDefFactory = (): TestModuleMetadata => ({
   imports: [HttpClientTestingModule],
+  declarations: [],
   providers: [
     // Repositories
     {
       provide: LoginRepository,
       useClass: DefaultLoginRepository
     }
-  ]
+  ],
+  schemas: []
 });

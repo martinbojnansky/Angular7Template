@@ -2,26 +2,18 @@ import { TestBed } from '@angular/core/testing';
 
 import {
   userFakeFactory,
-  UsersRepositoryServiceStub
+  UsersRepositoryStub
 } from '@modules/users/test-doubles';
 import { User } from '@modules/users/models';
 import { UsersService } from '@modules/users/services';
 import { UsersRepository } from '@modules/users/repositories';
+import { usersTestModuleDefFactory } from '@modules/users/test-doubles/moduleDefs';
 
 describe('UsersService', () => {
   let service: UsersService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [],
-      providers: [
-        UsersService,
-        {
-          provide: UsersRepository,
-          useClass: UsersRepositoryServiceStub
-        }
-      ]
-    });
+    TestBed.configureTestingModule(usersTestModuleDefFactory());
 
     service = TestBed.get(UsersService);
   });

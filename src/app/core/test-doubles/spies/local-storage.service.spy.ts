@@ -7,7 +7,7 @@ export interface LocalStorageValues {
 export const localStorageServiceSpyFactory = (
   values: LocalStorageValues = {}
 ) => {
-  const storage: LocalStorageValues = values ? values : {};
+  const storage: LocalStorageValues = values;
 
   const spy = jasmine.createSpyObj<LocalStorageService>('LocalStorageService', [
     'clear',

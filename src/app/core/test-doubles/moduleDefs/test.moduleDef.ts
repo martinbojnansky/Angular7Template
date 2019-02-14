@@ -28,11 +28,13 @@ import {
 import { LocalizationSettings } from '@assets/localization';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-export const testModuleDefFactory = ({
-  localStorageValues
-}: {
+export interface CoreTestModuleDefOptions {
   localStorageValues?: LocalStorageValues;
-}): TestModuleMetadata => ({
+}
+
+export const coreTestModuleDefFactory = (
+  options?: CoreTestModuleDefOptions
+): TestModuleMetadata => ({
   imports: [HttpClientTestingModule, FormsModule, ReactiveFormsModule],
   declarations: [
     // Pipes
@@ -52,7 +54,9 @@ export const testModuleDefFactory = ({
     // Services
     {
       provide: LocalStorageService,
-      useValue: localStorageServiceSpyFactory(localStorageValues)
+      useValue: localStorageServiceSpyFactory(
+        options && options.localStorageValues ? options.localStorageValues : {}
+      )
     },
     {
       provide: AuthService,

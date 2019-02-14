@@ -4,7 +4,7 @@ import { AuthorizedViewComponent } from './authorized-view.component';
 import { AuthService } from '@app/core';
 import {
   authInfoFakeFactory,
-  testModuleDefFactory
+  coreTestModuleDefFactory
 } from '@app/core/test-doubles';
 import { LocalStorageKey } from '@assets/constants';
 
@@ -17,7 +17,7 @@ describe('AuthorizedViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule(
-      testModuleDefFactory({
+      coreTestModuleDefFactory({
         localStorageValues: {
           [LocalStorageKey.AUTH_TOKEN]: authInfoFakeFactory().token
         }

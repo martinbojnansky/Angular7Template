@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserNameComponent } from './user-name.component';
 import { User } from '../../models';
 import { userFakeFactory } from '../../test-doubles/fakes/user.fake';
-import { LocalizePipeStub } from '@app/core/test-doubles';
+import { usersTestModuleDefFactory } from '@modules/users/test-doubles/moduleDefs';
 
 describe('UserNameComponent', () => {
   let component: UserNameComponent;
@@ -12,9 +12,9 @@ describe('UserNameComponent', () => {
   const userFake: User = userFakeFactory();
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [UserNameComponent, LocalizePipeStub]
-    }).compileComponents();
+    TestBed.configureTestingModule(
+      usersTestModuleDefFactory()
+    ).compileComponents();
   }));
 
   beforeEach(() => {

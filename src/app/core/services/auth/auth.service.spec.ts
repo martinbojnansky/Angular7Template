@@ -3,7 +3,10 @@ import { Router } from '@angular/router';
 
 import { LocalStorageKey, AppRoute } from '@assets/constants';
 import { AuthService, LocalStorageService } from '..';
-import { authInfoFakeFactory, testModuleDefFactory } from '../../test-doubles';
+import {
+  authInfoFakeFactory,
+  coreTestModuleDefFactory
+} from '../../test-doubles';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -12,7 +15,7 @@ describe('AuthService', () => {
   const authInfo = authInfoFakeFactory();
 
   beforeEach(() => {
-    TestBed.configureTestingModule(testModuleDefFactory({}));
+    TestBed.configureTestingModule(coreTestModuleDefFactory());
 
     service = TestBed.get(AuthService);
     localStorageServiceSpy = TestBed.get(LocalStorageService);

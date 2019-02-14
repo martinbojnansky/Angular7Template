@@ -6,7 +6,7 @@ import { ApiRoute, LocalStorageKey } from '@assets/constants';
 import { AuthHeaderInterceptor } from './auth-header.interceptor';
 import {
   authInfoFakeFactory,
-  testModuleDefFactory
+  coreTestModuleDefFactory
 } from '@app/core/test-doubles';
 
 describe('AuthHeaderInterceptor', () => {
@@ -17,7 +17,7 @@ describe('AuthHeaderInterceptor', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule(
-      testModuleDefFactory({
+      coreTestModuleDefFactory({
         localStorageValues: { [LocalStorageKey.AUTH_TOKEN]: authInfo.token }
       })
     );

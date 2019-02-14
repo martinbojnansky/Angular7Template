@@ -6,16 +6,14 @@ import {
   HttpTestingController
 } from '@angular/common/http/testing';
 import { ApiRoute } from '@assets/constants';
+import { usersRepositoryModuleDefFactory } from '@modules/users/test-doubles/moduleDefs';
 
 describe('UsersRepository', () => {
   let service: UsersRepository;
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [UsersRepository]
-    });
+    TestBed.configureTestingModule(usersRepositoryModuleDefFactory());
 
     service = TestBed.get(UsersRepository);
     httpTestingController = TestBed.get(HttpTestingController);

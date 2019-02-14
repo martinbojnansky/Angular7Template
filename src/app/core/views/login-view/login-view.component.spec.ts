@@ -4,7 +4,7 @@ import { LoginViewComponent } from './login-view.component';
 import { AuthService } from '@app/core';
 import {
   authInfoFakeFactory,
-  testModuleDefFactory
+  coreTestModuleDefFactory
 } from '@app/core/test-doubles';
 
 describe('LoginViewComponent', () => {
@@ -20,7 +20,7 @@ describe('LoginViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule(
-      testModuleDefFactory({})
+      coreTestModuleDefFactory()
     ).compileComponents();
 
     authService = TestBed.get(AuthService);

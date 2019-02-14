@@ -5,7 +5,7 @@ import { ApiRoute } from '@assets/constants';
 import { LoginRepository } from './login.repository';
 import {
   authInfoFakeFactory,
-  repositoryModuleDefFactory
+  coreRepositoryModuleDefFactory
 } from '@app/core/test-doubles';
 
 describe('LoginRepository', () => {
@@ -14,7 +14,7 @@ describe('LoginRepository', () => {
   const authInfo = authInfoFakeFactory();
 
   beforeEach(() => {
-    TestBed.configureTestingModule(repositoryModuleDefFactory());
+    TestBed.configureTestingModule(coreRepositoryModuleDefFactory());
 
     repository = TestBed.get(LoginRepository);
     httpTestingController = TestBed.get(HttpTestingController);
