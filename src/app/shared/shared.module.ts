@@ -5,12 +5,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConstantsPipe, LocalizePipe } from '@app/shared/pipes';
 
 @NgModule({
-  declarations: [LocalizePipe, ConstantsPipe],
+  declarations: [
+    // Pipes
+    LocalizePipe,
+    ConstantsPipe
+  ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    // Pipes
     LocalizePipe,
     ConstantsPipe
   ]

@@ -1,7 +1,7 @@
 import { TestModuleMetadata } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { DefaultLoginRepository, LoginRepository } from '@app/public';
+import { DefaultLoginRepository, LoginRepository } from '@app/core';
 
 export const coreRepositoryModuleDefFactory = (): TestModuleMetadata => ({
   imports: [HttpClientTestingModule],

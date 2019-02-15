@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { ApiRoute } from '@assets/constants';
-import { LoginRepository } from '@app/public';
+import { LoginRepository } from './login.repository';
 
 @Injectable()
 export class DefaultLoginRepository implements LoginRepository {

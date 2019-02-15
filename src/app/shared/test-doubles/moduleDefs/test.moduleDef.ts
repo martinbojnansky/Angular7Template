@@ -18,7 +18,11 @@ export const sharedTestModuleDefFactory = (
       ConstantsPipe,
       LocalizePipe
     ],
-    providers: [...coreTestModuleDef.providers],
+    providers: [
+      ...coreTestModuleDef.providers,
+      // Pipes
+      LocalizePipe
+    ],
     schemas: [...coreTestModuleDef.schemas]
   };
 };

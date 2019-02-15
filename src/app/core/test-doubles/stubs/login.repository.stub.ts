@@ -1,11 +1,11 @@
 import { Observable, of } from 'rxjs';
 
-import { DefaultLoginRepository } from '@app/public';
-import { authInfoFakeFactory } from '@app/core/test-doubles';
+import { DefaultLoginRepository } from '@app/core/repositories';
+import { authInfoFakeFactory } from '../fakes';
 
 const authInfo = authInfoFakeFactory();
 
-export class LoginRepositoryServiceStub extends DefaultLoginRepository {
+export class LoginRepositoryStub extends DefaultLoginRepository {
   login(userName: string, password: string): Observable<string> {
     if (userName === authInfo.userName && password === authInfo.password) {
       return of(authInfo.token);

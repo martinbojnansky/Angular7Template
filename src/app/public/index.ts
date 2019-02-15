@@ -3,6 +3,6 @@ export * from './public.module';
 // export * from './directives';
 // export * from './models';
 // export * from './pipes';
-export * from './repositories';
+// export * from './repositories';
 // export * from './services';
 export * from './views';

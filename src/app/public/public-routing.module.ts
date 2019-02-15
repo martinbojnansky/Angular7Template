@@ -3,10 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AppRoute } from '@assets/constants';
 import { LoginViewComponent, NotFoundViewComponent } from '@app/public/views';
-import {
-  DefaultLoginRepository,
-  LoginRepository
-} from '@app/public/repositories';
 
 const routes: Routes = [
   {
@@ -30,12 +26,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [
-    // Repositories
-    {
-      provide: LoginRepository,
-      useClass: DefaultLoginRepository
-    }
-  ]
+  providers: []
 })
 export class PublicRoutingModule {}

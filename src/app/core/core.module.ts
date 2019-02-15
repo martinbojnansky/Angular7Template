@@ -15,16 +15,14 @@ import {
 } from '@app/core/services';
 import { AuthGuard } from '@app/core/guards';
 import { AuthHeaderInterceptor } from '@app/core/interceptors';
+import {
+  DefaultLoginRepository,
+  LoginRepository
+} from '@app/core/repositories';
 
 @NgModule({
   declarations: [],
-  imports: [
-    BrowserModule,
-    CommonModule,
-    HttpClientModule,
-    RouterModule
-    // SharedModule
-  ],
+  imports: [BrowserModule, CommonModule, HttpClientModule, RouterModule],
   exports: [],
   providers: [
     // Services
@@ -51,6 +49,11 @@ import { AuthHeaderInterceptor } from '@app/core/interceptors';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHeaderInterceptor,
       multi: true
+    },
+    // Repositories
+    {
+      provide: LoginRepository,
+      useClass: DefaultLoginRepository
     }
   ]
 })

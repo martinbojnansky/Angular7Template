@@ -14,14 +14,15 @@ import {
   LocalizationService,
   LocalStorageService
 } from '@app/core';
-import { ConstantsPipe, LocalizePipe } from '@app/shared';
 import {
   localStorageServiceSpyFactory,
   LocalStorageValues,
+  LoginRepositoryStub,
   routerSpyFactory
 } from '@app/core/test-doubles';
 import { LocalizationSettings } from '@assets/localization';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoginRepository } from '@app/core/repositories';
 
 export interface CoreTestModuleDefOptions {
   localStorageValues?: LocalStorageValues;
@@ -65,9 +66,11 @@ export const coreTestModuleDefFactory = (
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHeaderInterceptor,
       multi: true
-    },
-    // Pipes
-    LocalizePipe
+    }, // Repositories
+    {
+      provide: LoginRepository,
+      useClass: LoginRepositoryStub
+    }
   ],
   schemas: [NO_ERRORS_SCHEMA]
 });

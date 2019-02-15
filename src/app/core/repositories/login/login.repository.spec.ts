@@ -6,7 +6,7 @@ import { LoginRepository } from './login.repository';
 import {
   authInfoFakeFactory,
   coreRepositoryModuleDefFactory
-} from '../../../core/test-doubles';
+} from '../../test-doubles';
 
 describe('LoginRepository', () => {
   let repository: LoginRepository;
