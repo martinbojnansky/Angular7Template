@@ -7,22 +7,17 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import {
   AuthGuard,
   AuthHeaderInterceptor,
-  AuthorizedViewComponent,
   AuthService,
   DefaultLocalizationService,
   FakeAuthService,
   DefaultAuthService,
   LocalizationService,
-  LocalStorageService,
-  LoginRepository,
-  LoginViewComponent,
-  NotFoundViewComponent
+  LocalStorageService
 } from '@app/core';
 import { ConstantsPipe, LocalizePipe } from '@app/shared';
 import {
   localStorageServiceSpyFactory,
   LocalStorageValues,
-  LoginRepositoryServiceStub,
   routerSpyFactory
 } from '@app/core/test-doubles';
 import { LocalizationSettings } from '@assets/localization';
@@ -36,15 +31,7 @@ export const coreTestModuleDefFactory = (
   options?: CoreTestModuleDefOptions
 ): TestModuleMetadata => ({
   imports: [HttpClientTestingModule, FormsModule, ReactiveFormsModule],
-  declarations: [
-    // Pipes
-    LocalizePipe,
-    ConstantsPipe,
-    // Views
-    NotFoundViewComponent,
-    LoginViewComponent,
-    AuthorizedViewComponent
-  ],
+  declarations: [],
   providers: [
     // Angular services
     {
@@ -69,11 +56,6 @@ export const coreTestModuleDefFactory = (
     {
       provide: LocalizationSettings,
       useValue: new LocalizationSettings()
-    },
-    // Repositories
-    {
-      provide: LoginRepository,
-      useClass: LoginRepositoryServiceStub
     },
     // Guards
     AuthGuard,

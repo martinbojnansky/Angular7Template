@@ -1,24 +1,22 @@
 import { TestModuleMetadata } from '@angular/core/testing';
 
-import {
-  coreTestModuleDefFactory,
-  CoreTestModuleDefOptions
-} from '@app/core/test-doubles';
+import { CoreTestModuleDefOptions } from '@app/core/test-doubles';
+import { sharedTestModuleDefFactory } from '@app/shared/test-doubles';
 import { HomeViewComponent } from '@modules/home/views';
 
 export const homeTestModuleDefFactory = (
   options?: CoreTestModuleDefOptions
 ): TestModuleMetadata => {
-  const coreTestModuleDef = coreTestModuleDefFactory(options);
+  const sharedTestModuleDef = sharedTestModuleDefFactory(options);
 
   return {
-    imports: [...coreTestModuleDef.imports],
+    imports: [...sharedTestModuleDef.imports],
     declarations: [
-      ...coreTestModuleDef.declarations,
+      ...sharedTestModuleDef.declarations,
       // Views
       HomeViewComponent
     ],
-    providers: [...coreTestModuleDef.providers],
-    schemas: [coreTestModuleDef.schemas]
+    providers: [...sharedTestModuleDef.providers],
+    schemas: [sharedTestModuleDef.schemas]
   };
 };

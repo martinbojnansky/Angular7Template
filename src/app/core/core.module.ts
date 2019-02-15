@@ -4,14 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
-import { SharedModule } from '@app/shared';
 import { LocalizationSettings } from '@assets/localization';
-import { LoginRepository } from '@app/core/repositories/login/login.repository';
-import {
-  AuthorizedViewComponent,
-  LoginViewComponent,
-  NotFoundViewComponent
-} from '@app/core/views';
 import {
   AuthService,
   DefaultLocalizationService,
@@ -22,28 +15,17 @@ import {
 } from '@app/core/services';
 import { AuthGuard } from '@app/core/guards';
 import { AuthHeaderInterceptor } from '@app/core/interceptors';
-import { DefaultLoginRepository } from '@app/core/repositories';
 
 @NgModule({
-  declarations: [
-    // Views
-    NotFoundViewComponent,
-    LoginViewComponent,
-    AuthorizedViewComponent
-  ],
+  declarations: [],
   imports: [
     BrowserModule,
     CommonModule,
     HttpClientModule,
-    RouterModule,
-    SharedModule
+    RouterModule
+    // SharedModule
   ],
-  exports: [
-    // Views
-    NotFoundViewComponent,
-    LoginViewComponent,
-    AuthorizedViewComponent
-  ],
+  exports: [],
   providers: [
     // Services
     {
@@ -61,11 +43,6 @@ import { DefaultLoginRepository } from '@app/core/repositories';
     {
       provide: LocalizationSettings,
       useValue: new LocalizationSettings()
-    },
-    // Repositories
-    {
-      provide: LoginRepository,
-      useClass: DefaultLoginRepository
     },
     // Guards
     AuthGuard,

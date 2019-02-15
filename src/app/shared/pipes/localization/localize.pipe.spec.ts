@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { coreTestModuleDefFactory } from '@app/core/test-doubles';
 import { LocalizePipe } from '@app/shared';
+import { sharedTestModuleDefFactory } from '@app/shared/test-doubles';
 
 describe('LocalizePipe', () => {
   let pipe: LocalizePipe;
 
   beforeEach(() => {
-    TestBed.configureTestingModule(coreTestModuleDefFactory());
+    TestBed.configureTestingModule(sharedTestModuleDefFactory());
 
     pipe = TestBed.get(LocalizePipe);
   });

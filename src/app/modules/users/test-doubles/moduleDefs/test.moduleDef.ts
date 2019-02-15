@@ -1,9 +1,7 @@
 import { TestModuleMetadata } from '@angular/core/testing';
 
-import {
-  coreTestModuleDefFactory,
-  CoreTestModuleDefOptions
-} from '@app/core/test-doubles';
+import { CoreTestModuleDefOptions } from '@app/core/test-doubles';
+import { sharedTestModuleDefFactory } from '@app/shared/test-doubles';
 import { UsersViewComponent } from '@modules/users/views';
 import {
   UserDetailComponent,
@@ -16,12 +14,12 @@ import { UsersRepositoryStub } from '@modules/users/test-doubles';
 export const usersTestModuleDefFactory = (
   options?: CoreTestModuleDefOptions
 ): TestModuleMetadata => {
-  const coreTestModuleDef = coreTestModuleDefFactory(options);
+  const sharedTestModuleDef = sharedTestModuleDefFactory(options);
 
   return {
-    imports: [...coreTestModuleDef.imports],
+    imports: [...sharedTestModuleDef.imports],
     declarations: [
-      ...coreTestModuleDef.declarations,
+      ...sharedTestModuleDef.declarations,
       // Components
       UserDetailComponent,
       UserNameComponent,
@@ -29,7 +27,7 @@ export const usersTestModuleDefFactory = (
       UsersViewComponent
     ],
     providers: [
-      ...coreTestModuleDef.providers,
+      ...sharedTestModuleDef.providers,
       // Services
       UsersService,
       // Repositories
@@ -38,6 +36,6 @@ export const usersTestModuleDefFactory = (
         useClass: UsersRepositoryStub
       }
     ],
-    schemas: [coreTestModuleDef.schemas]
+    schemas: [sharedTestModuleDef.schemas]
   };
 };

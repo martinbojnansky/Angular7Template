@@ -5,7 +5,7 @@ import { LocalStorageKey, AppRoute } from '@assets/constants';
 import { LocalStorageService } from '../storage';
 import { AuthService, AuthServiceState } from './auth.service';
 import { LocalizationService } from '../localization';
-import { LoginRepository } from '../../repositories';
+import { LoginRepository } from '../../../public/repositories';
 
 @Injectable()
 export class DefaultAuthService extends AuthService {

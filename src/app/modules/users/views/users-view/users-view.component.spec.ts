@@ -1,7 +1,6 @@
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UsersViewComponent } from './users-view.component';
+import { UsersViewComponent } from '@modules/users/views';
 import { usersTestModuleDefFactory } from '@modules/users/test-doubles/moduleDefs';
 
 describe('UsersViewComponent', () => {

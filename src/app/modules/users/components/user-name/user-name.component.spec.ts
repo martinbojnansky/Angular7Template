@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserNameComponent } from './user-name.component';
-import { User } from '../../models';
-import { userFakeFactory } from '../../test-doubles/fakes/user.fake';
-import { usersTestModuleDefFactory } from '@modules/users/test-doubles/moduleDefs';
+import { User } from '@modules/users/models';
+import { userFakeFactory } from '@modules/users/test-doubles';
+import { usersTestModuleDefFactory } from '@modules/users/test-doubles';
 
 describe('UserNameComponent', () => {
   let component: UserNameComponent;
