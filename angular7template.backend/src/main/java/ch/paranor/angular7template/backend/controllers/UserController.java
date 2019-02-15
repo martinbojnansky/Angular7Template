@@ -1,4 +1,4 @@
-package ch.paranor.angular7template.backend;
+package ch.paranor.angular7template.backend.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import ch.paranor.angular7template.backend.models.User;
+import ch.paranor.angular7template.backend.models.UsersPage;
 
 @RestController
 public class UserController {

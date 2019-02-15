@@ -1,4 +1,4 @@
-package ch.paranor.angular7template.backend;
+package ch.paranor.angular7template.backend.models;
 
 import java.util.List;
 

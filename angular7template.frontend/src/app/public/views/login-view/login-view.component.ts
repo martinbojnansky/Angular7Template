@@ -6,7 +6,6 @@ import { AuthService, Store } from '@app/core';
 export class LoginViewState {
   userName: FormControl = new FormControl();
   password: FormControl = new FormControl();
-  error: string;
 }
 
 @Component({
@@ -16,18 +15,14 @@ export class LoginViewState {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginViewComponent extends Store<LoginViewState> {
-  constructor(private authService: AuthService) {
+  constructor(public authService: AuthService) {
     super(new LoginViewState());
   }
 
   signIn(): void {
-    try {
-      this.authService.signIn(
-        this.state.userName.value,
-        this.state.password.value
-      );
-    } catch (e) {
-      this.setState({ ...this.state, error: e.message });
-    }
+    this.authService.signIn(
+      this.state.userName.value,
+      this.state.password.value
+    );
   }
 }

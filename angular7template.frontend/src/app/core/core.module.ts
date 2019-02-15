@@ -28,7 +28,7 @@ import {
     // Services
     {
       provide: AuthService,
-      useClass: DefaultAuthService // FakeAuthService
+      useClass: DefaultAuthService // FakeAuthService //
     },
     {
       provide: LocalStorageService,

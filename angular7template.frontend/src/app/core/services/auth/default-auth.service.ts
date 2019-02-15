@@ -22,7 +22,10 @@ export class DefaultAuthService extends AuthService {
   signIn(userName: string, password: string): void {
     this.loginRepositoryService
       .login(userName, password)
-      .subscribe(token => this.signInCompleted(token), this.signInFailed);
+      .subscribe(
+        token => this.signInCompleted(token),
+        e => this.signInFailed()
+      );
   }
 
   signOut(): void {
@@ -35,16 +38,24 @@ export class DefaultAuthService extends AuthService {
     const authToken = this.localStorageService.getItem(
       LocalStorageKey.AUTH_TOKEN
     );
-    this.setState({ ...this.state, isAuth: !!authToken, token: authToken });
+    this.setState({
+      ...this.state,
+      isAuth: !!authToken,
+      token: authToken,
+      error: null
+    });
   }
 
   protected signInCompleted(token: string): void {
     this.localStorageService.setItem(LocalStorageKey.AUTH_TOKEN, token);
-    this.setState({ ...this.state, isAuth: true, token: token });
+    this.setState({ ...this.state, isAuth: true, token: token, error: null });
     this.router.navigate([AppRoute.AUTH]);
   }
 
   protected signInFailed() {
-    throw new Error(this.localizationService.values.invalidCredentialsError);
+    this.setState({
+      ...this.state,
+      error: this.localizationService.values.invalidCredentialsError
+    });
   }
 }

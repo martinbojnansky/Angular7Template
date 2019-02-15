@@ -1,6 +1,6 @@
-<ng-container>
+<ng-container *ngIf="(authService.state$ | async) as authState">
   <form (ngSubmit)="signIn()">
-    <label *ngIf="state.error" class="error">{{ state.error }}</label>
+    <label *ngIf="authState.error" class="error">{{ authState.error }}</label>
     <label>
       <span>{{ ('' | localize).userNameCaption }}:</span>
       <input type="text" [formControl]="state.userName" />

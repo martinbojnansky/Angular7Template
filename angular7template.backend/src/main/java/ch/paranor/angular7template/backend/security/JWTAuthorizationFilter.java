@@ -25,37 +25,35 @@ import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
-    private static final String JWT_SECRET = "asdfsa";
+	public JWTAuthorizationFilter(AuthenticationManager authenticationManager) {
+		super(authenticationManager);
+	}
 
-    public JWTAuthorizationFilter(AuthenticationManager authenticationManager) {
-        super(authenticationManager);
-    }
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+		UsernamePasswordAuthenticationToken authentication = getAuthentication(request);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		chain.doFilter(request, response);
+	}
 
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        UsernamePasswordAuthenticationToken authentication = getAuthentication(request);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        chain.doFilter(request, response);
-    }
+	private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
+		String token = resolveToken(request);
+		if (token == null || !validateToken(token)) {
+			return null;
+		}
 
-    private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
-        String token = resolveToken(request);
-        if (token != null) {
-            if(!validateToken(token)) return null;
-        	String user = Jwts.parser()
-                    .setSigningKey(JWT_SECRET)
-                    .parseClaimsJws(token)
-                    .getBody()
-                    .getSubject();
-            if (user != null) {
-                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
-            }
-            return null;
-        }
-        return null;
-    }
-   
-    public String resolveToken(HttpServletRequest req) {
+		String user = Jwts.parser().setSigningKey(JWTSecuritySettings.JWT_SECRET).parseClaimsJws(token).getBody()
+				.getSubject();
+
+		if (user != null) {
+			return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+		}
+
+		return null;
+	}
+
+	public String resolveToken(HttpServletRequest req) {
 		String bearerToken = req.getHeader("Authorization");
 		if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
 			return bearerToken.substring(7, bearerToken.length());
@@ -65,7 +63,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
 	public boolean validateToken(String token) {
 		try {
-			Jws<Claims> claims = Jwts.parser().setSigningKey(JWT_SECRET).parseClaimsJws(token);
+			Jws<Claims> claims = Jwts.parser().setSigningKey(JWTSecuritySettings.JWT_SECRET).parseClaimsJws(token);
 
 			if (claims.getBody().getExpiration().before(new Date())) {
 				return false;
@@ -73,9 +71,9 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
 			return true;
 		} catch (MalformedJwtException | UnsupportedJwtException | SignatureException | IllegalArgumentException e) {
-			throw new BadCredentialsException("Invalid token", e);
+			throw new BadCredentialsException("Invalid token provided.", e);
 		} catch (ExpiredJwtException e) {
-			throw new NonceExpiredException("Token has expired", e);
+			throw new NonceExpiredException("Token has expired.", e);
 		}
 	}
 }

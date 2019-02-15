@@ -27,14 +27,18 @@ describe('AuthService', () => {
   });
 
   it('should have default state', () => {
-    expect(service.state.isAuth).toBeFalsy();
-    expect(service.state.token).toBeNull();
+    expect(service.state).toEqual({
+      isAuth: false,
+      token: null,
+      error: null
+    });
   });
 
   it('should sign in', () => {
     service.signIn(authInfo.userName, authInfo.password);
     expect(service.state.isAuth).toBeTruthy();
     expect(service.state.token).toBe(authInfo.token);
+    expect(service.state.error).toBeNull();
     expect(localStorageServiceSpy.setItem).toHaveBeenCalledWith(
       LocalStorageKey.AUTH_TOKEN,
       authInfo.token
@@ -42,10 +46,11 @@ describe('AuthService', () => {
     expect(routerSpy.navigate).toHaveBeenCalledWith([AppRoute.AUTH]);
   });
 
-  it('should throw error on invalid sign in', () => {
-    expect(() => service.signIn('', '')).toThrowError();
+  it('should set error on invalid sign in', () => {
+    service.signIn('', '');
     expect(service.state.isAuth).toBeFalsy();
     expect(service.state.token).toBeNull();
+    expect(service.state.error).not.toBeNull();
     expect(localStorageServiceSpy.setItem).not.toHaveBeenCalledWith(
       LocalStorageKey.AUTH_TOKEN,
       authInfo.token

@@ -75,15 +75,4 @@ describe('LoginViewComponent', () => {
     expect(authService.state.isAuth).toBeFalsy();
     expect(compiled.querySelector('.error').textContent).toBeTruthy();
   });
-
-  // Isolated test
-  it('should call auth service on submit button click', () => {
-    const errorMessage = 'Error message.';
-    const signInSpy = spyOn(authService, 'signIn').and.throwError(errorMessage);
-
-    login(authInfo.userName, '');
-
-    expect(signInSpy).toHaveBeenCalledWith(authInfo.userName, '');
-    expect(compiled.querySelector('.error').textContent).toEqual(errorMessage);
-  });
 });

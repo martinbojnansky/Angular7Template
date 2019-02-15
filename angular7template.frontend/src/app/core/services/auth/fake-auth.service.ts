@@ -24,13 +24,16 @@ export class FakeAuthService extends AuthService {
       this.setState({ ...this.state, isAuth: true, token: authToken });
       this.router.navigate([AppRoute.AUTH]);
     } else {
-      throw new Error(this.localizationService.values.invalidCredentialsError);
+      this.setState({
+        ...this.state,
+        error: this.localizationService.values.invalidCredentialsError
+      });
     }
   }
 
   signOut(): void {
     this.localStorageService.removeItem(LocalStorageKey.AUTH_TOKEN);
-    this.setState({ ...this.state, isAuth: false, token: null });
+    this.setState({ ...this.state, isAuth: false, token: null, error: null });
     this.router.navigate([AppRoute.LOGIN]);
   }
 
@@ -38,6 +41,11 @@ export class FakeAuthService extends AuthService {
     const authToken = this.localStorageService.getItem(
       LocalStorageKey.AUTH_TOKEN
     );
-    this.setState({ ...this.state, isAuth: !!authToken, token: authToken });
+    this.setState({
+      ...this.state,
+      isAuth: !!authToken,
+      token: authToken,
+      error: null
+    });
   }
 }
