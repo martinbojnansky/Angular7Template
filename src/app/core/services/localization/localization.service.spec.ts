@@ -2,48 +2,56 @@ import { TestBed } from '@angular/core/testing';
 
 import { coreTestModuleDefFactory } from '@app/core/test-doubles';
 import { LocalStorageKey } from '@assets/constants';
-import { en, de, LocalizationSettings, Locale } from '@assets/localization';
+import {
+  de,
+  LocalizationSettings,
+  Locale,
+  locales
+} from '@assets/localization';
 import { LocalizationService, LocalStorageService } from '../..';
+import { Local } from 'protractor/built/driverProviders';
 
 describe('LocalizationService', () => {
   let service: LocalizationService;
   let localStorageServiceSpy: jasmine.SpyObj<LocalStorageService>;
+  let localizationSettings: LocalizationSettings;
+  let updateUISpy: jasmine.Spy;
 
   beforeEach(() => {
     TestBed.configureTestingModule(coreTestModuleDefFactory());
 
     service = TestBed.get(LocalizationService);
     localStorageServiceSpy = TestBed.get(LocalStorageService);
+    localizationSettings = TestBed.get(LocalizationSettings);
+    updateUISpy = spyOn(service, 'updateUI').and.callFake(() => {});
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return  locale when no locale id is saved in local storage', () => {
+  it('should return default locale when no locale is saved in local storage', () => {
     expect(localStorageServiceSpy.getItem).toHaveBeenCalledWith(
       LocalStorageKey.LOCALE
     );
-    expect(service.locale).toBe(new LocalizationSettings().defaultLocale);
+    expect(service.locale).toBe(localizationSettings.defaultLocale);
   });
 
-  it('should return  locales when no locale id is saved in local storage', () => {
+  it('should return default locale values when no locale is saved in local storage', () => {
     expect(localStorageServiceSpy.getItem).toHaveBeenCalledWith(
       LocalStorageKey.LOCALE
     );
-    expect(service.values).toEqual(en);
+    expect(service.values).toEqual(locales[localizationSettings.defaultLocale]);
   });
 
   it('should change the locale correctly', () => {
-    localStorageServiceSpy.getItem.and.returnValue(Locale.DE);
     service.changeLocale(Locale.DE);
     expect(service.locale).toBe(Locale.DE);
-    expect(service.values).toEqual(de);
-    expect(localStorageServiceSpy.setItem).toHaveBeenCalledWith(
-      LocalStorageKey.LOCALE,
+    expect(service.values).toEqual(locales[Locale.DE]);
+    expect(localStorageServiceSpy.getItem(LocalStorageKey.LOCALE)).toBe(
       Locale.DE
     );
-    // expect(locationSpy).toHaveBeenCalledTimes(1);
+    expect(updateUISpy).toHaveBeenCalledTimes(1);
   });
 });
 
@@ -66,16 +74,14 @@ describe('LocalizationService with saved locale', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return saved locale when locale id is saved in local storage', () => {
+  it('should return saved locale when locale is saved in local storage', () => {
     expect(localStorageServiceSpy.getItem).toHaveBeenCalledWith(
       LocalStorageKey.LOCALE
     );
     expect(service.locale).toBe(Locale.DE);
   });
 
-  it('should return locales of saved locale when locale id is saved in local storage', () => {
-    localStorageServiceSpy.getItem.and.returnValues(Locale.DE.toString());
-
+  it('should return locale values of saved locale when locale is saved in local storage', () => {
     expect(localStorageServiceSpy.getItem).toHaveBeenCalledWith(
       LocalStorageKey.LOCALE
     );

@@ -30,13 +30,13 @@ export class DefaultLocalizationService implements LocalizationService {
     return this._values;
   }
 
-  changeLocale(locale: Locale, onApply: () => void = this.reload) {
+  changeLocale(locale: Locale) {
     if (this.locale === locale) {
       return;
     }
 
     this.setLocale(locale);
-    onApply();
+    this.updateUI();
   }
 
   private restoreLocaleSetting(): void {
@@ -65,7 +65,7 @@ export class DefaultLocalizationService implements LocalizationService {
     this.setLocale(this.localizationSettings.defaultLocale);
   }
 
-  protected reload() {
-    // window.location.reload();
+  updateUI() {
+    window.location.reload();
   }
 }
