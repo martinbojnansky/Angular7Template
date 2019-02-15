@@ -6,7 +6,6 @@ import { AuthService, Store } from '@app/core';
 export class LoginViewState {
   userName: FormControl = new FormControl();
   password: FormControl = new FormControl();
-  error: string;
 }
 
 @Component({
@@ -21,13 +20,9 @@ export class LoginViewComponent extends Store<LoginViewState> {
   }
 
   signIn(): void {
-    try {
-      this.authService.signIn(
-        this.state.userName.value,
-        this.state.password.value
-      );
-    } catch (e) {
-      this.setState({ ...this.state, error: e.message });
-    }
+    this.authService.signIn(
+      this.state.userName.value,
+      this.state.password.value
+    );
   }
 }
