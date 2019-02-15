@@ -270,7 +270,7 @@ Angular.
 1.  First of all, you need to mark dependency with a `@Injectable` decorator.
 
         @Injectable()
-        export class UsersRepositoryService {
+        export class LoginRepositoryService {
           constructor(private http: HttpClient) {}
 
           getUsers(): Observable<Object> {
@@ -281,7 +281,7 @@ Angular.
 2.  And register dependency as a provider in its module.
 
         @NgModule({
-          providers: [services.UsersRepositoryService]
+          providers: [services.LoginRepositoryService]
         })
         export class UsersModule {}
         
@@ -815,7 +815,7 @@ outside the service.
     
     @Injectable()
     export class UsersService extends Store<UsersServiceState> {
-      constructor(private usersRepository: UsersRepositoryService) {
+      constructor(private usersRepository: LoginRepositoryService) {
         super(new UsersServiceState());
       }
     

@@ -1,6 +1,9 @@
 export * from './core.module';
+// export * from './components';
 export * from './guards';
 export * from './interceptors';
-export * from './store';
+// export * from './models';
+export * from './repositories';
 export * from './services';
-export * from './views';
+export * from './store';
+// export * from './views';

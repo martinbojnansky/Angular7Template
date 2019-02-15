@@ -1,17 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeViewComponent } from './home-view.component';
-import { LocalizePipeStub } from '@app/core/test-doubles';
+import { homeTestModuleDefFactory } from '@modules/home/test-doubles';
 
 describe('HomeViewComponent', () => {
   let component: HomeViewComponent;
   let fixture: ComponentFixture<HomeViewComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [HomeViewComponent, LocalizePipeStub],
-      providers: []
-    }).compileComponents();
+    TestBed.configureTestingModule(
+      homeTestModuleDefFactory()
+    ).compileComponents();
   }));
 
   beforeEach(() => {

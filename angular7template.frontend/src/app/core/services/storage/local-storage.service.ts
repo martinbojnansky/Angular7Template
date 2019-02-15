@@ -1,8 +1,1 @@
-export abstract class LocalStorageService implements Storage {
-  abstract length: number;
-  abstract clear(): void;
-  abstract getItem(key: string): string;
-  abstract key(index: number): string;
-  abstract removeItem(key: string): void;
-  abstract setItem(key: string, value: string): void;
-}
+export abstract class LocalStorageService extends Storage {}

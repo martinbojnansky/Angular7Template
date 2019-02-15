@@ -4,58 +4,56 @@ import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
-import { SharedModule } from '@app/shared';
-import * as services from './services';
-import * as guards from './guards';
-import * as views from './views';
-import * as interceptors from './interceptors';
 import { LocalizationSettings } from '@assets/localization';
+import {
+  AuthService,
+  DefaultLocalizationService,
+  FakeAuthService,
+  DefaultAuthService,
+  LocalizationService,
+  LocalStorageService
+} from '@app/core/services';
+import { AuthGuard } from '@app/core/guards';
+import { AuthHeaderInterceptor } from '@app/core/interceptors';
+import {
+  DefaultLoginRepository,
+  LoginRepository
+} from '@app/core/repositories';
 
 @NgModule({
-  declarations: [
-    // Views
-    views.NotFoundViewComponent,
-    views.LoginViewComponent,
-    views.AuthorizedViewComponent
-  ],
-  imports: [
-    BrowserModule,
-    CommonModule,
-    HttpClientModule,
-    RouterModule,
-    SharedModule
-  ],
-  exports: [
-    // Views
-    views.NotFoundViewComponent,
-    views.LoginViewComponent,
-    views.AuthorizedViewComponent
-  ],
+  declarations: [],
+  imports: [BrowserModule, CommonModule, HttpClientModule, RouterModule],
+  exports: [],
   providers: [
     // Services
     {
-      provide: services.AuthService,
-      useClass: services.JwtAuthService
+      provide: AuthService,
+      useClass: DefaultAuthService // FakeAuthService
     },
     {
-      provide: services.LocalStorageService,
-      useFactory: () => new services.DefaultLocalStorageService(localStorage)
+      provide: LocalStorageService,
+      useValue: localStorage
     },
     {
-      provide: services.LocalizationService,
-      useClass: services.DefaultLocalizationService
+      provide: LocalizationService,
+      useClass: DefaultLocalizationService
     },
     {
       provide: LocalizationSettings,
       useValue: new LocalizationSettings()
     },
     // Guards
-    guards.AuthGuard,
+    AuthGuard,
     // Interceptors
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: interceptors.AuthHeaderInterceptor,
+      useClass: AuthHeaderInterceptor,
       multi: true
+    },
+    // Repositories
+    {
+      provide: LoginRepository,
+      useClass: DefaultLoginRepository
     }
   ]
 })

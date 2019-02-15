@@ -1,9 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { UserDetailComponent } from './user-detail.component';
 import { User } from '../../models';
-import { userFakeFactory } from '../../test-doubles/fakes/user.fake';
+import {
+  userFakeFactory,
+  usersTestModuleDefFactory
+} from '@modules/users/test-doubles';
+import {} from '@modules/users/test-doubles';
 
 describe('UserDetailComponent', () => {
   let component: UserDetailComponent;
@@ -12,10 +15,9 @@ describe('UserDetailComponent', () => {
   const userFake: User = userFakeFactory();
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [UserDetailComponent],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
+    TestBed.configureTestingModule(
+      usersTestModuleDefFactory()
+    ).compileComponents();
   }));
 
   beforeEach(() => {

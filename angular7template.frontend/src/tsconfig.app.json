@@ -8,6 +8,7 @@
     "test.ts",
     "**/*.spec.ts",
     "**/test-doubles/**/index.ts",
+    "**/*.moduleDef.ts",
     "**/*.dummy.ts",
     "**/*.fake.ts",
     "**/*.spy.ts",

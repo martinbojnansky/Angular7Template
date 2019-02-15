@@ -20,7 +20,7 @@ import * as components from './components';
     // Services
     services.UsersService,
     // Repositories
-    repositories.UsersRepositoryService
+    repositories.UsersRepository
   ]
 })
 export class UsersModule {}

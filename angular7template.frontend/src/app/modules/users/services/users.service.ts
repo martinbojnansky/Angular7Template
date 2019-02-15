@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Store } from '@app/core';
 import { User } from '../models';
-import { UsersRepositoryService } from '../repositories';
+import { UsersRepository } from '../repositories';
 
 export class UsersServiceState {
   users: User[];
@@ -11,7 +11,7 @@ export class UsersServiceState {
 
 @Injectable()
 export class UsersService extends Store<UsersServiceState> {
-  constructor(private usersRepository: UsersRepositoryService) {
+  constructor(private usersRepository: UsersRepository) {
     super(new UsersServiceState());
   }
 

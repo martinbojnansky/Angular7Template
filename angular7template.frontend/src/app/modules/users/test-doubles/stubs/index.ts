@@ -1,1 +1,1 @@
-export * from './users-repository-service.stub';
+export * from './users.repository.stub';
