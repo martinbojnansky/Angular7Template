@@ -19,10 +19,17 @@ import {
   DefaultLoginRepository,
   LoginRepository
 } from '@app/core/repositories';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [],
-  imports: [BrowserModule, CommonModule, HttpClientModule, RouterModule],
+  imports: [
+    BrowserModule,
+    NoopAnimationsModule,
+    CommonModule,
+    HttpClientModule,
+    RouterModule
+  ],
   exports: [],
   providers: [
     // Services

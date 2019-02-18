@@ -9,6 +9,10 @@
       <span>{{ ('' | localize).passwordCaption }}:</span>
       <input type="password" [formControl]="state.password" />
     </label>
-    <input type="submit" [textContent]="('' | localize).signInButtonText" />
+    <input
+      pButton
+      type="submit"
+      [textContent]="('' | localize).signInButtonText"
+    />
   </form>
 </ng-container>
