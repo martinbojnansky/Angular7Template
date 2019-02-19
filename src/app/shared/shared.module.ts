@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ConstantsPipe, LocalizePipe } from '@app/shared/pipes';
-import { PrimengModule } from '@app/shared/components';
+// import { PrimengModule } from '@app/shared/components';
 
 @NgModule({
   declarations: [
@@ -11,16 +11,22 @@ import { PrimengModule } from '@app/shared/components';
     LocalizePipe,
     ConstantsPipe
   ],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, PrimengModule],
+  imports: [
+    CommonModule,
+    // Components
+    FormsModule,
+    ReactiveFormsModule
+    // PrimengModule
+  ],
   exports: [
     CommonModule,
+    // Components
     FormsModule,
     ReactiveFormsModule,
+    // PrimengModule
     // Pipes
     LocalizePipe,
-    ConstantsPipe,
-    // Components
-    PrimengModule
+    ConstantsPipe
   ]
 })
 export class SharedModule {}
