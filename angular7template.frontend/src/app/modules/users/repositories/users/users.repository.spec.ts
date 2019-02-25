@@ -26,7 +26,7 @@ describe('UsersRepository', () => {
   it('should call getAll correctly', () => {
     service.getAll().subscribe(() => {});
     httpTestingController.expectOne(
-      `${ApiRoute.BASE}/${ApiRoute.API}/${ApiRoute.USERS}`
+      `${ApiRoute.API}/${ApiRoute.USERS}`
     );
   });
 });

@@ -36,9 +36,9 @@ describe('AuthHeaderInterceptor', () => {
   });
 
   it('should add header when request contains api url', () => {
-    httpClient.get(`${ApiRoute.BASE}/${ApiRoute.API}/xxx`).subscribe(() => {});
+    httpClient.get(`${ApiRoute.API}/xxx`).subscribe(() => {});
     const httpRequest = httpTestingController.expectOne(
-      `${ApiRoute.BASE}/${ApiRoute.API}/xxx`
+      `${ApiRoute.API}/xxx`
     );
     expect(httpRequest.request.headers.has('Authorization')).toBeTruthy();
     expect(httpRequest.request.headers.get('Authorization')).toEqual(
@@ -47,8 +47,8 @@ describe('AuthHeaderInterceptor', () => {
   });
 
   it('should not add header when request does not contain api url', () => {
-    httpClient.get(`${ApiRoute.BASE}/xxx`).subscribe(() => {});
-    const httpRequest = httpTestingController.expectOne(`${ApiRoute.BASE}/xxx`);
+    httpClient.get(`/xxx`).subscribe(() => {});
+    const httpRequest = httpTestingController.expectOne(`/xxx`);
     expect(httpRequest.request.headers.has('Authorization')).toBeFalsy();
   });
 });

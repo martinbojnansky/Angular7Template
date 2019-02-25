@@ -15,7 +15,7 @@ export class DefaultLoginRepository implements LoginRepository {
     formData.append('password', password);
 
     return this.httpClient.post(
-      `${ApiRoute.BASE}/${ApiRoute.LOGIN}`,
+      `${ApiRoute.API}/${ApiRoute.LOGIN}`,
       formData,
       {
         responseType: 'text'

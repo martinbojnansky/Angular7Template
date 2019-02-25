@@ -27,7 +27,7 @@ describe('LoginRepository', () => {
   it('should call login correctly', () => {
     repository.login(authInfo.userName, authInfo.password).subscribe(() => {});
     const httpRequest = httpTestingController.expectOne(
-      `${ApiRoute.BASE}/${ApiRoute.LOGIN}`
+      `${ApiRoute.API}/${ApiRoute.LOGIN}`
     );
 
     const formData = <FormData>httpRequest.request.body;
