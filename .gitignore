@@ -3,7 +3,8 @@ chrome-profiler-events.json
 speed-measure-plugin.json
 
 # IDEs and editors
-/.idea
+**/.idea/workspace.xml
+**/.idea/tasks.xml
 .project
 .classpath
 .c9/
