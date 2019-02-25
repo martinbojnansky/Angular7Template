@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.exceptionHandling()
 			.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)) // Return 401 instead of 403
 			.and()
-			// Disabled CSRF (cross site request forgery) protection because we are not using new header cookies
+			// Disable CSRF (cross site request forgery) protection because header cookies are not used
 			.csrf().disable();
 	}
 }

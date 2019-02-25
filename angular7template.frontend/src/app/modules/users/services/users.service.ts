@@ -18,7 +18,7 @@ export class UsersService extends Store<UsersServiceState> {
   fetchUsers(): void {
     this.usersRepository.getAll().subscribe(r => {
       this.setState({ ...this.state, users: (<any>r).data });
-    });
+    }, e => {});
   }
 
   selectUser(user: User) {

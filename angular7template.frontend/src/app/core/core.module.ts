@@ -14,7 +14,7 @@ import {
   LocalStorageService
 } from '@app/core/services';
 import { AuthGuard } from '@app/core/guards';
-import { AuthHeaderInterceptor } from '@app/core/interceptors';
+import {AuthExpirationInterceptor, AuthHeaderInterceptor} from '@app/core/interceptors';
 import {
   DefaultLoginRepository,
   LoginRepository
@@ -48,6 +48,11 @@ import {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHeaderInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthExpirationInterceptor,
       multi: true
     },
     // Repositories

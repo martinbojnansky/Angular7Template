@@ -9,10 +9,9 @@ import {
   AuthHeaderInterceptor,
   AuthService,
   DefaultLocalizationService,
-  FakeAuthService,
   DefaultAuthService,
   LocalizationService,
-  LocalStorageService
+  LocalStorageService, AuthExpirationInterceptor
 } from '@app/core';
 import {
   localStorageServiceSpyFactory,
@@ -66,7 +65,14 @@ export const coreTestModuleDefFactory = (
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHeaderInterceptor,
       multi: true
-    }, // Repositories
+    },
+    AuthExpirationInterceptor,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthExpirationInterceptor,
+      multi: true
+    },
+    // Repositories
     {
       provide: LoginRepository,
       useClass: LoginRepositoryStub

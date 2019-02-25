@@ -6,7 +6,6 @@ import {
 } from '@modules/users/test-doubles';
 import { User } from '@modules/users/models';
 import { UsersService } from '@modules/users/services';
-import { UsersRepository } from '@modules/users/repositories';
 import { usersTestModuleDefFactory } from '@modules/users/test-doubles/moduleDefs';
 
 describe('UsersService', () => {
