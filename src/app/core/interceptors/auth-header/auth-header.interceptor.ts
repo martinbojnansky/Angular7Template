@@ -17,7 +17,7 @@ export class AuthHeaderInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    if (request.url.indexOf(`${ApiRoute.BASE}/${ApiRoute.API}`) >= 0) {
+    if (request.url.indexOf(`${ApiRoute.API}`) >= 0) {
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${this.auth.state.token}`

@@ -1,7 +1,5 @@
 export enum ApiRoute {
-  BASE = 'https://reqres.in',
-  // BASE = 'http://localhost:8080',
-  API = 'api',
+  API = 'https://reqres.in/api',
   LOGIN = 'login',
   USERS = 'users'
 }

@@ -9,16 +9,11 @@ import {
   AuthService,
   DefaultLocalizationService,
   FakeAuthService,
-  DefaultAuthService,
   LocalizationService,
   LocalStorageService
 } from '@app/core/services';
 import { AuthGuard } from '@app/core/guards';
 import { AuthHeaderInterceptor } from '@app/core/interceptors';
-import {
-  DefaultLoginRepository,
-  LoginRepository
-} from '@app/core/repositories';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -35,7 +30,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     // Services
     {
       provide: AuthService,
-      useClass: FakeAuthService // DefaultAuthService //
+      useClass: FakeAuthService
     },
     {
       provide: LocalStorageService,
@@ -58,10 +53,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
       multi: true
     },
     // Repositories
-    {
-      provide: LoginRepository,
-      useClass: DefaultLoginRepository
-    }
   ]
 })
 export class CoreModule {

@@ -121,7 +121,11 @@ e.g.
 
 - **core** - Contains single instance features shared across the whole application.
 - **shared** - Contains multi-instance features shared across different modules.
-- **modules** - Contains logically grouped features that represents some part of the application.
+- **public** - Contains basic features of the application that can be accessed by anyone. (e.g. login, error handling, etc.)
+- **auth** - Contains basic features of the application that can be accessed by authorized users only. 
+(e.g. layouts for different types of users)
+- **modules** - Contains logically grouped features that represents some part of the application. 
+This modules are referenced from public or auth module.
   - **users** - Application part for the user management.
   - **orders** - Application part for the orders management.
   - ...
@@ -180,7 +184,7 @@ e.g.
 
 - Authentication service should be initiated only once and may be used across different modules.
 - Authentication guard should be here.
-- AuthorizedView component should be here.
+- Localization service should be here.
 
 #### 3.2.2 Shared Module
 
@@ -189,15 +193,35 @@ The Shared Module should contain features that are going to be used in multiple 
 
 e.g.
 
-- LoadingOverlay component should be here.
+- Loading overlay component should be here.
 - IBAN formatting pipe should be here.
+- Localization pipe should be here.
 
-#### 3.2.3 Feature Modules
+#### 3.2.3 Public Module
+
+Contains basic features of the application that can be accessed by anyone.
+
+e.g.
+
+- Layout for any public component that wraps it with header and footer is placed here.
+- Login page that enables user to login and access authorized part of the application.
+- Routing module for all publicly accessible pages should be here.
+
+#### 3.2.4 Auth Module
+
+Contains basic features of the application that can be accessed by authorized users only.
+
+e.g.
+
+- Layout for any authorized component that wraps it with different header and footer than public components have.
+- Routing module for all non-publicly accessible pages should be here.
+
+#### 3.2.5 Feature Modules
 
 Feature Modules contains multiple application parts and features that were logically encapsulated. Those modules should 
 have its own routing module and therefore does not need to be loaded until needed.
 To create a new module with routing navigate to `app/modules` folder and run Angular CLI command 
-`ng generate module module_name --routing`.
+`ng generate module module_name --routing` or use schematics provided in WebStorm.
 Any feature module should use `Shared Module`.
 
 ## 4. Principles
@@ -442,6 +466,7 @@ For this purposes, application uses 4 types of test-doubles:
 referencing in-memory database)
 4. **Spies (\*.spy.ts)** - Used to verify behaviour by inspecting calls, its arguments. It can also provide fake calls 
 and return values.
+5. **ModuleDefs (\*.moduleDef.ts)** - Used to specify module definition shared by various types of tests. 
 
 > To get more information on test-doubles take a look [here](https://www.mokacoding.com/blog/swift-test-doubles/), 
 [here](https://www.javacodegeeks.com/2015/11/test-doubles-mocks-dummies-and-stubs.html) or 
@@ -463,6 +488,9 @@ be included in builds and fail during running or testing, or include unnecessary
   - **spies**
     - \*.spy.ts
     - index.ts
+  - **moduleDefs**
+    - \*.moduleDef.ts
+    - index.ts
   - index.ts
 
 #### 7.1.2 No errors schema
@@ -477,8 +505,62 @@ use `NO_ERRORS_SCHEMA` that will ignore errors caused by unknown component tags.
         schemas: [NO_ERRORS_SCHEMA]
       }).compileComponents();
     }));
+    
+#### 7.1.3 Module definitions
 
-#### 7.1.3 Running tests
+In order to simplify testing and share code necessary to setup each `*.spec` file, we can create a shared module definitions.
+They can also be inherited and extended by other modules. 
+
+Currently, application uses two 3 different types of module definitions.
+
+- **Module** - Each module file (e.g. core.module.ts) specifies declarations, imports, exports, providers and schemas. 
+This is module definition that we want to use when running and deploying application.
+- **Test** - For a testing purposes we can share configuration and replace providers or others with dummies, fakes, spies or stubs.
+Repository layer of this module definition is stubbed to enable unit/integration testing without live data.
+
+      export const usersTestModuleDefFactory = (
+        options?: CoreTestModuleDefOptions
+      ): TestModuleMetadata => {
+        const sharedTestModuleDef = sharedTestModuleDefFactory(options);
+      
+        return {
+          imports: [...sharedTestModuleDef.imports],
+          declarations: [
+            ...sharedTestModuleDef.declarations,
+            // Components
+            UserDetailComponent,
+            UserNameComponent,
+            // Views
+            UsersViewComponent
+          ],
+          providers: [
+            ...sharedTestModuleDef.providers,
+            // Services
+            UsersService,
+            // Repositories
+            {
+              provide: UsersRepository,
+              useClass: UsersRepositoryStub
+            }
+          ],
+          schemas: [sharedTestModuleDef.schemas]
+        };
+      };
+      
+- **Repository** - This definition is used by repository tests, to make sure they calls API correctly or are able to parse the response.
+      
+      export const usersRepositoryModuleDefFactory = (): TestModuleMetadata => {
+        const coreRepositoryModuleDef = coreRepositoryModuleDefFactory();
+      
+        return {
+          imports: [...coreRepositoryModuleDef.imports],
+          declarations: [...coreRepositoryModuleDef.declarations],
+          providers: [...coreRepositoryModuleDef.providers, UsersRepository],
+          schemas: [coreRepositoryModuleDef.schemas]
+        };
+      };
+
+#### 7.1.4 Running tests
 
 To run Unit / Integration tests run command `npm run test`.
 

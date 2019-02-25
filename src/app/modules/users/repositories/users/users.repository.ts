@@ -10,7 +10,7 @@ export class UsersRepository {
 
   getAll(): Observable<any> {
     return this.httpClient.get(
-      `${ApiRoute.BASE}/${ApiRoute.API}/${ApiRoute.USERS}`
+      `${ApiRoute.API}/${ApiRoute.USERS}`
     );
   }
 }
