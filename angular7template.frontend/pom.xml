@@ -71,7 +71,7 @@
                   <!--verify-->
                 <!--</phase>-->
                 <!--<configuration>-->
-                  <!--<arguments>run e2e</arguments>-->
+                  <!--<arguments>run e2e:production</arguments>-->
                 <!--</configuration>-->
               <!--</execution>-->
 
