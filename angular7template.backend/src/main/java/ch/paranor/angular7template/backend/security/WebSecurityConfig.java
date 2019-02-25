@@ -2,8 +2,8 @@ package ch.paranor.angular7template.backend.security;
 
 import java.util.Arrays;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,15 +13,13 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.access.ExceptionTranslationFilter;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
 	@Override
 	@Bean
 	protected AuthenticationManager authenticationManager() throws Exception {
@@ -34,9 +32,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		return super.userDetailsService();
 	}
 
+	protected JWTProperties jwtProperties() {
+		return new JWTProperties();
+	}
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("password")).roles("USER");
+		auth.inMemoryAuthentication().withUser("editor").password(passwordEncoder().encode("password")).roles("EDITOR");
+		auth.inMemoryAuthentication().withUser("reviewer").password(passwordEncoder().encode("password")).roles("REVIEWER");
 	}
 
 	@Bean
@@ -46,14 +50,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
-		http.authorizeRequests()
-			.antMatchers("/api/**").authenticated()
-			.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-			.addFilter(new JWTAuthenticationFilter(authenticationManager()))
-			.addFilter(new JWTAuthorizationFilter(authenticationManager()))
-			.cors()
-			.and().csrf().disable();
+		http
+				// Entry points
+				.authorizeRequests()
+				// Authorize all API calls
+				.antMatchers("/api/**").authenticated().and()
+				// Set JWT authentication and authorization
+				.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtProperties()))
+				.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtProperties()))
+				// Disable creating Spring Security session
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and()
+				// Handle exceptions
+				.exceptionHandling()
+				.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)) // Return 401 instead of 403
+				.and()
+				// Disabled CSRF (cross site request forgery) protection because we are not
+				// using new HeadersCookies
+				.csrf().disable().cors();
 	}
 
 	@Bean

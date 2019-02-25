@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,8 +26,11 @@ import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
-	public JWTAuthorizationFilter(AuthenticationManager authenticationManager) {
+	private JWTProperties jwtProperties;
+	
+	public JWTAuthorizationFilter(AuthenticationManager authenticationManager, JWTProperties jwtProperties) {
 		super(authenticationManager);
+		this.jwtProperties = jwtProperties;
 	}
 
 	@Override
@@ -34,16 +38,21 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 			throws IOException, ServletException {
 		UsernamePasswordAuthenticationToken authentication = getAuthentication(request);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
+		
 		chain.doFilter(request, response);
 	}
 
 	private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
 		String token = resolveToken(request);
+		
 		if (token == null || !validateToken(token)) {
 			return null;
 		}
 
-		String user = Jwts.parser().setSigningKey(JWTSecuritySettings.JWT_SECRET).parseClaimsJws(token).getBody()
+		String user = Jwts.parser()
+				.setSigningKey(jwtProperties.SECRET)
+				.parseClaimsJws(token)
+				.getBody()
 				.getSubject();
 
 		if (user != null) {
@@ -53,27 +62,27 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 		return null;
 	}
 
-	public String resolveToken(HttpServletRequest req) {
-		String bearerToken = req.getHeader("Authorization");
+	protected String resolveToken(HttpServletRequest req) {
+		String bearerToken = req.getHeader(HttpHeaders.AUTHORIZATION);
+		
 		if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
 			return bearerToken.substring(7, bearerToken.length());
 		}
+		
 		return null;
 	}
 
-	public boolean validateToken(String token) {
+	protected boolean validateToken(String token) {
 		try {
-			Jws<Claims> claims = Jwts.parser().setSigningKey(JWTSecuritySettings.JWT_SECRET).parseClaimsJws(token);
-
-			if (claims.getBody().getExpiration().before(new Date())) {
-				return false;
-			}
-
+			Jws<Claims> claims = Jwts.parser().setSigningKey(jwtProperties.SECRET).parseClaimsJws(token);			
+			claims.getBody().getExpiration().before(new Date());
 			return true;
 		} catch (MalformedJwtException | UnsupportedJwtException | SignatureException | IllegalArgumentException e) {
-			throw new BadCredentialsException("Invalid token provided.", e);
+			// Invalid token
+			return false;
 		} catch (ExpiredJwtException e) {
-			throw new NonceExpiredException("Token has expired.", e);
+			// Token expired
+			return false;
 		}
 	}
 }
