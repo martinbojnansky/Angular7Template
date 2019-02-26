@@ -20,14 +20,4 @@ foreach($file in $files)
 
 Write-Host "Renaming complete!" -ForegroundColor Green
 
-git init
-(git add .) | out-null
-(git commit -m "Renames solution.") | out-null
-
-#create basic alias for git stash pul
-git config alias.stash-update "!git stash && git fetch && git pull && git stash pop"
-#you can't register alias to alias
-git config alias.su "!git stash && git fetch && git pull && git stash pop"
-Write-Host "Initialize git complete!" -ForegroundColor Green
-
 Write-Host "Done!" -ForegroundColor Green
