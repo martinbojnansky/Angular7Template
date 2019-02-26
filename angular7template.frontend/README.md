@@ -1,4 +1,4 @@
-# Angular7Template
+# angular7template
 
 This application was inspired by Angular best-practices mentioned in the 
 [Pluralsight course by Jim Cooper](https://app.pluralsight.com/player?course=best-practices-angular&author=jim-cooper&name=099afa72-35ee-4f15-9f26-257b10c11665&clip=2&mode=live) and author's experience in front-end development.
@@ -6,7 +6,7 @@ This application was inspired by Angular best-practices mentioned in the
 The main goal of this application is to create a stable infrastructure and solid foundation for a long-term Angular projects.
 It proposes and showcases implementation of the following commonly used principles in front-end programming:
 
-- Single Resposibility
+- Single Responsibility
 - Dependency Injection
 - Dependency Inversion
 - Software Modularity & Lazy Loading
@@ -52,9 +52,9 @@ To get more help on the Angular CLI use `ng help` or go check out the
 
 This application was created using [Visual Studio Code](https://code.visualstudio.com/) that provides tools for:
 
-- Syntax higlighting, type check and auto completion (IntelliSense)
+- Syntax highlighting, type check and auto completion (IntelliSense)
 - Easy Refactoring (Rename - F2, Search - Ctrl + F, Replace - Ctrl + H, ..)
-- Integratated console
+- Integrated console
 
 #### 2.1.1 Extensions
 
