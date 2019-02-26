@@ -12,18 +12,21 @@ import { AuthService } from '../../services/';
 
 @Injectable()
 export class AuthHeaderInterceptor implements HttpInterceptor {
-  constructor(public auth: AuthService) {}
-  intercept(
-    request: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    if (request.url.indexOf(`${ApiRoute.API}`) >= 0) {
-      request = request.clone({
-        setHeaders: {
-          Authorization: `Bearer ${this.auth.state.token}`
-        }
-      });
+  constructor(private auth: AuthService) {}
+
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (request.url.indexOf(`${ApiRoute.API}/`) >= 0 && request.url.indexOf(`${ApiRoute.API}/${ApiRoute.LOGIN}`) === -1) {
+      request = this.addAuthorizationHeader.bind(this)(request);
     }
+
     return next.handle(request);
+  }
+
+  private addAuthorizationHeader(request: HttpRequest<any>): HttpRequest<any> {
+    return request.clone({
+      setHeaders: {
+        Authorization: `Bearer ${this.auth.state.token}`
+      }
+    });
   }
 }

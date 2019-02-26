@@ -51,4 +51,10 @@ describe('AuthHeaderInterceptor', () => {
     const httpRequest = httpTestingController.expectOne(`/xxx`);
     expect(httpRequest.request.headers.has('Authorization')).toBeFalsy();
   });
+
+  it('should not add header when request contain api login url', () => {
+    httpClient.get(`${ApiRoute.API}/${ApiRoute.LOGIN}`).subscribe(() => {});
+    const httpRequest = httpTestingController.expectOne(`${ApiRoute.API}/${ApiRoute.LOGIN}`);
+    expect(httpRequest.request.headers.has('Authorization')).toBeFalsy();
+  });
 });
