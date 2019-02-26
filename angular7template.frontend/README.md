@@ -102,7 +102,7 @@ formatting automatically on external changes (save).
 
 For a basic overview of folder structure see following list:
 
-- **angular7-template** - Project folder.
+- **angular7template** - Project folder.
   - **e2e** - End-to-End tests folder.
     - **src** - E2E test modules folder.
   - **src** - Application source folder.
@@ -625,7 +625,7 @@ To examine what might be an issue, you can use `source-map-explorer` which visua
 
 3.  Run `source-map-explorer` for with path of the bundle file.
 
-        source-map-explorer dist/angular7-template/vendor.xxx.js
+        source-map-explorer dist/angular7template/vendor.xxx.js
 
 ## 9. Localization
 
