@@ -49,7 +49,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			// Entry points
 			.authorizeRequests()
 			// Authorize all API calls
-			.antMatchers("/api/**").authenticated().and()
+			.antMatchers("/api/**").authenticated()
+			.antMatchers("/api/login").permitAll()
+			.and()
 			// Set JWT authentication and authorization
 			.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtProperties()))
 			.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtProperties()))
