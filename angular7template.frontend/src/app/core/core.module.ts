@@ -8,7 +8,6 @@ import { LocalizationSettings } from '@assets/localization';
 import {
   AuthService,
   DefaultLocalizationService,
-  FakeAuthService,
   DefaultAuthService,
   LocalizationService,
   LocalStorageService
@@ -28,7 +27,7 @@ import {
     // Services
     {
       provide: AuthService,
-      useClass: DefaultAuthService // FakeAuthService //
+      useClass: DefaultAuthService
     },
     {
       provide: LocalStorageService,

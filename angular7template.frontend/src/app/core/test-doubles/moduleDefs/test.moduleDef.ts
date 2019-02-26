@@ -47,7 +47,7 @@ export const coreTestModuleDefFactory = (
     },
     {
       provide: AuthService,
-      useClass: DefaultAuthService // FakeAuthService //
+      useClass: DefaultAuthService
     },
     {
       provide: LocalizationService,
